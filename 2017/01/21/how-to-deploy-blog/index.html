@@ -66,7 +66,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Computer Science, Tech, Technique, AI, Artificial Intelligence, Machine Learning" />
+  <meta name="keywords" content="record,how-to,coding,server," />
 
 
 
@@ -82,12 +82,22 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jason's Blog">
-<meta property="og:url" content="http://blog.aixc.com/index.html">
+<meta name="description" content="个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。
+代码
+整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由hexo通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何搭建个人博客">
+<meta property="og:url" content="http://blog.aixc.com/2017/01/21/how-to-deploy-blog/index.html">
 <meta property="og:site_name" content="Jason's Blog">
+<meta property="og:description" content="个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。
+代码
+整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由hexo通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于">
+<meta property="og:updated_time" content="2017-01-21T21:11:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jason's Blog">
+<meta name="twitter:title" content="如何搭建个人博客">
+<meta name="twitter:description" content="个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。
+代码
+整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由hexo通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于">
 
 
 
@@ -115,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.aixc.com/"/>
+  <link rel="canonical" href="http://blog.aixc.com/2017/01/21/how-to-deploy-blog/"/>
 
 
 
 
 
-  <title> Jason's Blog </title>
+  <title> 如何搭建个人博客 | Jason's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -142,9 +152,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -235,9 +243,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -270,10 +278,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/01/21/how-to-deploy-blog/" itemprop="url">
-                  如何搭建个人博客
-                </a>
+                如何搭建个人博客
               
             
           </h2>
@@ -288,7 +293,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T17:25:46Z">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T17:25:46+00:00">
                 21/01/2017
               </time>
             
@@ -346,9 +351,7 @@
       
 
       
-        
-          
-            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><p>个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><p>个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。</p>
 <h1>代码</h1>
 <p>整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由<a href="hexo.io">hexo</a>通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于node.js开发的一个开源的博客框架，其宗旨是提供简单快捷的步骤来帮助个人不需要写一行代码就能搭建博客。</p>
 <p>博客的主题是由<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">NexT</a>提供的，它不但提供了简介的外观同时集成了很多插件。当然，由于Hexo的可扩展行，用户可以自主创建样式和插件来实现各种需求。</p>
@@ -364,182 +367,68 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; blog.aixc.space</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 22870</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;blog.aixc.space.		IN	A</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">blog.aixc.space.	600	IN	A	192.30.252.153</div><div class="line">blog.aixc.space.	600	IN	A	192.30.252.154</div></pre></td></tr></table></figure>
 <p>至此，一个个人博客就搭建完毕了。</p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://blog.aixc.com/2017/01/21/hello-world/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jason Chen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/uploads/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Jason's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Jason's Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/21/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T16:38:43Z">
-                21/01/2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">Life</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/record/" rel="tag"># record</a>
           
-
+            <a href="/tags/how-to/" rel="tag"># how-to</a>
           
-            
+            <a href="/tags/coding/" rel="tag"># coding</a>
           
-
+            <a href="/tags/server/" rel="tag"># server</a>
           
-
-          
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><blockquote>
-<p>这是一个俗套的Hello World</p>
-</blockquote>
-<p>Hello World, my new blog。</p>
-<p>新博客搭建好了，一是作为一个技术备忘录，二是用自己的经验帮助读到文章的有缘人，最后是用来见证自己的进步。文章不需要很长，关键是坚持写下去和保持固定（一周至少一次）的更新频率，和言简意赅的对问题与解决的描述。</p>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/21/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
 
-          
-        
-      
-    </div>
+          <span class="post-nav-divider"></span>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
           
           </div>
@@ -547,6 +436,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -566,8 +459,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -623,6 +525,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">DNS</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
@@ -729,6 +647,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
@@ -760,6 +682,10 @@
 
   
 
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
   
 
 
