@@ -359,7 +359,8 @@
 <p>这个博客用的是<a href="https://www.namecheap.com" target="_blank" rel="external">namecheap.com</a>的服务，虽然它在写博客的时候还是没有修复自己提供给客户修改DNS name server的bug，但是优势在于它的域名和附加服务很便宜，客服也还行。</p>
 <p>由于本博客以Github Page为载体的，所以得稍微做些配置才能不去使用默认的http://<username>.github.io来作为域名。<br>
 首先是新建一个repository，可以使用任意的名字，但是只有用<username>.github.io才能把博客放在<username>.github.io的root上，其余的<name>都会把博客放置在<username>.github.io/<name>路径上。如果是用自己DNS其实并没有什么影响。然后在这个repository下面新建一个branch叫gh-pages，然后放入一个CNAME文件，里面写入自己的域名，比如本博客，我们可以用</name></username></name></username></username></username></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> &lt;repository&gt; ./temp</div><div class="line"><span class="built_in">cd</span> ./temp &amp;&amp; git checkout -b gh-pages</div><div class="line"><span class="built_in">echo</span> <span class="string">"blog.aixc.space"</span> &gt; CNAME</div><div class="line">git add . &amp;&amp; git commit -m <span class="string">"add CNAME"</span> &amp;&amp; git push origin gh-pages</div><div class="line"><span class="built_in">cd</span> .. &amp;&amp; rm -rf ./temp</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> &lt;repository&gt; ./temp</div><div class="line"><span class="built_in">cd</span> ./temp</div><div class="line"><span class="built_in">echo</span> <span class="string">"blog.aixc.space"</span> &gt; CNAME</div><div class="line">git checkout -b gh-pages</div><div class="line">git add . &amp;&amp; git commit -m <span class="string">"add CNAME"</span> &amp;&amp; git push origin gh-pages</div><div class="line"><span class="built_in">cd</span> .. &amp;&amp; rm -rf ./temp</div></pre></td></tr></table></figure>
+<p>同时，我们需要在博客的hexo项目中的public文件夹下建立同样的文件。这样在运行hexo deploy的时候就不会把CNAME文件删除了。</p>
 <p>然后在namecheap的console中，我们建立两个A record，把blog.aixc.space映射到<code>192.30.252.153</code>和<code>192.30.252.153</code>上。等到DNS节点的同步完成后，我们就能通过访问<a href="blog.aixc.space">blog.aixc.space</a>来访问这个博客了，此时，如果运行<code>dig blog.aixc.space</code>就能看到结果变成</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; blog.aixc.space</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 22870</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;blog.aixc.space.		IN	A</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">blog.aixc.space.	600	IN	A	192.30.252.153</div><div class="line">blog.aixc.space.	600	IN	A	192.30.252.154</div></pre></td></tr></table></figure>
 <p>至此，一个个人博客就搭建完毕了。</p>
@@ -506,7 +507,6 @@
             <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><blockquote>
 <p>这是一个俗套的Hello World</p>
 </blockquote>
-<p>Hello World, my new blog。</p>
 <p>新博客搭建好了，一是作为一个技术备忘录，二是用自己的经验帮助读到文章的有缘人，最后是用来见证自己的进步。文章不需要很长，关键是坚持写下去和保持固定（一周至少一次）的更新频率，和言简意赅的对问题与解决的描述。</p>
 
           
@@ -598,7 +598,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
