@@ -83,21 +83,18 @@
 
 
 <meta name="description" content="个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。
-代码
-整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由hexo通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于">
+代码整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由hexo通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何搭建个人博客">
 <meta property="og:url" content="http://blog.aixc.com/2017/01/21/how-to-deploy-blog/index.html">
 <meta property="og:site_name" content="Jason's Blog">
 <meta property="og:description" content="个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。
-代码
-整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由hexo通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于">
+代码整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由hexo通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于n">
 <meta property="og:updated_time" content="2017-01-21T21:26:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何搭建个人博客">
 <meta name="twitter:description" content="个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。
-代码
-整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由hexo通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于">
+代码整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由hexo通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于n">
 
 
 
@@ -293,7 +290,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T17:25:46Z">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T17:25:46+00:00">
                 21/01/2017
               </time>
             
@@ -352,20 +349,15 @@
 
       
         <p>个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。</p>
-<h1>代码</h1>
-<p>整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由<a href="hexo.io">hexo</a>通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于node.js开发的一个开源的博客框架，其宗旨是提供简单快捷的步骤来帮助个人不需要写一行代码就能搭建博客。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由<a href="hexo.io">hexo</a>通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于node.js开发的一个开源的博客框架，其宗旨是提供简单快捷的步骤来帮助个人不需要写一行代码就能搭建博客。</p>
 <p>博客的主题是由<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">NexT</a>提供的，它不但提供了简介的外观同时集成了很多插件。当然，由于Hexo的可扩展行，用户可以自主创建样式和插件来实现各种需求。</p>
-<h1>服务器</h1>
-<p>Github Page起初是为了提供一个免费的静态网页载体让开源项目能把文档放在和代码一样的地方，但是后来也被大家用来放自己的博客。它的好处是免费和（应该）没有容量的限制，坏处有两个，一个是放博客HTML的repository的branch必须是开源，所以任何人都能去复制整个代码，二是没有办法运行任何的服务器端的逻辑代码。可是博客本身就是公开的而且只要出文字就行了嘛。 😄 并且，由于现在JS的强大，很多以前必须在自己服务器实现的事情都有了第三方封装的很好的服务，只要简单的复制些调用对方接口的代码，不用会写程序就能在一个静态网页上完成很多事情。（题外话，现在的独立程序员真是能一个人能顶一个团队。但是，第三方的服务是把双刃剑，它约强大，个人反而越需要提升能力，不然哪什么保证工作哟。。。）</p>
+<h1 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h1><p>Github Page起初是为了提供一个免费的静态网页载体让开源项目能把文档放在和代码一样的地方，但是后来也被大家用来放自己的博客。它的好处是免费和（应该）没有容量的限制，坏处有两个，一个是放博客HTML的repository的branch必须是开源，所以任何人都能去复制整个代码，二是没有办法运行任何的服务器端的逻辑代码。可是博客本身就是公开的而且只要出文字就行了嘛。 :smile: 并且，由于现在JS的强大，很多以前必须在自己服务器实现的事情都有了第三方封装的很好的服务，只要简单的复制些调用对方接口的代码，不用会写程序就能在一个静态网页上完成很多事情。（题外话，现在的独立程序员真是能一个人能顶一个团队。但是，第三方的服务是把双刃剑，它约强大，个人反而越需要提升能力，不然哪什么保证工作哟。。。）</p>
 <p>如果实在是需要一个可以运行东西的服务器，<a href="https://aws.amazon.com/" target="_blank" rel="external">AWS</a>现在提供免费的EC2 Instance,虽然运算能力非常赢弱，但是放个一般只有十几二十来个并发的小博客还是绰绰有余的。而且它提供一个独立的IP: elastic IP 和独立长到没人能记住的DNS。如果用来做手机APP的服务器其实挺好的。</p>
-<h1>DNS</h1>
-<p>这个博客用的是<a href="https://www.namecheap.com" target="_blank" rel="external">namecheap.com</a>的服务，虽然它在写博客的时候还是没有修复自己提供给客户修改DNS name server的bug，但是优势在于它的域名和附加服务很便宜，客服也还行。</p>
-<p>由于本博客以Github Page为载体的，所以得稍微做些配置才能不去使用默认的http://<username>.github.io来作为域名。<br>
-首先是新建一个repository，可以使用任意的名字，但是只有用<username>.github.io才能把博客放在<username>.github.io的root上，其余的<name>都会把博客放置在<username>.github.io/<name>路径上。如果是用自己DNS其实并没有什么影响。然后在这个repository下面新建一个branch叫gh-pages，然后放入一个CNAME文件，里面写入自己的域名，比如本博客，我们可以用</name></username></name></username></username></username></p>
+<h1 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h1><p>这个博客用的是<a href="https://www.namecheap.com" target="_blank" rel="external">namecheap.com</a>的服务，虽然它在写博客的时候还是没有修复自己提供给客户修改DNS name server的bug，但是优势在于它的域名和附加服务很便宜，客服也还行。</p>
+<p>由于本博客以Github Page为载体的，所以得稍微做些配置才能不去使用默认的http://<username>.github.io来作为域名。<br>首先是新建一个repository，可以使用任意的名字，但是只有用<username>.github.io才能把博客放在<username>.github.io的root上，其余的<name>都会把博客放置在<username>.github.io/<name>路径上。如果是用自己DNS其实并没有什么影响。然后在这个repository下面新建一个branch叫gh-pages，然后放入一个CNAME文件，里面写入自己的域名，比如本博客，我们可以用</name></username></name></username></username></username></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> &lt;repository&gt; ./temp</div><div class="line"><span class="built_in">cd</span> ./temp</div><div class="line"><span class="built_in">echo</span> <span class="string">"blog.aixc.space"</span> &gt; CNAME</div><div class="line">git checkout -b gh-pages</div><div class="line">git add . &amp;&amp; git commit -m <span class="string">"add CNAME"</span> &amp;&amp; git push origin gh-pages</div><div class="line"><span class="built_in">cd</span> .. &amp;&amp; rm -rf ./temp</div></pre></td></tr></table></figure>
 <p>同时，我们需要在博客的hexo项目中的public文件夹下建立同样的文件。这样在运行hexo deploy的时候就不会把CNAME文件删除了。</p>
-<p>然后在namecheap的console中，我们建立两个A record，把blog.aixc.space映射到<code>192.30.252.153</code>和<code>192.30.252.153</code>上。等到DNS节点的同步完成后，我们就能通过访问<a href="blog.aixc.space">blog.aixc.space</a>来访问这个博客了，此时，如果运行<code>dig blog.aixc.space</code>就能看到结果变成</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; blog.aixc.space</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 22870</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;blog.aixc.space.		IN	A</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">blog.aixc.space.	600	IN	A	192.30.252.153</div><div class="line">blog.aixc.space.	600	IN	A	192.30.252.154</div></pre></td></tr></table></figure>
+<p>然后在namecheap的console中，我们建立两个A record，把blog.aixc.space映射到<code>192.30.252.153</code>和<code>192.30.252.153</code>上。等到DNS节点的同步完成后，我们就能通过访问<a href="blog.aixc.space">blog.aixc.space</a>来访问这个博客了，此时，如果运行<code>dig blog.aixc.space</code>就能看到结果变成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; blog.aixc.space</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 22870</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;blog.aixc.space.		IN	A</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">blog.aixc.space.	600	IN	A	192.30.252.153</div><div class="line">blog.aixc.space.	600	IN	A	192.30.252.154</div></pre></td></tr></table></figure></p>
 <p>至此，一个个人博客就搭建完毕了。</p>
 
       
@@ -487,7 +479,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -496,7 +488,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -505,7 +497,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -540,7 +532,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">DNS</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务器"><span class="nav-number">2.</span> <span class="nav-text">服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS"><span class="nav-number">3.</span> <span class="nav-text">DNS</span></a></li></ol></div>
             
 
           </div>

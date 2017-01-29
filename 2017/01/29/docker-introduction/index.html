@@ -1,0 +1,728 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="server,tools,linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Docker是最近很火的一个东西（最近指是一段很长时间），淘宝在去年把它们的所以服务都docker化了并承受了双十一的洗礼也侧面证明了docker生态是值得信赖的。
+这篇文章就和大家谈一下Docker这个高端的Linux底层技术。有大概了解过docker的人应该不会对下面这张图表示陌生。图的左边可视化了一般的虚拟机(VM)的结构。比如我们熟悉的AWS或者典型的Data center都是基于这种模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker入门介绍">
+<meta property="og:url" content="http://blog.aixc.com/2017/01/29/docker-introduction/index.html">
+<meta property="og:site_name" content="Jason's Blog">
+<meta property="og:description" content="Docker是最近很火的一个东西（最近指是一段很长时间），淘宝在去年把它们的所以服务都docker化了并承受了双十一的洗礼也侧面证明了docker生态是值得信赖的。
+这篇文章就和大家谈一下Docker这个高端的Linux底层技术。有大概了解过docker的人应该不会对下面这张图表示陌生。图的左边可视化了一般的虚拟机(VM)的结构。比如我们熟悉的AWS或者典型的Data center都是基于这种模型">
+<meta property="og:image" content="http://i1.piimg.com/4851/ee037c9ed576f47a.jpg">
+<meta property="og:updated_time" content="2017-01-29T14:47:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker入门介绍">
+<meta name="twitter:description" content="Docker是最近很火的一个东西（最近指是一段很长时间），淘宝在去年把它们的所以服务都docker化了并承受了双十一的洗礼也侧面证明了docker生态是值得信赖的。
+这篇文章就和大家谈一下Docker这个高端的Linux底层技术。有大概了解过docker的人应该不会对下面这张图表示陌生。图的左边可视化了一般的虚拟机(VM)的结构。比如我们熟悉的AWS或者典型的Data center都是基于这种模型">
+<meta name="twitter:image" content="http://i1.piimg.com/4851/ee037c9ed576f47a.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.aixc.com/2017/01/29/docker-introduction/"/>
+
+
+
+
+
+  <title> Docker入门介绍 | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jason's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.aixc.com/2017/01/29/docker-introduction/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jason Chen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jason's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jason's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                Docker入门介绍
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-29T12:43:00Z">
+                29/01/2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computing/" itemprop="url" rel="index">
+                    <span itemprop="name">Computing</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Docker是最近很火的一个东西（最近指是一段很长时间），淘宝在去年把它们的所以服务都docker化了并承受了双十一的洗礼也侧面证明了docker生态是值得信赖的。</p>
+<p>这篇文章就和大家谈一下Docker这个高端的Linux底层技术。有大概了解过docker的人应该不会对下面这张图表示陌生。图的左边可视化了一般的虚拟机(VM)的结构。比如我们熟悉的AWS或者典型的Data center都是基于这种模型。拿AWS做比方，每次我们用他们家的EC2服务，我们都能够在初始化系统之后获得一台非常干净的远程电脑。但是这并不代表我们真的获得了一台新电脑，而是一部分电脑。这就涉及到了Hypervisor技术。这个技术可能大家都用过，比如VMware，Virtualbox都是这个技术的坚实拥护对象。简单来说就是一台电脑硬件上安装了OS(host)，比如说Windows，然后在这个OS上面有一个翻译／模拟／我也不知道怎么形容层，在这层上又安装了新的OS（们），这些OS独享（或者共享）了主机的硬件资源。这些子OS（们）并不会意识到自己其实是运行在母OS上，因为有这个模拟层的存在，它会把所有的子OS的指令发给母OS，然后把运行的结果穿回子OS。但是可想而知，由于每个子OS都是完整的东西，其中很多东西都并不需要，但为了保证功能完整，Hypervisor却得一五一十得把所有东西都模拟出来，这个很辛苦。于是就有了Docker所用的Container技术。</p>
+<p><img src="http://i1.piimg.com/4851/ee037c9ed576f47a.jpg" alt="Docker VS VM"></p>
+<h1 id="Image-amp-Container"><a href="#Image-amp-Container" class="headerlink" title="Image &amp; Container"></a>Image &amp; Container</h1><p>入门docker首先从熟悉两个最基础的docker组件开始，docker image &amp; docker container。其区别很简单。</p>
+<blockquote>
+<p>Docker Image is immutable while container is a running instance.</p>
+</blockquote>
+<p>类比下就是，docker image就是电脑安装的ISO光盘文件，建立好了就不能修改了，但是程序能够读出内容并根据这个文件建立一个可运行的操作系统instance。这个instance就可以类比为docker的container，这是可以修改的。</p>
+<p>我最喜欢拿三明治来比喻Docker image的构建过程。Docker提供了一个叫Dockerfile的特性，它是一个安装文件make file，里面记录了一个可用的docker image的搭建过程。以下面这个非官方的apache docker image做例子。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># A basic apache server. To use either add or bind mount content under /var/www</span></div><div class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">12.04</span></div><div class="line"></div><div class="line"><span class="keyword">MAINTAINER</span> Kimbro Staken version: <span class="number">0.1</span></div><div class="line"></div><div class="line"><span class="keyword">RUN</span> apt-get update &amp;&amp; apt-get install -y apache2 &amp;&amp; apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/*</div><div class="line"></div><div class="line"><span class="keyword">ENV</span> APACHE_RUN_USER www-data</div><div class="line"><span class="keyword">ENV</span> APACHE_RUN_GROUP www-data</div><div class="line"><span class="keyword">ENV</span> APACHE_LOG_DIR /var/log/apache2</div><div class="line"></div><div class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></div></pre></td></tr></table></figure>
+<p>首先这是基于ubuntu v12.04版本的docker image的。这也就是所谓的三明治结构。所有的Docker image都不是从无到有的，而是从成品到成品。比方说上面这个文件能够生成新的Docker image，里面是以ubuntu系统做底，然后安装了一个apache。当这个image被建造出来后，我们可以复用它，然后再在这个基础上安装新的东西，就这么一层一层得使一个image越来越复杂，功能也越来越多样化。但这并不推荐，因为image是不可修改的，比如一个image又有Java又有Python还有Apache，当其中任意一个东西需要修改的时候，我们就得从头来构造一遍，这是不可忍受的了。接着看这个文件，可以看到在后面它运行了一些系统的命令还加入了些apache运行需要的环境变量，最后还把自己的80端口开放了出来。这里的80端口开放其实并不是Host 80端口的开放，在运行一个新的container时需要做一个端口映射。</p>
+<p>然后运行下面命令就能用上面的Dockerfile创建一个叫apache-sample的image。这时docker就会用搭三明治的方法把这个image建起来。这里涉及到很多hash值和checksum用来优化的技巧，就不展开了。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker build -t apache-sample</div></pre></td></tr></table></figure></p>
+<p>最后可以使用run命令来启动这个image，也就是建立一个container，记住我们需要映射80端口。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo docker run -p 80:80 apache-sample</div></pre></td></tr></table></figure></p>
+<p>前面有说到docker的hash值和checksum，我觉得可以提下docker image的版本，在很多时候工业应用上，我们需要更新image但是不把老的image直接淘汰掉，docker提供了tag的功能，能给image进行版本标注。这里hash值和checksum就发挥了作用，它们能使docker image在最小变动的基础上完成升级。这在以后的博客中可以展开下。</p>
+<h1 id="Container-amp-Cgroups"><a href="#Container-amp-Cgroups" class="headerlink" title="Container &amp; Cgroups"></a>Container &amp; Cgroups</h1><p>Docker所基于的技术，其实并不是它最先提出的，只是Docker的公司把它商业化了。这个高大上的技术其实早就是所有Linux现在发行版的内核所自带的，也就是Cgroups。Cgroups是control group的缩写，最早由google的工程师为了给他们的Data center省钱而提出。简单来说它就是给Host系统的资源管理提供了一个统一的框架，可以小到为单个进程限制资源，大到OS级别的虚拟化。很明显Docker用的就是后一种。解释下前面一种，比方说我们有个科学计算的程序，算圆周率，一算要好几天。但整个机器不能只做这个，还有别的科研人员想跑demo或者用些运算能力做别的事情。如果不限制，这个圆周率程序就会把资源全占走。所以，Cgroups就可以用上了，它能把整个圆周率但进程隔离起来，单独给它分配CPU set，每个子线程的优先级，单独的内存使用上限。在Linux整个OS初始化后，我们知道，所有的进程其实都是init进程的子进程，所以，这些进程其实都是运行在一个默认的Cgroups里的。说远了，在Cgroups技术的基础上，那些专家们又发明了LXC，Linux Container，是不是和Docker的Container很像。这个技术能够实现OS级别的虚拟，把多个独立的Linux系统运行在单个Linux内核上。其实这个和Docker的技术的表达形式一模一样，docker的container自己也并不拥有自己独立的Linux内核，所有的Docker containers共享了同一个，也就是Host OS的内核。不过Docker的Container技术和LXC，还有LXD并不太一样，尽管目的甚至表现形式是相同的。值得一提的是，现在docker的版本已经支持用LXC作为运行Docker container的Driver了。</p>
+<h1 id="Compose"><a href="#Compose" class="headerlink" title="Compose"></a>Compose</h1><p>Compose是docker的一个高级用法。因为前面说docker的三明治技术在把大量的软件安装进一个image没有那么提倡，docker官方就提出了compose的概念，就是一个文件能建立多个不同目的的container。比如说apache一个container，Java一个container，MySQL一个Container。但由于这些都是为了支持一个东西的顺利运行，所以把它们放进compose中可以“一键管理”。</p>
+<h1 id="Swarm-Service-amp-Data-center"><a href="#Swarm-Service-amp-Data-center" class="headerlink" title="Swarm, Service &amp; Data center"></a>Swarm, Service &amp; Data center</h1><p>这几个技术很是厉害，值得另开一篇文章说。简单来说就是Docker说，啊呀，Hypervisor技术你落后啦，让我来替代你吧，同样的，你们AWS啊Data center啊你们不要再觉得商业的Hypervisor能够自动scale啊，分配啊，容灾啊这些技术很好了，我也有这些能力了，所以快来用我吧。这都是商业竞争的一些特性，如果不是工作需要一般也不会去用，但是也挺有意思可以了解下。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/server/" rel="tag"># server</a>
+          
+            <a href="/tags/tools/" rel="tag"># tools</a>
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/28/neural-network-1/" rel="next" title="Artificial Neural Network - Part 1">
+                <i class="fa fa-chevron-left"></i> Artificial Neural Network - Part 1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Jason Chen" />
+          <p class="site-author-name" itemprop="name">Jason Chen</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Image-amp-Container"><span class="nav-number">1.</span> <span class="nav-text">Image & Container</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Container-amp-Cgroups"><span class="nav-number">2.</span> <span class="nav-text">Container & Cgroups</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Compose"><span class="nav-number">3.</span> <span class="nav-text">Compose</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Swarm-Service-amp-Data-center"><span class="nav-number">4.</span> <span class="nav-text">Swarm, Service & Data center</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jason Chen</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
