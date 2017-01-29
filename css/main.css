@@ -834,6 +834,7 @@ pre .javascript .function {
 .btn {
   display: inline-block;
   padding: 0 20px;
+  margin-top: 20px;
   font-size: 14px;
   color: #fff;
   background: #222;
@@ -1686,7 +1687,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #400ef1;
+  background: #9ff;
 }
 .links-of-blogroll {
   font-size: 13px;

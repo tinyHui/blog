@@ -348,25 +348,16 @@
       
         
           
-            <p>Docker是最近很火的一个东西（最近指是一段很长时间），淘宝在去年把它们的所以服务都docker化了并承受了双十一的洗礼也侧面证明了docker生态是值得信赖的。</p>
-<p>这篇文章就和大家谈一下Docker这个高端的Linux底层技术。有大概了解过docker的人应该不会对下面这张图表示陌生。图的左边可视化了一般的虚拟机(VM)的结构。比如我们熟悉的AWS或者典型的Data center都是基于这种模型。拿AWS做比方，每次我们用他们家的EC2服务，我们都能够在初始化系统之后获得一台非常干净的远程电脑。但是这并不代表我们真的获得了一台新电脑，而是一部分电脑。这就涉及到了Hypervisor技术。这个技术可能大家都用过，比如VMware，Virtualbox都是这个技术的坚实拥护对象。简单来说就是一台电脑硬件上安装了OS(host)，比如说Windows，然后在这个OS上面有一个翻译／模拟／我也不知道怎么形容层，在这层上又安装了新的OS（们），这些OS独享（或者共享）了主机的硬件资源。这些子OS（们）并不会意识到自己其实是运行在母OS上，因为有这个模拟层的存在，它会把所有的子OS的指令发给母OS，然后把运行的结果穿回子OS。但是可想而知，由于每个子OS都是完整的东西，其中很多东西都并不需要，但为了保证功能完整，Hypervisor却得一五一十得把所有东西都模拟出来，这个很辛苦。于是就有了Docker所用的Container技术。</p>
-<p><img src="http://i1.piimg.com/4851/ee037c9ed576f47a.jpg" alt="Docker VS VM"></p>
-<h1 id="Image-amp-Container"><a href="#Image-amp-Container" class="headerlink" title="Image &amp; Container"></a>Image &amp; Container</h1><p>入门docker首先从熟悉两个最基础的docker组件开始，docker image &amp; docker container。其区别很简单。</p>
-<blockquote>
-<p>Docker Image is immutable while container is a running instance.</p>
-</blockquote>
-<p>类比下就是，docker image就是电脑安装的ISO光盘文件，建立好了就不能修改了，但是程序能够读出内容并根据这个文件建立一个可运行的操作系统instance。这个instance就可以类比为docker的container，这是可以修改的。</p>
-<p>我最喜欢拿三明治来比喻Docker image的构建过程。Docker提供了一个叫Dockerfile的特性，它是一个安装文件make file，里面记录了一个可用的docker image的搭建过程。以下面这个非官方的apache docker image做例子。</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># A basic apache server. To use either add or bind mount content under /var/www</span></div><div class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">12.04</span></div><div class="line"></div><div class="line"><span class="keyword">MAINTAINER</span> Kimbro Staken version: <span class="number">0.1</span></div><div class="line"></div><div class="line"><span class="keyword">RUN</span> apt-get update &amp;&amp; apt-get install -y apache2 &amp;&amp; apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/*</div><div class="line"></div><div class="line"><span class="keyword">ENV</span> APACHE_RUN_USER www-data</div><div class="line"><span class="keyword">ENV</span> APACHE_RUN_GROUP www-data</div><div class="line"><span class="keyword">ENV</span> APACHE_LOG_DIR /var/log/apache2</div><div class="line"></div><div class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></div></pre></td></tr></table></figure>
-<p>首先这是基于ubuntu v12.04版本的docker image的。这也就是所谓的三明治结构。所有的Docker image都不是从无到有的，而是从成品到成品。比方说上面这个文件能够生成新的Docker image，里面是以ubuntu系统做底，然后安装了一个apache。当这个image被建造出来后，我们可以复用它，然后再在这个基础上安装新的东西，就这么一层一层得使一个image越来越复杂，功能也越来越多样化。但这并不推荐，因为image是不可修改的，比如一个image又有Java又有Python还有Apache，当其中任意一个东西需要修改的时候，我们就得从头来构造一遍，这是不可忍受的了。接着看这个文件，可以看到在后面它运行了一些系统的命令还加入了些apache运行需要的环境变量，最后还把自己的80端口开放了出来。这里的80端口开放其实并不是Host 80端口的开放，在运行一个新的container时需要做一个端口映射。</p>
-<p>然后运行下面命令就能用上面的Dockerfile创建一个叫apache-sample的image。这时docker就会用搭三明治的方法把这个image建起来。这里涉及到很多hash值和checksum用来优化的技巧，就不展开了。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker build -t apache-sample</div></pre></td></tr></table></figure></p>
-<p>最后可以使用run命令来启动这个image，也就是建立一个container，记住我们需要映射80端口。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo docker run -p 80:80 apache-sample</div></pre></td></tr></table></figure></p>
-<p>前面有说到docker的hash值和checksum，我觉得可以提下docker image的版本，在很多时候工业应用上，我们需要更新image但是不把老的image直接淘汰掉，docker提供了tag的功能，能给image进行版本标注。这里hash值和checksum就发挥了作用，它们能使docker image在最小变动的基础上完成升级。这在以后的博客中可以展开下。</p>
-<h1 id="Container-amp-Cgroups"><a href="#Container-amp-Cgroups" class="headerlink" title="Container &amp; Cgroups"></a>Container &amp; Cgroups</h1><p>Docker所基于的技术，其实并不是它最先提出的，只是Docker的公司把它商业化了。这个高大上的技术其实早就是所有Linux现在发行版的内核所自带的，也就是Cgroups。Cgroups是control group的缩写，最早由google的工程师为了给他们的Data center省钱而提出。简单来说它就是给Host系统的资源管理提供了一个统一的框架，可以小到为单个进程限制资源，大到OS级别的虚拟化。很明显Docker用的就是后一种。解释下前面一种，比方说我们有个科学计算的程序，算圆周率，一算要好几天。但整个机器不能只做这个，还有别的科研人员想跑demo或者用些运算能力做别的事情。如果不限制，这个圆周率程序就会把资源全占走。所以，Cgroups就可以用上了，它能把整个圆周率但进程隔离起来，单独给它分配CPU set，每个子线程的优先级，单独的内存使用上限。在Linux整个OS初始化后，我们知道，所有的进程其实都是init进程的子进程，所以，这些进程其实都是运行在一个默认的Cgroups里的。说远了，在Cgroups技术的基础上，那些专家们又发明了LXC，Linux Container，是不是和Docker的Container很像。这个技术能够实现OS级别的虚拟，把多个独立的Linux系统运行在单个Linux内核上。其实这个和Docker的技术的表达形式一模一样，docker的container自己也并不拥有自己独立的Linux内核，所有的Docker containers共享了同一个，也就是Host OS的内核。不过Docker的Container技术和LXC，还有LXD并不太一样，尽管目的甚至表现形式是相同的。值得一提的是，现在docker的版本已经支持用LXC作为运行Docker container的Driver了。</p>
-<h1 id="Compose"><a href="#Compose" class="headerlink" title="Compose"></a>Compose</h1><p>Compose是docker的一个高级用法。因为前面说docker的三明治技术在把大量的软件安装进一个image没有那么提倡，docker官方就提出了compose的概念，就是一个文件能建立多个不同目的的container。比如说apache一个container，Java一个container，MySQL一个Container。但由于这些都是为了支持一个东西的顺利运行，所以把它们放进compose中可以“一键管理”。</p>
-<h1 id="Swarm-Service-amp-Data-center"><a href="#Swarm-Service-amp-Data-center" class="headerlink" title="Swarm, Service &amp; Data center"></a>Swarm, Service &amp; Data center</h1><p>这几个技术很是厉害，值得另开一篇文章说。简单来说就是Docker说，啊呀，Hypervisor技术你落后啦，让我来替代你吧，同样的，你们AWS啊Data center啊你们不要再觉得商业的Hypervisor能够自动scale啊，分配啊，容灾啊这些技术很好了，我也有这些能力了，所以快来用我吧。这都是商业竞争的一些特性，如果不是工作需要一般也不会去用，但是也挺有意思可以了解下。</p>
-
-          
+          Docker是最近很火的一个东西（最近指是一段很长时间），淘宝在去年把它们的所以服务都docker化了并承受了双十一的洗礼也侧面证明了docker生态是值得信赖的。
+这篇文章就和大家谈一下Docker这个高端的Linux底层技术。有大概了解过docker的人应该不会对下面这张图表示陌生。图的左边可视化了一般的虚拟机(VM)的结构。比如我们熟悉的AWS或者典型的Data center都是基于这种模型。拿AWS做比方，每次我们用他们家的EC2服务，我们都能够在初始化系统之后获得一台非常干净的远程电脑。但是这并不代表我们真的获得了一台新电脑，而是一部分电脑。这就涉及到了Hypervisor技术。这个技术可能大家都用过，比如VMware，Virtualbox都是这个技术的坚实拥护对象。简单来说就是一台电脑硬件上安装了OS(host)，比如说Windows，然后在这个OS上面有一个翻译／模拟／我也不知道怎么形容层，在这层上又安装了新的OS（们），这些OS独享（或者共享）了主机的硬件资源。这些子OS（们）并不会意识到自己其实是运行在母OS上，因为有这个模拟层的存在，它会把所有的子OS的指令发给母O
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/29/docker-introduction/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -505,29 +496,16 @@
       
         
           
-            <p>从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。</p>
-<h1 id="早期的机器学习-Early-stage-of-Machine-learning"><a href="#早期的机器学习-Early-stage-of-Machine-learning" class="headerlink" title="早期的机器学习 (Early stage of Machine learning)"></a>早期的机器学习 (Early stage of Machine learning)</h1><p><img src="http://p1.bqimg.com/4851/de149d22d97c033c.png" alt="classification"><br>机器学习，是现行的靠谱的实现人工智能的算法的统称。顾名思义，就是让机器，也就是计算机，自动地去学习。由于电影中的夸张和对于这个行业的过度自信，加上媒体的渲染，一说自己是学人工智能的大家就会想到：好小子，准备毁灭全人类了啊。其实真冤枉了，人工智能，或者说机器学习，简单来说它学的东西就是如何画一条线，能把平面(feature space)内自由分散的不同类型的点恰好划分开。这个平面可以不止是2维的，也可以是三维的，4维的以及多维的。以此类推，线也不一定就是线，在二维下是线，三维下是平面，多维下就是不知道什么东西的东西。再用数学化点的语言来描述就是我们有一个函数f，输入是x，输出是y，这个函数能够把在空间内的任意x变成其对应的y。这个也就是线性回归，一切的机器学习算法的核心思想。别看这个东西描述效果起来异常简单，但具体的数学实现却前前后后花费了200多年几代人的心思。</p>
-<p>机器学习从输出数据的类型上大致分两种：classification和regression。前者是预测离散的类，比如说晴天啊雨天啊，后者则是预测连续的类，比如说年龄啊价格啊。从学习的方法来说可分为supervised learning, unsupervised learning, semi-supervised learning。第一个是在训练的时候告诉电脑一系列x-&gt;y的对应集，让机器去估计。这就引发了两种问题，一个是这个估计的f对于训练集实在是太匹配了，以至于对于外在数据反而没有那么的合适，这就是over fitting，还有一个就比较常见了，就是f连训练数据都没法很好得划分，也就是under fitting。</p>
-<p>在早期的时候，人工智能的研究专家们通常也都是很厉害的数学家，他们发明了很多耳熟能详的算法来解决线性回归的问题，比如决策树，朴素贝叶斯，SVM等等等等（以后我将会开展系列文章来详细解释下）。这些算法都后世的人工智能行业思想的发展产生了深远的影响并被广泛应用，在此对他们致敬。但是，在那个时期人工智能的突破真的很困难，一来是这些算法理解的门槛很高；二来它的过程实在是太抽象了，比如如上文二维三维的空间(feature space)还能理解，但4维，5维乃至100维，300维，1000维就不是常人能够理解的了；三来则是把这些算法组合并和现实的问题联系起来何谈容易，首先一个问题它如何用这些结构来表达现实问题的数据结构，其次这需要很多领域的专家和人工智能专家合作，但隔行如隔山，两个行业互相理解也是不容易。</p>
-<p>因此，在多年以来，人工智能一直都是在苦苦追求发展但却在实际应用上很少有大的突破。</p>
-<h1 id="感知器-Perception"><a href="#感知器-Perception" class="headerlink" title="感知器 (Perception)"></a>感知器 (Perception)</h1><p>在正式介绍深度学习之前我们先来说说它的鼻祖：Perception。</p>
-<p>这个东西从历史上来说可有年头了，它早在1957年就在美国海军研究部门被提出，并在一台IBM的计算机上被实现，用以实现图像识别。说句题外话，这整个研究野心非常大投入巨额资金并囊括了机器视觉，自动翻译，机器人行走等等等等。但结果却是为人工智能的发展泼了一盆冷水。多年后由于计算机性能的提升人们才又想起了这方面的研究。但很多machine learning的核心算法的雏型都在那个研究中被提出。</p>
-<p>说回Perception，抽象来说它就是一个计算单元，效果是输入两个参数（布尔值）然后再用一个布尔运算把这两个个参数揉再一起，比如我们熟悉的AND，OR最后输出结果。神经网络就是这个东西的集合，成千上万的Perception单元聚集在一起就能够模拟出一个大脑。这也就是早期神经网络方面研究受脑科学研究的启发，也是这个研究的终极目标。</p>
-<p>但很明显，这个想法很有野心，但却步履维艰。第一个摆在研究人员面前的问题不是大脑的构成，而是，这个结构没法模拟非线性的计算啊，比如说XOR。从数学角度来说，单一的线性函数是不可能得到和XOR一样的计算结果的。</p>
-<p>直到一个教父级的人物出现Geoffrey Hinton（是校友啊好自豪），他提出用非线性函数Sigmod function来作为Perception内的激活函数(activation function)。至此，通过严谨的数学推断，多个Perception组合实现的神经网络理论上能够模拟出任何的算法。到了1997年，Hinton老爷子又发现反向传播（backpropagation)能够用来生成输入数据在神经网络隐藏层的表达，这可是可以拿来做每个Perception的权重的更新啊。</p>
-<h1 id="正-反向传播-Forwardpropagation-amp-Backwardpropagation"><a href="#正-反向传播-Forwardpropagation-amp-Backwardpropagation" class="headerlink" title="正/反向传播 (Forwardpropagation &amp; Backwardpropagation)"></a>正/反向传播 (Forwardpropagation &amp; Backwardpropagation)</h1><p>下图就是一个现在的经过多人努力后发展出的Perception的样子。<br><img src="http://p1.bqimg.com/4851/d4defa0972395073.png" alt="perception"></p>
-<p>单个元件的计算目标是通过调整权重<script type="math/tex">w</script>和偏重<code>bias</code>的值使得输出的结果(actual result, <script type="math/tex">y_a</script>)能尽可能得接近它应该得到的结果(target result, <script type="math/tex">y_t</script>)。整个过程可被拆分为三步：正向传播，估错和反向传播。</p>
-<p>整个正向传播用数学来表达如下：</p>
-<script type="math/tex; mode=display">y = \varphi(a) = \varphi(\sum^m_{i=1} w_i \cdot x_i + b)</script><p>用来估错方法太多了，比较常用的有cross entropy error，这里<script type="math/tex">t</script>代表的是目标结果：</p>
-<script type="math/tex; mode=display">E = -(t \ln y + (1 - y)\ln (1 - y))</script><p>为何不用Classification error或者Mean square error呢？<a href="https://jamesmccaffrey.wordpress.com/2013/11/05/why-you-should-use-cross-entropy-error-instead-of-classification-error-or-mean-squared-error-for-neural-network-classifier-training/" target="_blank" rel="external">这篇文章</a>有很好的解释。简单来说就是Cross entropy error能在backpropagation阶段给予神经网络最好的引导。</p>
-<p>反向传播是神经网络的重头戏。通俗来说，反向传播就是个“下山”的过程。训练的起点是山顶，终点是山脚。在每迈出一步（迭代过程中），函数都会观察哪个方向的坡度最陡然后朝那个方向迈出一步。数学上对此过程的表达需要点偏方(partial derivative)的知识。</p>
-<script type="math/tex; mode=display">\frac{\partial E}{\partial w_i} = \frac{\partial E}{\partial \varphi} \cdot \frac{\partial \varphi}{\partial a} \cdot \frac{\partial a}{\partial w_i}</script><script type="math/tex; mode=display">\frac{\partial E}{\partial b} = \frac{\partial E}{\partial \varphi} \cdot \frac{\partial \varphi}{\partial a} \cdot \frac{\partial a}{\partial b} = \frac{\partial E}{\partial y} \cdot \frac{\partial y}{\partial \varphi} \cdot 1</script><p>于是，新的<script type="math/tex">w_{ij+1} = w_{ij} - \frac{\partial E}{\partial w_{ij}}</script>，其中<script type="math/tex">j</script>表示的迭代次数。同样<script type="math/tex">b_{j+1} = b_{j} - \frac{\partial E}{\partial b_{j}}</script>。</p>
-<h1 id="激活函数-Activation-Function"><a href="#激活函数-Activation-Function" class="headerlink" title="激活函数 (Activation Function)"></a>激活函数 (Activation Function)</h1><p>根据上文的描述，我们发现，只要是非线性的函数都能用作激活函数。于是三角函数(<script type="math/tex">\sin</script>, <script type="math/tex">\cos</script>)都被拿来用。但是，由于反向传播的过程存在，这些函数在进行求导的时候没有办法很简洁且运算量很大。这就催生出了大名鼎鼎的sigmod函数：</p>
-<script type="math/tex; mode=display">\varphi(x) = \frac{1}{1+e^{-x}}</script><p>它的导数非常简洁，如下所示，有兴趣的朋友可以自己去试试。</p>
-<script type="math/tex; mode=display">\frac{\partial \varphi}{\partial a} = \varphi(x) \cdot (1 - \varphi(x))</script><p>也就是说，在Forwardpropagation过程产出的运算结果可以复用到Backwardpropagation中。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>看似完美的背后，sigmod函数却有个天生的致命的缺陷。在下一篇文章中，我将会介绍Full Connection Neural Network，并告诉大家这个缺陷是什么。同时，如何修复这个缺陷，甚至改进我们的激活函数也将在下一章呈现给大家看。</p>
-
-          
+          从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。
+早期的机器学习 (Early stage of Machine learning)机器学习，是现行的靠谱的实现人工智能的算法的统称。顾名思义，就是让机器，也就是计算机，自动地去学习。由于电影中的夸张和对于这个行业的过度自信，加上媒体的渲染，一说自己是学人工智能的大家就会想到：好小子，准备毁灭全人类了啊。其实真冤枉了，人工智能，或者说机器学习，简单来说它学的东西就是如何画一条线，能把平面(feature space)内自由分散的不同类型的点恰好划分开。这个平面可以不止是2维的，也可以是三维的，4维的以及多维的。以此类推，线也不一定就是线，在二维下是线，三维下是平面，多维下就是不
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/28/neural-network-1/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -666,19 +644,18 @@
       
         
           
-            <p>个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由<a href="hexo.io">hexo</a>通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于node.js开发的一个开源的博客框架，其宗旨是提供简单快捷的步骤来帮助个人不需要写一行代码就能搭建博客。</p>
-<p>博客的主题是由<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">NexT</a>提供的，它不但提供了简介的外观同时集成了很多插件。当然，由于Hexo的可扩展行，用户可以自主创建样式和插件来实现各种需求。</p>
-<h1 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h1><p>Github Page起初是为了提供一个免费的静态网页载体让开源项目能把文档放在和代码一样的地方，但是后来也被大家用来放自己的博客。它的好处是免费和（应该）没有容量的限制，坏处有两个，一个是放博客HTML的repository的branch必须是开源，所以任何人都能去复制整个代码，二是没有办法运行任何的服务器端的逻辑代码。可是博客本身就是公开的而且只要出文字就行了嘛。 :smile: 并且，由于现在JS的强大，很多以前必须在自己服务器实现的事情都有了第三方封装的很好的服务，只要简单的复制些调用对方接口的代码，不用会写程序就能在一个静态网页上完成很多事情。（题外话，现在的独立程序员真是能一个人能顶一个团队。但是，第三方的服务是把双刃剑，它约强大，个人反而越需要提升能力，不然哪什么保证工作哟。。。）</p>
-<p>如果实在是需要一个可以运行东西的服务器，<a href="https://aws.amazon.com/" target="_blank" rel="external">AWS</a>现在提供免费的EC2 Instance,虽然运算能力非常赢弱，但是放个一般只有十几二十来个并发的小博客还是绰绰有余的。而且它提供一个独立的IP: elastic IP 和独立长到没人能记住的DNS。如果用来做手机APP的服务器其实挺好的。</p>
-<h1 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h1><p>这个博客用的是<a href="https://www.namecheap.com" target="_blank" rel="external">namecheap.com</a>的服务，虽然它在写博客的时候还是没有修复自己提供给客户修改DNS name server的bug，但是优势在于它的域名和附加服务很便宜，客服也还行。</p>
-<p>由于本博客以Github Page为载体的，所以得稍微做些配置才能不去使用默认的http://<username>.github.io来作为域名。<br>首先是新建一个repository，可以使用任意的名字，但是只有用<username>.github.io才能把博客放在<username>.github.io的root上，其余的<name>都会把博客放置在<username>.github.io/<name>路径上。如果是用自己DNS其实并没有什么影响。然后在这个repository下面新建一个branch叫gh-pages，然后放入一个CNAME文件，里面写入自己的域名，比如本博客，我们可以用</name></username></name></username></username></username></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> &lt;repository&gt; ./temp</div><div class="line"><span class="built_in">cd</span> ./temp</div><div class="line"><span class="built_in">echo</span> <span class="string">"blog.aixc.space"</span> &gt; CNAME</div><div class="line">git checkout -b gh-pages</div><div class="line">git add . &amp;&amp; git commit -m <span class="string">"add CNAME"</span> &amp;&amp; git push origin gh-pages</div><div class="line"><span class="built_in">cd</span> .. &amp;&amp; rm -rf ./temp</div></pre></td></tr></table></figure>
-<p>同时，我们需要在博客的hexo项目中的public文件夹下建立同样的文件。这样在运行hexo deploy的时候就不会把CNAME文件删除了。</p>
-<p>然后在namecheap的console中，我们建立两个A record，把blog.aixc.space映射到<code>192.30.252.153</code>和<code>192.30.252.153</code>上。等到DNS节点的同步完成后，我们就能通过访问<a href="blog.aixc.space">blog.aixc.space</a>来访问这个博客了，此时，如果运行<code>dig blog.aixc.space</code>就能看到结果变成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; blog.aixc.space</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 22870</div><div class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;blog.aixc.space.		IN	A</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">blog.aixc.space.	600	IN	A	192.30.252.153</div><div class="line">blog.aixc.space.	600	IN	A	192.30.252.154</div></pre></td></tr></table></figure></p>
-<p>至此，一个个人博客就搭建完毕了。</p>
-
-          
+          个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。
+代码整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由hexo通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于node.js开发的一个开源的博客框架，其宗旨是提供简单快捷的步骤来帮助个人不需要写一行代码就能搭建博客。
+博客的主题是由NexT提供的，它不但提供了简介的外观同时集成了很多插件。当然，由于Hexo的可扩展行，用户可以自主创建样式和插件来实现各种需求。
+服务器Github Page起初是为了提供一个免费的静态网页载体让开源项目能把文档放在和代码一样的地方，但是后来也被大家用来放自己的博客。它的好处是免费和（应该）没有容量的限制，坏处有两个，一个是放博客HTML的repository的branch必须是开源，所以任何人都能去复制整个代码，二是没有办法运行任何的服务器端的逻辑代码。可是博客本身就是公
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/21/how-to-deploy-blog/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -817,12 +794,19 @@
       
         
           
-            <blockquote>
-<p>这是一个俗套的Hello World</p>
-</blockquote>
-<p>新博客搭建好了，一是作为一个技术备忘录，二是用自己的经验帮助读到文章的有缘人，最后是用来见证自己的进步。文章不需要很长，关键是坚持写下去和保持固定（一周至少一次）的更新频率，和言简意赅的对问题与解决的描述。</p>
+          
+这是一个俗套的Hello World
+
+新博客搭建好了，一是作为一个技术备忘录，二是用自己的经验帮助读到文章的有缘人，最后是用来见证自己的进步。文章不需要很长，关键是坚持写下去和保持固定（一周至少一次）的更新频率，和言简意赅的对问题与解决的描述。
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/21/hello-world/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
