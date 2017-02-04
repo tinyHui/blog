@@ -82,13 +82,19 @@
 
 
 
+<meta name="description" content="本博客围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Artificial Neural Network - Part 2，全连接神经网络(full connected neural network)">
+<meta property="og:title" content="Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient vanish)">
 <meta property="og:url" content="http://blog.aixc.com/2017/02/04/neural-network-2/index.html">
 <meta property="og:site_name" content="Jason's Blog">
-<meta property="og:updated_time" content="2017-02-04T14:15:46.000Z">
+<meta property="og:description" content="本博客围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的">
+<meta property="og:image" content="http://p1.bpimg.com/4851/3d0103e36064862a.gif">
+<meta property="og:image" content="http://p1.bpimg.com/4851/10650fb04fec0e49.png">
+<meta property="og:updated_time" content="2017-02-04T17:20:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Artificial Neural Network - Part 2，全连接神经网络(full connected neural network)">
+<meta name="twitter:title" content="Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient vanish)">
+<meta name="twitter:description" content="本博客围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的">
+<meta name="twitter:image" content="http://p1.bpimg.com/4851/3d0103e36064862a.gif">
 
 
 
@@ -122,7 +128,7 @@
 
 
 
-  <title> Artificial Neural Network - Part 2，全连接神经网络(full connected neural network) | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient vanish) | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -278,7 +284,7 @@
             
             
               
-                Artificial Neural Network - Part 2，全连接神经网络(full connected neural network)
+                Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient vanish)
               
             
           </h2>
@@ -351,7 +357,48 @@
       
 
       
-        
+        <p>本博客围绕神经网络展开一系列的解说，包括<a href="/2017/01/28/neural-network-1/">神经网络的历史与数学模型基础</a>，<a href="/2017/02/04/neural-network-2/">数学模型的debug</a>，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。</p>
+<h1 id="Sigmod的缺陷-Flaw-of-sigmod"><a href="#Sigmod的缺陷-Flaw-of-sigmod" class="headerlink" title="Sigmod的缺陷 (Flaw of sigmod)"></a>Sigmod的缺陷 (Flaw of sigmod)</h1><p>在<a href="/2017/01/28/neural-network-1/">上一章</a>中，我们说到了神经网络(NN)的基础单元：perception，与和神经网络的两个重要的数学步骤：Forwardpropagation与Backwardpropagation。我们提到，sigmod函数是一个伟大的发明但却有一个天生的缺陷。<br><img src="http://p1.bpimg.com/4851/3d0103e36064862a.gif" alt="Sigmod function"></p>
+<p>通过观察，我们发现从$x$的值接近<script type="math/tex">\pm 5</script>的位置开始，整个函数的扩展方向就无限接近于水平，换言之，函数的斜率开始无限接近于<script type="math/tex">0</script>。结合Backwardpropagation的公式，这个数学事实也就意味着在神经网络的训练后期，<script type="math/tex">w</script>与<script type="math/tex">b</script>的绝对值变大后，整个模型的收敛效果将会无限的降低。</p>
+<p>再进一步说，由于sigmod无法保证给所有的输入值提供稳定有效的函数收敛用值(gradient)，整个网络的学习能力就会收到很大限制。具体表现为，如果整个NN的层数太多或者某一层的Perception太多，网络都并不会提升它的表现。</p>
+<p>这个问题也就是折磨了很多人并让神经网络研究止步不前的梯度消失问题(gradient vanish problem)。</p>
+<h1 id="救星1：Regularisation"><a href="#救星1：Regularisation" class="headerlink" title="救星1：Regularisation"></a>救星1：Regularisation</h1><p><strong><em>In nutshell：</em></strong> Regularisation的修复想法就是从估错(Error estimate)上面入手的。具体形式就是它在原有的估错所得到的值上面加上1级或2级的惩罚值(prior term)。整个过程就是用来消减权重的值。</p>
+<h3 id="L1-Regularisation"><a href="#L1-Regularisation" class="headerlink" title="L1 Regularisation"></a>L1 Regularisation</h3><p>L1 regularisation是基于权重的绝对值的。通过L1 regularisation修正后的错误评估值用数学表达式来表现则是</p>
+<script type="math/tex; mode=display">\begin{eqnarray}
+E &=& E_{train} + \beta E_{L1} \\
+&=& E_{train} + \beta | w_i |
+\end{eqnarray}</script><p>它的斜率(gradients)为</p>
+<script type="math/tex; mode=display">\begin{eqnarray}
+\frac{\partial E}{\partial w_i} &=& \frac{\partial E_{train}}{\partial w_i} + \frac{\partial E_{L1}}{\partial w_i} \\
+&=& \frac{\partial E_{train}}{\partial w_i} + sgn(w_i)\\
+\end{eqnarray}</script><p>其中<script type="math/tex">sgn(w_i)</script>是一个简单的信号值。</p>
+<script type="math/tex; mode=display">
+sgn(w_i) =
+\begin{cases}
+    1 & \text{if } x\gt 0 \\
+    -1 & \text{if } x \lt 0 \\
+    0 & \text{otherwise}
+\end{cases}</script><h3 id="L2-Regularisation"><a href="#L2-Regularisation" class="headerlink" title="L2 Regularisation"></a>L2 Regularisation</h3><p>L2 regularisation的原理是通过增加一个complexity term来得到更平滑的错误评估函数曲线(encourage smoother mappings)。</p>
+<script type="math/tex; mode=display">\begin{eqnarray}
+E &=& E_{train} + \beta E_{L2} \\
+&=& E_{train} + \beta \frac{1}{2} \sum_i {w_i}^2
+\end{eqnarray}</script><p>它的斜率(gradients)为</p>
+<script type="math/tex; mode=display">\begin{eqnarray}
+\frac{\partial E}{\partial w_i} &=& \frac{\partial E_{train}}{\partial w_i} + \frac{\partial E_{L2}}{\partial w_i} \\
+&=& \frac{\partial E_{train}}{\partial w_i} + w_i\\
+\end{eqnarray}</script><h1 id="救星2：Dropout"><a href="#救星2：Dropout" class="headerlink" title="救星2：Dropout"></a>救星2：Dropout</h1><p><strong><em>In nutshell：</em></strong> Dropout是另一种修复gradient vanish问题的思路，即通过改变整个NN迭代时每一层的行为的方法来每次只更新一小部分的权重。</p>
+<p>打个比方，一个NN有3层，每层都有10个Perception。如果是普通的训练过程，这30个Perception将在每一次迭代过程中都参与训练。在应用了dropout后，我们设其中将有30%的Perception不参与训练。那么，在每次训练的时候，每一层的每个迭代过程都会有30%的Perception（即3个）会放弃这次迭代机会，从整个NN中被暂时剔除，既不参与forward的过程，也不参与backward的过程。他们的weight将会被保留直到下次被启用的时候。</p>
+<p>抽象来说在NN中每个perception代表了一个训练最终模型的hidden feature。由于采用dropout后每次迭代中features的组合都会有变化，因此dropout的技术不仅能够消减gradient vanish的影响，也能更大程度得发挥hidden feature的作用。</p>
+<h1 id="救星3：ReLU函数"><a href="#救星3：ReLU函数" class="headerlink" title="救星3：ReLU函数"></a>救星3：ReLU函数</h1><p>ReLU函数其实是一个简单的条件判断，即</p>
+<script type="math/tex; mode=display">relu(x) = \max(0, x)</script><p><img src="http://p1.bpimg.com/4851/10650fb04fec0e49.png" alt="ReLU function"></p>
+<p>它的导数(derivative)是</p>
+<script type="math/tex; mode=display">\frac{d}{d x} relu(x) =
+\begin{cases}
+    0 & \text{if } x\leq 1\\
+    1 & \text{otherwise}
+\end{cases}</script><p>个人认为ReLU的想法非常创新，是一个一个彻底的用计算机思想颠覆数学思想的壮举。它在保留模拟原有的函数作用并阻止了gradient vanish的同时，又做到了极度简化计算。但是它同样有两个很致命的缺陷，比如在输入值变成0后，整个perception会“死去”，因为它所有的过程结果都会变成0。同时，由于第一个缺陷，ReLU对于大的learning rate变得非常敏感，每次迭代的“步子”不能迈得太大。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>上述的三个做法互相间都不冲突。前两个方法都对于大规模的神经网络运算作出了卓越得贡献。同时由于ReLU运算的简便，GPU做运算来加速训练过程的思想也被提出。在两者的作用下，神经网络的发展从此一日千里，成为了整个Machine Learning领域最被广泛利用的一个算法。</p>
+
       
     </div>
 
@@ -442,8 +489,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -499,6 +555,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sigmod的缺陷-Flaw-of-sigmod"><span class="nav-number">1.</span> <span class="nav-text">Sigmod的缺陷 (Flaw of sigmod)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#救星1：Regularisation"><span class="nav-number">2.</span> <span class="nav-text">救星1：Regularisation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#L1-Regularisation"><span class="nav-number">2.0.1.</span> <span class="nav-text">L1 Regularisation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L2-Regularisation"><span class="nav-number">2.0.2.</span> <span class="nav-text">L2 Regularisation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#救星2：Dropout"><span class="nav-number">3.</span> <span class="nav-text">救星2：Dropout</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#救星3：ReLU函数"><span class="nav-number">4.</span> <span class="nav-text">救星3：ReLU函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

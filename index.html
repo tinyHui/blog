@@ -281,7 +281,7 @@
               
                 
                 <a class="post-title-link" href="/2017/02/04/neural-network-2/" itemprop="url">
-                  Artificial Neural Network - Part 2，全连接神经网络(full connected neural network)
+                  Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient vanish)
                 </a>
               
             
@@ -357,8 +357,10 @@
       
         
           
-          
-          
+          本博客围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。
+Sigmod的缺陷 (Flaw of sigmod)在上一章中，我们说到了神经网络(NN)的基础单元：perception，与和神经网络的两个重要的数学步骤：Forwardpropagation与Backwardpropagation。我们提到，sigmod函数是一个伟大的发明但却有一个天生的缺陷。
+通过观察，我们发现从$x$的值接近\pm 5的位置开始，整个函数的扩展方向就无限接近于水平，换言之，函数的斜率开始无限接近于0。结合Backwardpropagation的公式，这个数学事实也就意味着在神经网络的训练后期，w与b的绝对值变大后，整个模型的收敛效
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/02/04/neural-network-2/#more" rel="contents">
@@ -576,7 +578,7 @@
               
                 
                 <a class="post-title-link" href="/2017/01/28/neural-network-1/" itemprop="url">
-                  Artificial Neural Network - Part 1，数学模型基础
+                  Artificial Neural Network - Part 1，神经网络的历史与数学模型基础
                 </a>
               
             
@@ -652,8 +654,8 @@
       
         
           
-          从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。
-早期的机器学习 (Early stage of Machine learning)机器学习，是现行的靠谱的实现人工智能的算法的统称。顾名思义，就是让机器，也就是计算机，自动地去学习。由于电影中的夸张和对于这个行业的过度自信，加上媒体的渲染，一说自己是学人工智能的大家就会想到：好小子，准备毁灭全人类了啊。其实真冤枉了，人工智能，或者说机器学习，简单来说它学的东西就是如何画一条线，能把平面(feature space)内自由分散的不同类型的点恰好划分开。这个平面可以不止是2维的，也可以是三维的，4维的以及多维的。以此类推，线也不一定就是线，在二维下是线，三维下是平面，多维下就是不
+          从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。
+早期的机器学习 (Early stage of Machine learning)机器学习，是现行的靠谱的实现人工智能的算法的统称。顾名思义，就是让机器，也就是计算机，自动地去学习。由于电影中的夸张和对于这个行业的过度自信，加上媒体的渲染，一说自己是学人工智能的大家就会想到：好小子，准备毁灭全人类了啊。其实真冤枉了，人工智能，或者说机器学习，简单来说它学的东西就是如何画一条线，能把平面(feature space)内自由分散的不同类型的点恰好划分开。这个平面可以不止是2维的，也可以是三维的，4维的以及多维的。以此类推，线也不一定就是线，在二
           ...
           <!--noindex-->
           <div class="post-button text-center">

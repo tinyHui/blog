@@ -82,18 +82,18 @@
 
 
 
-<meta name="description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这">
+<meta name="description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Artificial Neural Network - Part 1，数学模型基础">
+<meta property="og:title" content="Artificial Neural Network - Part 1，神经网络的历史与数学模型基础">
 <meta property="og:url" content="http://blog.aixc.com/2017/01/28/neural-network-1/index.html">
 <meta property="og:site_name" content="Jason's Blog">
-<meta property="og:description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这">
+<meta property="og:description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来">
 <meta property="og:image" content="http://p1.bqimg.com/4851/de149d22d97c033c.png">
 <meta property="og:image" content="http://p1.bqimg.com/4851/d4defa0972395073.png">
-<meta property="og:updated_time" content="2017-02-04T13:54:14.000Z">
+<meta property="og:updated_time" content="2017-02-04T16:55:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Artificial Neural Network - Part 1，数学模型基础">
-<meta name="twitter:description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这">
+<meta name="twitter:title" content="Artificial Neural Network - Part 1，神经网络的历史与数学模型基础">
+<meta name="twitter:description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来">
 <meta name="twitter:image" content="http://p1.bqimg.com/4851/de149d22d97c033c.png">
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title> Artificial Neural Network - Part 1，数学模型基础 | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> Artificial Neural Network - Part 1，神经网络的历史与数学模型基础 | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -284,7 +284,7 @@
             
             
               
-                Artificial Neural Network - Part 1，数学模型基础
+                Artificial Neural Network - Part 1，神经网络的历史与数学模型基础
               
             
           </h2>
@@ -299,7 +299,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-28T10:46:14+00:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-28T10:46:14Z">
                 28/01/2017
               </time>
             
@@ -357,7 +357,7 @@
       
 
       
-        <p>从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。</p>
+        <p>从今天开始，本博客将会围绕神经网络展开一系列的解说，包括<a href="/2017/01/28/neural-network-1/">神经网络的历史与数学模型基础</a>，<a href="/2017/02/04/neural-network-2/">数学模型的debug</a>，全连接神经网络(full connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。</p>
 <h1 id="早期的机器学习-Early-stage-of-Machine-learning"><a href="#早期的机器学习-Early-stage-of-Machine-learning" class="headerlink" title="早期的机器学习 (Early stage of Machine learning)"></a>早期的机器学习 (Early stage of Machine learning)</h1><p><img src="http://p1.bqimg.com/4851/de149d22d97c033c.png" alt="classification"><br>机器学习，是现行的靠谱的实现人工智能的算法的统称。顾名思义，就是让机器，也就是计算机，自动地去学习。由于电影中的夸张和对于这个行业的过度自信，加上媒体的渲染，一说自己是学人工智能的大家就会想到：好小子，准备毁灭全人类了啊。其实真冤枉了，人工智能，或者说机器学习，简单来说它学的东西就是如何画一条线，能把平面(feature space)内自由分散的不同类型的点恰好划分开。这个平面可以不止是2维的，也可以是三维的，4维的以及多维的。以此类推，线也不一定就是线，在二维下是线，三维下是平面，多维下就是不知道什么东西的东西。再用数学化点的语言来描述就是我们有一个函数f，输入是x，输出是y，这个函数能够把在空间内的任意x变成其对应的y。这个也就是线性回归，一切的机器学习算法的核心思想。别看这个东西描述效果起来异常简单，但具体的数学实现却前前后后花费了200多年几代人的心思。</p>
 <p>机器学习从输出数据的类型上大致分两种：classification和regression。前者是预测离散的类，比如说晴天啊雨天啊，后者则是预测连续的类，比如说年龄啊价格啊。从学习的方法来说可分为supervised learning, unsupervised learning, semi-supervised learning。第一个是在训练的时候告诉电脑一系列x-&gt;y的对应集，让机器去估计。这就引发了两种问题，一个是这个估计的f对于训练集实在是太匹配了，以至于对于外在数据反而没有那么的合适，这就是over fitting，还有一个就比较常见了，就是f连训练数据都没法很好得划分，也就是under fitting。</p>
 <p>在早期的时候，人工智能的研究专家们通常也都是很厉害的数学家，他们发明了很多耳熟能详的算法来解决线性回归的问题，比如决策树，朴素贝叶斯，SVM等等等等（以后我将会开展系列文章来详细解释下）。这些算法都后世的人工智能行业思想的发展产生了深远的影响并被广泛应用，在此对他们致敬。但是，在那个时期人工智能的突破真的很困难，一来是这些算法理解的门槛很高；二来它的过程实在是太抽象了，比如如上文二维三维的空间(feature space)还能理解，但4维，5维乃至100维，300维，1000维就不是常人能够理解的了；三来则是把这些算法组合并和现实的问题联系起来何谈容易，首先一个问题它如何用这些结构来表达现实问题的数据结构，其次这需要很多领域的专家和人工智能专家合作，但隔行如隔山，两个行业互相理解也是不容易。</p>
@@ -368,16 +368,16 @@
 <p>但很明显，这个想法很有野心，但却步履维艰。第一个摆在研究人员面前的问题不是大脑的构成，而是，这个结构没法模拟非线性的计算啊，比如说XOR。从数学角度来说，单一的线性函数是不可能得到和XOR一样的计算结果的。</p>
 <p>直到一个教父级的人物出现Geoffrey Hinton（是校友啊好自豪），他提出用非线性函数Sigmod function来作为Perception内的激活函数(activation function)。至此，通过严谨的数学推断，多个Perception组合实现的神经网络理论上能够模拟出任何的算法。到了1997年，Hinton老爷子又发现反向传播（backpropagation)能够用来生成输入数据在神经网络隐藏层的表达，这可是可以拿来做每个Perception的权重的更新啊。</p>
 <h1 id="正-反向传播-Forwardpropagation-amp-Backwardpropagation"><a href="#正-反向传播-Forwardpropagation-amp-Backwardpropagation" class="headerlink" title="正/反向传播 (Forwardpropagation &amp; Backwardpropagation)"></a>正/反向传播 (Forwardpropagation &amp; Backwardpropagation)</h1><p>下图就是一个现在的经过多人努力后发展出的Perception的样子。<br><img src="http://p1.bqimg.com/4851/d4defa0972395073.png" alt="perception"></p>
-<p>单个元件的计算目标是通过调整权重<script type="math/tex">w</script>和偏重<code>bias</code>的值使得输出的结果(actual result, <script type="math/tex">y_a</script>)能尽可能得接近它应该得到的结果(target result, <script type="math/tex">y_t</script>)。整个过程可被拆分为三步：正向传播，估错和反向传播。</p>
+<p>单个元件的计算目标是通过调整权重$w$和偏重bias的值使得输出的结果(actual result, $y_a$)能尽可能得接近它应该得到的结果(target result, $y_t$)。整个过程可被拆分为三步：正向传播，估错和反向传播。</p>
 <p>整个正向传播用数学来表达如下：</p>
-<script type="math/tex; mode=display">y = \varphi(a) = \varphi(\sum^m_{i=1} w_i \cdot x_i + b)</script><p>用来估错方法太多了，比较常用的有cross entropy error，这里<script type="math/tex">t</script>代表的是目标结果：</p>
+<script type="math/tex; mode=display">y = \varphi(a) = \varphi(\sum^m_{i=1} w_i \cdot x_i + b)</script><p>用来估错方法太多了，比较常用的有cross entropy error，这里$t$代表的是目标结果：</p>
 <script type="math/tex; mode=display">E = -(t \ln y + (1 - y)\ln (1 - y))</script><p>为何不用Classification error或者Mean square error呢？<a href="https://jamesmccaffrey.wordpress.com/2013/11/05/why-you-should-use-cross-entropy-error-instead-of-classification-error-or-mean-squared-error-for-neural-network-classifier-training/" target="_blank" rel="external">这篇文章</a>有很好的解释。简单来说就是Cross entropy error能在backpropagation阶段给予神经网络最好的引导。</p>
 <p>反向传播是神经网络的重头戏。通俗来说，反向传播就是个“下山”的过程。训练的起点是山顶，终点是山脚。在每迈出一步（迭代过程中），函数都会观察哪个方向的坡度最陡然后朝那个方向迈出一步。数学上对此过程的表达需要点偏方(partial derivative)的知识。</p>
-<script type="math/tex; mode=display">\frac{\partial E}{\partial w_i} = \frac{\partial E}{\partial \varphi} \cdot \frac{\partial \varphi}{\partial a} \cdot \frac{\partial a}{\partial w_i}</script><script type="math/tex; mode=display">\frac{\partial E}{\partial b} = \frac{\partial E}{\partial \varphi} \cdot \frac{\partial \varphi}{\partial a} \cdot \frac{\partial a}{\partial b} = \frac{\partial E}{\partial y} \cdot \frac{\partial y}{\partial \varphi} \cdot 1</script><p>于是，新的<script type="math/tex">w_{ij+1} = w_{ij} - \frac{\partial E}{\partial w_{ij}}</script>，其中<script type="math/tex">j</script>表示的迭代次数。同样<script type="math/tex">b_{j+1} = b_{j} - \frac{\partial E}{\partial b_{j}}</script>。</p>
-<h1 id="激活函数-Activation-Function"><a href="#激活函数-Activation-Function" class="headerlink" title="激活函数 (Activation Function)"></a>激活函数 (Activation Function)</h1><p>根据上文的描述，我们发现，只要是非线性的函数都能用作激活函数。于是三角函数(<script type="math/tex">\sin</script>, <script type="math/tex">\cos</script>)都被拿来用。但是，由于反向传播的过程存在，这些函数在进行求导的时候没有办法很简洁且运算量很大。这就催生出了大名鼎鼎的sigmod函数：</p>
+<script type="math/tex; mode=display">\frac{\partial E}{\partial w_i} = \frac{\partial E}{\partial \varphi} \cdot \frac{\partial \varphi}{\partial a} \cdot \frac{\partial a}{\partial w_i}</script><script type="math/tex; mode=display">\frac{\partial E}{\partial b} = \frac{\partial E}{\partial \varphi} \cdot \frac{\partial \varphi}{\partial a} \cdot \frac{\partial a}{\partial b} = \frac{\partial E}{\partial y} \cdot \frac{\partial y}{\partial \varphi} \cdot 1</script><p>于是，新的<script type="math/tex">w_{ij+1} = w_{ij} - \eta \frac{\partial E}{\partial w_{ij}}</script>，其中$j$表示迭代次数，$\eta$表示学习速度(learning rate)。同样<script type="math/tex">b_{j+1} = b_{j} - \eta \frac{\partial E}{\partial b_{j}}</script>。</p>
+<h1 id="激活函数-Activation-Function"><a href="#激活函数-Activation-Function" class="headerlink" title="激活函数 (Activation Function)"></a>激活函数 (Activation Function)</h1><p>根据上文的描述，我们发现，只要是非线性的函数都能用作激活函数。于是三角函数(<script type="math/tex">\tanh</script>, <script type="math/tex">\sin</script>, <script type="math/tex">\cos</script>，最好的是<script type="math/tex">\tanh</script>因为它不需要位移就能满足激活函数的需求，其实后面的sigmod函数也是对它形状的模拟)都被拿来用。但是，由于反向传播的过程存在，这些函数在进行求导的时候没有办法很简洁且运算量很大。这就催生出了大名鼎鼎的sigmod函数：</p>
 <script type="math/tex; mode=display">\varphi(x) = \frac{1}{1+e^{-x}}</script><p>它的导数非常简洁，如下所示，有兴趣的朋友可以自己去试试。</p>
-<script type="math/tex; mode=display">\frac{\partial \varphi}{\partial a} = \varphi(x) \cdot (1 - \varphi(x))</script><p>也就是说，在Forwardpropagation过程产出的运算结果可以复用到Backwardpropagation中。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>看似完美的背后，sigmod函数却有个天生的致命的缺陷。在下一篇文章中，我将会介绍Full Connection Neural Network，并告诉大家这个缺陷是什么。同时，如何修复这个缺陷，甚至改进我们的激活函数也将在下一章呈现给大家看。</p>
+<script type="math/tex; mode=display">\frac{\partial \varphi}{\partial x} = \varphi(x) \cdot (1 - \varphi(x))</script><p>也就是说，在Forwardpropagation过程产出的运算结果可以复用到Backwardpropagation中。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>看似完美的背后，sigmod函数却有个天生的致命的缺陷。在下一篇文章中，我将会介绍Full Connection Neural Network，并告诉大家这个缺陷是什么。同时，如何修复这个缺陷，甚至改进我们的激活函数也将在<a href="/2017/02/04/neural-network-2/">下一章</a>呈现给大家看。</p>
 
       
     </div>
