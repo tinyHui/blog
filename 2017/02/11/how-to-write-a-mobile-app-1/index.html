@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="record," />
+  <meta name="keywords" content="how-to,react-native,server," />
 
 
 
@@ -84,22 +84,19 @@
 
 
 
-<meta name="description" content="这是一个俗套的Hello World
-
-新博客搭建好了，一是作为一个技术备忘录，二是用自己的经验帮助读到文章的有缘人，最后是用来见证自己的进步。文章不需要很长，关键是坚持写下去和保持固定（一周至少一次）的更新频率，和言简意赅的对问题与解决的描述。">
+<meta name="description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器端，手机端。
+RESTful在具体实现一个网络应用之前我们先提一个网络通信的准则:RESTful。RESTful是一个革命性的变革，也很好的体现了计算机的很重要的一个设计原则：S.O.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://blog.aixc.space/2017/01/21/hello-world/index.html">
+<meta property="og:title" content="如何实现一个有网络通信的手机应用1 - 基础知识">
+<meta property="og:url" content="http://blog.aixc.space/2017/02/11/how-to-write-a-mobile-app-1/index.html">
 <meta property="og:site_name" content="Jason's Blog">
-<meta property="og:description" content="这是一个俗套的Hello World
-
-新博客搭建好了，一是作为一个技术备忘录，二是用自己的经验帮助读到文章的有缘人，最后是用来见证自己的进步。文章不需要很长，关键是坚持写下去和保持固定（一周至少一次）的更新频率，和言简意赅的对问题与解决的描述。">
-<meta property="og:updated_time" content="2017-01-21T21:27:05.000Z">
+<meta property="og:description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器端，手机端。
+RESTful在具体实现一个网络应用之前我们先提一个网络通信的准则:RESTful。RESTful是一个革命性的变革，也很好的体现了计算机的很重要的一个设计原则：S.O.">
+<meta property="og:updated_time" content="2017-02-11T11:42:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="这是一个俗套的Hello World
-
-新博客搭建好了，一是作为一个技术备忘录，二是用自己的经验帮助读到文章的有缘人，最后是用来见证自己的进步。文章不需要很长，关键是坚持写下去和保持固定（一周至少一次）的更新频率，和言简意赅的对问题与解决的描述。">
+<meta name="twitter:title" content="如何实现一个有网络通信的手机应用1 - 基础知识">
+<meta name="twitter:description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器端，手机端。
+RESTful在具体实现一个网络应用之前我们先提一个网络通信的准则:RESTful。RESTful是一个革命性的变革，也很好的体现了计算机的很重要的一个设计原则：S.O.">
 
 
 
@@ -127,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.aixc.space/2017/01/21/hello-world/"/>
+  <link rel="canonical" href="http://blog.aixc.space/2017/02/11/how-to-write-a-mobile-app-1/"/>
 
 
 
 
 
-  <title> Hello World | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 如何实现一个有网络通信的手机应用1 - 基础知识 | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -265,7 +262,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/01/21/hello-world/">
+  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/02/11/how-to-write-a-mobile-app-1/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jason Chen">
@@ -289,7 +286,7 @@
             
             
               
-                Hello World
+                如何实现一个有网络通信的手机应用1 - 基础知识
               
             
           </h2>
@@ -304,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T16:38:43+00:00">
-                21/01/2017
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-11T08:39:13Z">
+                11/02/2017
               </time>
             
 
@@ -327,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">Life</span>
+                  <a href="/categories/tutorial/" itemprop="url" rel="index">
+                    <span itemprop="name">Tutorial</span>
                   </a>
                 </span>
 
@@ -362,10 +359,22 @@
       
 
       
-        <blockquote>
-<p>这是一个俗套的Hello World</p>
-</blockquote>
-<p>新博客搭建好了，一是作为一个技术备忘录，二是用自己的经验帮助读到文章的有缘人，最后是用来见证自己的进步。文章不需要很长，关键是坚持写下去和保持固定（一周至少一次）的更新频率，和言简意赅的对问题与解决的描述。</p>
+        <p>这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：<a href="/2017/02/11/how-to-write-a-mobile-app-1">基础知识</a>，服务器端，手机端。</p>
+<h1 id="RESTful"><a href="#RESTful" class="headerlink" title="RESTful"></a>RESTful</h1><p>在具体实现一个网络应用之前我们先提一个网络通信的准则:RESTful。RESTful是一个革命性的变革，也很好的体现了计算机的很重要的一个设计原则：S.O.L.I.D中的D，倚赖倒转原则(Dependency Inversion Principle)。说远了，RESTful是一个底层的网络架构原则，或者我更喜欢说它是种服务器和客户端达成的协议。无论是网页，手机，甚至是电视OS，PSP游戏机，这个年代的无论什么平台的网络应用都脱离不开RESTful这个终极网络协议。</p>
+<p>小A是个服务器，小B是个客户端。由于小A和小B相互生存在不同的地方然而却时常互相通信交换资源，一开始两个人各说各的，每次收到对方的消息了就去查找自己的语法书来尝试理解对方发过来的消息的意思。然而，小B是出了名的兄弟多，每次多了个孪生兄弟后（网页变手机应用）就得把规则书新抄一份仔细的变形下以便也能和小A通信。还有一个更严重的问题是由于双方独立的发展，每次两人有一方一有变动增加了新的消息类型或者懂得了新的词语，对方就傻眼看不懂了，因为原来的语法书里没有这个规则。于是邮差大人得把新写的语法书挨家挨户得送一遍。</p>
+<p>这实在是方便。两人只好互相约定，以后我们就按一个固定的句子格式说话，把每次遣词造句变成给格式里面填完，句子填好后发过来，我就按照约定的格式去解读它，要是我理解不了或者你发的内容有问题我就告诉你发错了，但错误信息也按照我们约定的句子格式写。这下，双方的通信变得无比便利，无论小A有多少孪生兄弟，小A都不用管，只要知道多了这么个兄弟并把他当作可以信任的人就行了。并且由于规则确定下来了，双方就顺带改造了电话，让语法书内置电话中，这样每次通话时双方也就不用去翻语法书了因为电话会自动把对方的消息翻译成自己看的懂的，也能把自己说的话重新排列成约定的句式发给对方。</p>
+<p>这个句子格式也就是RESTful协议，句子格式里有大家相对熟悉的Method, 200, 404，也有相对不熟悉的Content-Type, Accept-Type, Authorization等等等等。<a href="http://web.archive.org/web/20130116005443/http://tomayko.com/writings/rest-to-my-wife" target="_blank" rel="external">这个文章</a>用不同于上文例子的角度解释了RESTful。一次完整的基于RESTful协议有两部分，一个是Request，一个是Response。Request通常会包含一个方法，一个目标，一个数据类型，还有当前对话session的信息；Response则一般包括一个状态，返回数据类型，返回数据体。</p>
+<h1 id="程序功能概览-React-Native-amp-Flase介绍"><a href="#程序功能概览-React-Native-amp-Flase介绍" class="headerlink" title="程序功能概览 + React Native &amp; Flase介绍"></a>程序功能概览 + React Native &amp; Flase介绍</h1><p>整个程序的功能很简单，只有两个功能：一是提供一个界面来查询一个城市的天气，二是把查询过天气的城市保留在历史列表中。两个界面可以通过滑动来切换。由于本人设计能力渣，图形界面各位看官将就一下。</p>
+<p>程序的前段是基于React Native。和其他的跨平台开发的platform如Cordova原理不同的是，React Native在运行的时候并不是启动一个WebView的控件然后用运行原生HTML+JavaScript+CSS的方式来把网页封装成独立APP的样子，React Native引入了Bridge的概念，通过三个运行在OS平台上的线程来实现JS与Native OS的交互。三个线程分别的作用为</p>
+<ol>
+<li>shadow queue: 与其说是单独的进程不如说是一个队列，主要负责界面的异常处理。值得一提的是对于每一个具体的React module，框架都会启动一个Grand Central Dispatch (GCD) dispatch Queue用来执行同／异步的操作。</li>
+<li>main thread: 负责原生OS的界面，即iOS中UIKit的概念。</li>
+<li>JavaScript thread：运行JS代码。</li>
+</ol>
+<p>React端和Native端的数据通信主要收到React框架的启发，即用了properties的概念。Native OS的框架代码负责把Native UI运行的状态通过properties的方式用JSON格式传给React端。React端把module端properties交给Native中框架代码的<code>RCT_CUSTOM_VIEW_PROPERTY</code>宏处理。</p>
+<p>Python的Flask网络框架作为后台框架。Flask的优点是轻量，开发快捷。由于Python的第三方libraries的丰富，Flask过于简单的缺点也能被大量的第三方插件所解决，甚至变成灵活的优点。但它的缺点也很明显，就是过于简单，所有的东西（例如admin界面，</p>
+<p>由于应用只设计简单的存储（一串访问过的城市列表），我们也就不劳烦数据库了。我们将创建一个JSON的文件来作我们的存储文件。</p>
+<p>下一篇开始我们将正式写代码，从服务器端开始。</p>
 
       
     </div>
@@ -389,7 +398,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/record/" rel="tag"># record</a>
+            <a href="/tags/how-to/" rel="tag"># how-to</a>
+          
+            <a href="/tags/react-native/" rel="tag"># react-native</a>
+          
+            <a href="/tags/server/" rel="tag"># server</a>
           
         </div>
       
@@ -398,15 +411,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/02/04/neural-network-2/" rel="next" title="Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient Vanish)">
+                <i class="fa fa-chevron-left"></i> Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient Vanish)
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/01/21/how-to-deploy-blog/" rel="prev" title="如何搭建个人博客">
-                如何搭建个人博客 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -453,8 +466,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -510,6 +532,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RESTful"><span class="nav-number">1.</span> <span class="nav-text">RESTful</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序功能概览-React-Native-amp-Flase介绍"><span class="nav-number">2.</span> <span class="nav-text">程序功能概览 + React Native & Flase介绍</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
