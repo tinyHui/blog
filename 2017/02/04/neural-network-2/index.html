@@ -337,6 +337,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/04/neural-network-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/04/neural-network-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -446,8 +456,8 @@ E &=& E_{train} + \beta E_{L2} \\
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/11/how-to-write-a-mobile-app-1/" rel="prev" title="如何实现一个有网络通信的手机应用1 - 基础知识">
-                如何实现一个有网络通信的手机应用1 - 基础知识 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/11/how-to-write-a-mobile-app-1/" rel="prev" title="如何实现一个有网络通信的手机应用 - Part 1，基础知识篇">
+                如何实现一个有网络通信的手机应用 - Part 1，基础知识篇 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -473,6 +483,13 @@ E &=& E_{train} + \beta E_{L2} \\
 
           
   <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -518,7 +535,7 @@ E &=& E_{train} + \beta E_{L2} \\
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -701,28 +718,39 @@ E &=& E_{train} + \beta E_{L2} \\
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'aixc';
+      var disqus_identifier = '2017/02/04/neural-network-2/';
+
+      var disqus_title = "Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient Vanish)";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
 
-	
+      run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
 
-
-
-
+    </script>
   
 
 
 
 
 
-  
-
-  
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
-      <!-- UY END -->
-  
 
 
 

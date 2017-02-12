@@ -268,7 +268,7 @@
             10 tags in total
         </div>
         <div class="tag-cloud-tags">
-          <a href="/tags/coding/" style="font-size: 12px; color: #ccc">coding</a> <a href="/tags/how-to/" style="font-size: 21px; color: #6f6f6f">how-to</a> <a href="/tags/linux/" style="font-size: 12px; color: #ccc">linux</a> <a href="/tags/machine-learning/" style="font-size: 21px; color: #6f6f6f">machine learning</a> <a href="/tags/neural-network/" style="font-size: 21px; color: #6f6f6f">neural network</a> <a href="/tags/react-native/" style="font-size: 12px; color: #ccc">react-native</a> <a href="/tags/record/" style="font-size: 21px; color: #6f6f6f">record</a> <a href="/tags/series/" style="font-size: 21px; color: #6f6f6f">series</a> <a href="/tags/server/" style="font-size: 30px; color: #111">server</a> <a href="/tags/tools/" style="font-size: 12px; color: #ccc">tools</a>
+          <a href="/tags/coding/" style="font-size: 12px; color: #ccc">coding</a> <a href="/tags/how-to/" style="font-size: 24px; color: #4f4f4f">how-to</a> <a href="/tags/linux/" style="font-size: 12px; color: #ccc">linux</a> <a href="/tags/machine-learning/" style="font-size: 18px; color: #8e8e8e">machine learning</a> <a href="/tags/neural-network/" style="font-size: 18px; color: #8e8e8e">neural network</a> <a href="/tags/react-native/" style="font-size: 18px; color: #8e8e8e">react-native</a> <a href="/tags/record/" style="font-size: 18px; color: #8e8e8e">record</a> <a href="/tags/series/" style="font-size: 18px; color: #8e8e8e">series</a> <a href="/tags/server/" style="font-size: 30px; color: #111">server</a> <a href="/tags/tools/" style="font-size: 12px; color: #ccc">tools</a>
         </div>
       </div>
     
@@ -281,6 +281,13 @@
 
           
   <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -317,7 +324,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -480,28 +487,39 @@
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'aixc';
+      var disqus_identifier = 'tags/index.html';
+
+      var disqus_title = "#HashTag#";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
 
-	
+      run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
 
-
-
-
+    </script>
   
 
 
 
 
 
-  
-
-  
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
-      <!-- UY END -->
-  
 
 
 

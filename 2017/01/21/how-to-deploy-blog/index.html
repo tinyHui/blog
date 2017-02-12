@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="how-to,server,record,coding," />
+  <meta name="keywords" content="record,how-to,coding,server," />
 
 
 
@@ -301,7 +301,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T17:25:46+00:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T17:25:46Z">
                 21/01/2017
               </time>
             
@@ -336,6 +336,16 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/01/21/how-to-deploy-blog/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/01/21/how-to-deploy-blog/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -393,13 +403,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/how-to/" rel="tag"># how-to</a>
-          
-            <a href="/tags/server/" rel="tag"># server</a>
-          
             <a href="/tags/record/" rel="tag"># record</a>
           
+            <a href="/tags/how-to/" rel="tag"># how-to</a>
+          
             <a href="/tags/coding/" rel="tag"># coding</a>
+          
+            <a href="/tags/server/" rel="tag"># server</a>
           
         </div>
       
@@ -446,6 +456,13 @@
           
   <div class="comments" id="comments">
     
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -490,7 +507,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -673,28 +690,39 @@
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'aixc';
+      var disqus_identifier = '2017/01/21/how-to-deploy-blog/';
+
+      var disqus_title = "如何搭建个人博客";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
 
-	
+      run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
 
-
-
-
+    </script>
   
 
 
 
 
 
-  
-
-  
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
-      <!-- UY END -->
-  
 
 
 
