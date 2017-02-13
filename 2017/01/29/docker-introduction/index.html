@@ -3,7 +3,7 @@
 
 
 
-<html class="theme-next pisces" lang="zh">
+<html class="theme-next pisces" lang="en">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="server,tools,linux," />
+  <meta name="keywords" content="tools,server,linux," />
 
 
 
@@ -135,7 +135,7 @@
   <title> Docker入门介绍 | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -380,7 +380,7 @@
 </blockquote>
 <p>类比下就是，docker image就是电脑安装的ISO光盘文件，建立好了就不能修改了，但是程序能够读出内容并根据这个文件建立一个可运行的操作系统instance。这个instance就可以类比为docker的container，这是可以修改的。</p>
 <p>我最喜欢拿三明治来比喻Docker image的构建过程。Docker提供了一个叫Dockerfile的特性，它是一个安装文件make file，里面记录了一个可用的docker image的搭建过程。以下面这个非官方的apache docker image做例子。</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># A basic apache server. To use either add or bind mount content under /var/www</span></div><div class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">12.04</span></div><div class="line"></div><div class="line"><span class="keyword">MAINTAINER</span> Kimbro Staken version: <span class="number">0.1</span></div><div class="line"></div><div class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; apt-get install -y apache2 &amp;&amp; apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/*</span></div><div class="line"></div><div class="line"><span class="keyword">ENV</span> APACHE_RUN_USER www-data</div><div class="line"><span class="keyword">ENV</span> APACHE_RUN_GROUP www-data</div><div class="line"><span class="keyword">ENV</span> APACHE_LOG_DIR /var/log/apache2</div><div class="line"></div><div class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></div></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># A basic apache server. To use either add or bind mount content under /var/www</span></div><div class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">12.04</span></div><div class="line"></div><div class="line"><span class="keyword">MAINTAINER</span> Kimbro Staken version: <span class="number">0.1</span></div><div class="line"></div><div class="line"><span class="keyword">RUN</span> apt-get update &amp;&amp; apt-get install -y apache2 &amp;&amp; apt-get clean &amp;&amp; rm -rf /var/lib/apt/lists/*</div><div class="line"></div><div class="line"><span class="keyword">ENV</span> APACHE_RUN_USER www-data</div><div class="line"><span class="keyword">ENV</span> APACHE_RUN_GROUP www-data</div><div class="line"><span class="keyword">ENV</span> APACHE_LOG_DIR /var/log/apache2</div><div class="line"></div><div class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></div></pre></td></tr></table></figure>
 <p>首先这是基于ubuntu v12.04版本的docker image的。这也就是所谓的三明治结构。所有的Docker image都不是从无到有的，而是从成品到成品。比方说上面这个文件能够生成新的Docker image，里面是以ubuntu系统做底，然后安装了一个apache。当这个image被建造出来后，我们可以复用它，然后再在这个基础上安装新的东西，就这么一层一层得使一个image越来越复杂，功能也越来越多样化。但这并不推荐，因为image是不可修改的，比如一个image又有Java又有Python还有Apache，当其中任意一个东西需要修改的时候，我们就得从头来构造一遍，这是不可忍受的了。接着看这个文件，可以看到在后面它运行了一些系统的命令还加入了些apache运行需要的环境变量，最后还把自己的80端口开放了出来。这里的80端口开放其实并不是Host 80端口的开放，在运行一个新的container时需要做一个端口映射。</p>
 <p>然后运行下面命令就能用上面的Dockerfile创建一个叫apache-sample的image。这时docker就会用搭三明治的方法把这个image建起来。这里涉及到很多hash值和checksum用来优化的技巧，就不展开了。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker build -t apache-sample</div></pre></td></tr></table></figure></p>
 <p>最后可以使用run命令来启动这个image，也就是建立一个container，记住我们需要映射80端口。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo docker run -p 80:80 apache-sample</div></pre></td></tr></table></figure></p>
@@ -411,9 +411,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/server/" rel="tag"># server</a>
-          
             <a href="/tags/tools/" rel="tag"># tools</a>
+          
+            <a href="/tags/server/" rel="tag"># server</a>
           
             <a href="/tags/linux/" rel="tag"># linux</a>
           
