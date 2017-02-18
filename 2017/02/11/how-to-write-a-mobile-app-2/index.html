@@ -84,22 +84,22 @@
 
 
 
-<meta name="description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器篇，手机端。完整代码可以在这里找到。
+<meta name="description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器端，手机端。完整代码可以在这里找到。
 功能分析整个应用对服务器通信的部分有两个，一个是使用城市名得到天气，另一个是使用当前位置得到天气。由于两者都是“得到”资源，在RESTful中对应">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何实现一个有网络通信的手机应用 - Part 2，服务器篇">
 <meta property="og:url" content="http://blog.aixc.space/2017/02/11/how-to-write-a-mobile-app-2/index.html">
 <meta property="og:site_name" content="Jason's Blog">
-<meta property="og:description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器篇，手机端。完整代码可以在这里找到。
+<meta property="og:description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器端，手机端。完整代码可以在这里找到。
 功能分析整个应用对服务器通信的部分有两个，一个是使用城市名得到天气，另一个是使用当前位置得到天气。由于两者都是“得到”资源，在RESTful中对应">
 <meta property="og:image" content="http://p1.bpimg.com/4851/783d81aa88ab1639.png">
 <meta property="og:image" content="http://p1.bqimg.com/4851/0c72620d1098e699.png">
 <meta property="og:image" content="http://p1.bqimg.com/4851/d1d9e92991a696a2.png">
 <meta property="og:image" content="http://p1.bpimg.com/4851/50a40819fb9fc605.png">
-<meta property="og:updated_time" content="2017-02-12T23:49:36.000Z">
+<meta property="og:updated_time" content="2017-02-17T20:10:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何实现一个有网络通信的手机应用 - Part 2，服务器篇">
-<meta name="twitter:description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器篇，手机端。完整代码可以在这里找到。
+<meta name="twitter:description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器端，手机端。完整代码可以在这里找到。
 功能分析整个应用对服务器通信的部分有两个，一个是使用城市名得到天气，另一个是使用当前位置得到天气。由于两者都是“得到”资源，在RESTful中对应">
 <meta name="twitter:image" content="http://p1.bpimg.com/4851/783d81aa88ab1639.png">
 
@@ -374,7 +374,7 @@
       
 
       
-        <p>这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：<a href="/2017/02/11/how-to-write-a-mobile-app-1">基础知识</a>，<a href="/2017/02/11/how-to-write-a-mobile-app-2">服务器篇</a>，手机端。完整代码可以在<a href="https://github.com/tinyHui/weather-mobile-app-sample" target="_blank" rel="external">这里</a>找到。</p>
+        <p>这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：<a href="/2017/02/11/how-to-write-a-mobile-app-1">基础知识</a>，<a href="/2017/02/11/how-to-write-a-mobile-app-2">服务器端</a>，<a href="/2017/02/17/how-to-write-a-mobile-app-3">手机端</a>。完整代码可以在<a href="https://github.com/tinyHui/weather-mobile-app-sample" target="_blank" rel="external">这里</a>找到。</p>
 <h1 id="功能分析"><a href="#功能分析" class="headerlink" title="功能分析"></a>功能分析</h1><p>整个应用对服务器通信的部分有两个，一个是使用城市名得到天气，另一个是使用当前位置得到天气。由于两者都是“得到”资源，在RESTful中对应的概念则为GET。同时，我浅薄的地理知识告诉我“当前位置”这个功能可以使用经纬度来实现，即经度与纬度各作为一个参数，用<code>?lat=&lt;lat&gt;&amp;lon=&lt;lon&gt;</code>的方式向服务器传递请求。但对于城市这个参数就有两种做法了。由于城市只是一个单词，所以它既可以使用GET的参数形式传入如<code>city=&lt;city&gt;</code>，也可以作为一个URL path的部分如<code>/&lt;city&gt;</code>。为了做和经纬度不一样的例子，我选择用第二个方法。</p>
 <p>对于具体的天气数据，程序则使用免费好用的<a href="https://openweathermap.org/" target="_blank" rel="external">openweathermap api</a>。这是一个基于简单GET请求的，默认使用JSON格式数据的天气预报数据源，提供几乎你能想到的所有的天气有关的数据。我们只用它最基础的当前天气的接口就好。</p>
 <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><p>功能定下来之后就是定义服务器传回客户端的数据结构了。作为一个天气应用，我们需要向用户展示温度，天气情况，地理位置。为了软件美化起见，我们还想展示一下当前气候的图示。由于UTF编码的便利，我们可以使用自制的字体来做本应该用图片才能实现的图示功能，比如下图这样的效果：<br><img src="http://p1.bpimg.com/4851/783d81aa88ab1639.png" alt="下雨"></p>
@@ -443,6 +443,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/17/how-to-write-a-mobile-app-3/" rel="prev" title="如何实现一个有网络通信的手机应用 - Part 3，客户端篇">
+                如何实现一个有网络通信的手机应用 - Part 3，客户端篇 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -519,7 +523,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

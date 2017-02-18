@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="record,server,how-to,coding," />
+  <meta name="keywords" content="server,record,how-to,coding," />
 
 
 
@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Jason's Blog">
 <meta property="og:description" content="个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。
 代码整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由hexo通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于n">
-<meta property="og:updated_time" content="2017-01-21T21:26:19.000Z">
+<meta property="og:updated_time" content="2017-02-17T20:34:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何搭建个人博客">
 <meta name="twitter:description" content="个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。
@@ -301,7 +301,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T17:25:46+00:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T17:25:46Z">
                 21/01/2017
               </time>
             
@@ -372,7 +372,7 @@
         <p>个人博客的搭建在这个时代实在是太简单了，成堆的成熟框架和各种各样的服务器供应商。虽然网上教程很多，但我还是把自己的配置过程简述一下。</p>
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>整个博客运行在服务器上的其实只是个静态的HTML页面，在客户端浏览器渲染完成之后，页面并没有任何进一步的与服务器间的通信。但是，整个HTML与所有的static files是由<a href="hexo.io">hexo</a>通过解析配置文件，主题文件和mark down文章自动生成的。Hexo是基于node.js开发的一个开源的博客框架，其宗旨是提供简单快捷的步骤来帮助个人不需要写一行代码就能搭建博客。</p>
 <p>博客的主题是由<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">NexT</a>提供的，它不但提供了简介的外观同时集成了很多插件。当然，由于Hexo的可扩展行，用户可以自主创建样式和插件来实现各种需求。</p>
-<h1 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h1><p>Github Page起初是为了提供一个免费的静态网页载体让开源项目能把文档放在和代码一样的地方，但是后来也被大家用来放自己的博客。它的好处是免费和（应该）没有容量的限制，坏处有两个，一个是放博客HTML的repository的branch必须是开源，所以任何人都能去复制整个代码，二是没有办法运行任何的服务器端的逻辑代码。可是博客本身就是公开的而且只要出文字就行了嘛。 :smile: 并且，由于现在JS的强大，很多以前必须在自己服务器实现的事情都有了第三方封装的很好的服务，只要简单的复制些调用对方接口的代码，不用会写程序就能在一个静态网页上完成很多事情。（题外话，现在的独立程序员真是能一个人能顶一个团队。但是，第三方的服务是把双刃剑，它约强大，个人反而越需要提升能力，不然哪什么保证工作哟。。。）</p>
+<h1 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h1><p>Github Page起初是为了提供一个免费的静态网页载体让开源项目能把文档放在和代码一样的地方，但是后来也被大家用来放自己的博客。它的好处是免费和（应该）没有容量的限制，坏处有两个，一个是放博客HTML的repository的branch必须是开源，所以任何人都能去复制整个代码，二是没有办法运行任何的服务器端的逻辑代码。可是博客本身就是公开的而且只要出文字就行了嘛。 并且，由于现在JS的强大，很多以前必须在自己服务器实现的事情都有了第三方封装的很好的服务，只要简单的复制些调用对方接口的代码，不用会写程序就能在一个静态网页上完成很多事情。（题外话，现在的独立程序员真是能一个人能顶一个团队。但是，第三方的服务是把双刃剑，它约强大，个人反而越需要提升能力，不然哪什么保证工作哟。。。）</p>
 <p>如果实在是需要一个可以运行东西的服务器，<a href="https://aws.amazon.com/" target="_blank" rel="external">AWS</a>现在提供免费的EC2 Instance,虽然运算能力非常赢弱，但是放个一般只有十几二十来个并发的小博客还是绰绰有余的。而且它提供一个独立的IP: elastic IP 和独立长到没人能记住的DNS。如果用来做手机APP的服务器其实挺好的。</p>
 <h1 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h1><p>这个博客用的是<a href="https://www.namecheap.com" target="_blank" rel="external">namecheap.com</a>的服务，虽然它在写博客的时候还是没有修复自己提供给客户修改DNS name server的bug，但是优势在于它的域名和附加服务很便宜，客服也还行。</p>
 <p>由于本博客以Github Page为载体的，所以得稍微做些配置才能不去使用默认的http://<username>.github.io来作为域名。<br>首先是新建一个repository，可以使用任意的名字，但是只有用<username>.github.io才能把博客放在<username>.github.io的root上，其余的<name>都会把博客放置在<username>.github.io/<name>路径上。如果是用自己DNS其实并没有什么影响。然后在这个repository下面新建一个branch叫gh-pages，然后放入一个CNAME文件，里面写入自己的域名，比如本博客，我们可以用</name></username></name></username></username></username></p>
@@ -403,9 +403,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/record/" rel="tag"># record</a>
-          
             <a href="/tags/server/" rel="tag"># server</a>
+          
+            <a href="/tags/record/" rel="tag"># record</a>
           
             <a href="/tags/how-to/" rel="tag"># how-to</a>
           
@@ -507,7 +507,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

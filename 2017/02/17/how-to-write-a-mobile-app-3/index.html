@@ -1,0 +1,762 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="NNJVI2kqmp6HrpWP-L6ZRCLv_37G0X_kVV_1zM2cWlE" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Computer Science, Tech, Technique, AI, Artificial Intelligence, Machine Learning" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器端，手机端。完整代码可以在这里找到。
+初始操作我们的手机端是以iOS应用为例子，但由于React Native的特性，下面大部分代码可以直接移植到Android平台上。并且所谓的移植也">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何实现一个有网络通信的手机应用 - Part 3，客户端篇">
+<meta property="og:url" content="http://blog.aixc.space/2017/02/17/how-to-write-a-mobile-app-3/index.html">
+<meta property="og:site_name" content="Jason's Blog">
+<meta property="og:description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器端，手机端。完整代码可以在这里找到。
+初始操作我们的手机端是以iOS应用为例子，但由于React Native的特性，下面大部分代码可以直接移植到Android平台上。并且所谓的移植也">
+<meta property="og:image" content="http://i1.piimg.com/4851/eb9b5858349357ca.png">
+<meta property="og:image" content="http://i1.piimg.com/4851/1b010667746a0f05.png">
+<meta property="og:image" content="http://p1.bqimg.com/4851/0857843c7adb4f07.png">
+<meta property="og:updated_time" content="2017-02-18T01:23:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何实现一个有网络通信的手机应用 - Part 3，客户端篇">
+<meta name="twitter:description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器端，手机端。完整代码可以在这里找到。
+初始操作我们的手机端是以iOS应用为例子，但由于React Native的特性，下面大部分代码可以直接移植到Android平台上。并且所谓的移植也">
+<meta name="twitter:image" content="http://i1.piimg.com/4851/eb9b5858349357ca.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.aixc.space/2017/02/17/how-to-write-a-mobile-app-3/"/>
+
+
+
+
+
+  <title> 如何实现一个有网络通信的手机应用 - Part 3，客户端篇 | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-44328670-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jason's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/02/17/how-to-write-a-mobile-app-3/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jason Chen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jason's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jason's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                如何实现一个有网络通信的手机应用 - Part 3，客户端篇
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-17T20:08:42+00:00">
+                17/02/2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/02/17/how-to-write-a-mobile-app-3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/17/how-to-write-a-mobile-app-3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：<a href="/2017/02/11/how-to-write-a-mobile-app-1">基础知识</a>，<a href="/2017/02/11/how-to-write-a-mobile-app-2">服务器端</a>，<a href="/2017/02/17/how-to-write-a-mobile-app-3">手机端</a>。完整代码可以在<a href="https://github.com/tinyHui/weather-mobile-app-sample" target="_blank" rel="external">这里</a>找到。</p>
+<h1 id="初始操作"><a href="#初始操作" class="headerlink" title="初始操作"></a>初始操作</h1><p>我们的手机端是以iOS应用为例子，但由于React Native的特性，下面大部分代码可以直接移植到Android平台上。并且所谓的移植也只是把index.ios.js里的代码复制到index.android.js里。相关内容大家可以在本教程后继续自己发掘，或者等我哪天心血来潮更新。</p>
+<p>在用<code>react-native init WeatherMobileApp</code>新建了整个框架并附赠一个Hello World应用后，我们的第一件事情是把Hello World应用删掉。。。开个玩笑，我们保留这个Hello World应用，并执行<code>cd WeatherMobileApp &amp;&amp; react-native run-ios</code>。在一段比较久的初始后，电脑就会打开iOS simulator。这一步需要Xcode的支持。在所有的初始之后，我们就能看到一个完整的但什么功能都没有的iOS应用。值得一提的是React Native有一个很人性化的设定是：程序运行在模拟器时，React Native提供了一个好用的debug框架，可以通过Command+D键触发。</p>
+<h1 id="外观结构"><a href="#外观结构" class="headerlink" title="外观结构"></a>外观结构</h1><p>Hello World应用出现在模拟器后，也就表示初始的配置都完成了，我们可以正式开始着手开发了。开发iOS程序的入口文件是index.ios.js。</p>
+<p>第一件事是把Hello World的代码删掉。真的。</p>
+<p>React Native的核心思想继承于React，即Everything is a component. 意思是任何东西都是一个可移植的独立的组件。比如说，最常见的文本显示框(Text)，即大部分GUI框架中的Label控件，自带了包括显示效果，对事件(Event)的响应，对象属性等等。甚至说，一个component是另外一些component的集合，比如我们有个Footer component，它包括了三个navigate按钮，每个按钮对应了一个单独的事件。换句话说，只要是任何东西，只要抽象出来有意义就可以做为一个单独的component。由于properties的存在，我们可以通过传参的方法来控制component的具体显示，所以在灵活性上也有了一定的保证。</p>
+<p>从广义上来说，一个app也是一个component，在代码中也是这样表现的。</p>
+<p>这个简单的天气app主要有以下一些控件（从上到下的顺序）：</p>
+<ol>
+<li>一个Text负责天气图示的展示</li>
+<li>一个Text负责气温的显示</li>
+<li>一个Text负责显示城市名称</li>
+<li>一个Text负责显示天气的描述</li>
+<li>一个TextInput负责让用户输入城市名</li>
+<li>一个ListView负责记录所有查询过的历史城市</li>
+</ol>
+<p>其他还有些肉眼不可见的控件来做排版之用。这里不得不提到React Native里的<a href="https://facebook.github.io/react-native/docs/flexbox.html" target="_blank" rel="external">flexbox模型</a>，作用是能够实现排版精确的界面且不用担心不同屏幕尺寸对排版的影响。</p>
+<p>把上述的控件用flexbox的形式从上到下在render函数中排出来<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;View style=&#123;styles.innerContainer&#125;&gt;</div><div class="line">      &lt;Text style=&#123;styles.icon&#125;&gt;</div><div class="line">        &#123;this.state.icon&#125;</div><div class="line">      &lt;/Text&gt;</div><div class="line">      &lt;Text style=&#123;styles.temperature&#125;&gt;</div><div class="line">        &#123;this.state.temperature&#125; °C</div><div class="line">      &lt;/Text&gt;</div><div class="line">      &lt;Text style=&#123;styles.location&#125;&gt;</div><div class="line">        &#123;this.state.location&#125;</div><div class="line">      &lt;/Text&gt;</div><div class="line">      &lt;Text style=&#123;styles.description&#125;&gt;</div><div class="line">        &#123;this.state.description&#125;</div><div class="line">      &lt;/Text&gt;</div><div class="line">      &lt;TextInput style=&#123;styles.input&#125;</div><div class="line">        placeholder="City"</div><div class="line">        onChangeText=&#123;evt =&gt; return;&#125;</div><div class="line">        onSubmitEditing=&#123;_ =&gt; return;&#125;</div><div class="line">        clearButtonMode=&#123;"always"&#125;</div><div class="line">        clearTextOnFocus=&#123;true&#125;</div><div class="line">        enablesReturnKeyAutomatically=&#123;true&#125;</div><div class="line">        returnKeyType=&#123;"search"&#125;/&gt;</div><div class="line">      &lt;ListView/&gt;</div><div class="line">    &lt;/View&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>同时把每个控件的显示样式也定义下。React Native对于样式的支持用的是类CSS的语法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> styles = StyleSheet.create(&#123;</div><div class="line">  <span class="attr">outerContainer</span>: &#123;</div><div class="line">    <span class="attr">flex</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">justifyContent</span>: <span class="string">'center'</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">innerContainer</span>: &#123;</div><div class="line">    <span class="attr">justifyContent</span>: <span class="string">'center'</span>,</div><div class="line">    <span class="attr">alignItems</span>: <span class="string">'center'</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">temperature</span>: &#123;</div><div class="line">    <span class="attr">fontSize</span>: <span class="number">62</span>,</div><div class="line">    <span class="attr">fontWeight</span>: <span class="string">"100"</span>,</div><div class="line">    <span class="attr">margin</span>: <span class="number">0</span></div><div class="line">  ...</div><div class="line">  icon: &#123;</div><div class="line">    <span class="attr">fontFamily</span>: <span class="string">'Weather Icons'</span>,</div><div class="line">    <span class="attr">fontSize</span>: <span class="number">130</span>,</div><div class="line">    <span class="attr">padding</span>: <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h1 id="初始值-Properties"><a href="#初始值-Properties" class="headerlink" title="初始值(Properties)"></a>初始值(Properties)</h1><p>在讲初始值之前，我们先肃清一个概念：</p>
+<blockquote>
+<p>Properties是不可变的(immutable)，而States是可变的(mutable)。</p>
+</blockquote>
+<p>由于React Native是受React启发所做的一个框架，所以，每个compoent的生命周期(Lifecycle)和React component一样。每个component从constructor，获取外部传入的Properties，建立内部的States。然后进入CompoentWillMount做显示前的准备。再进入render函数根据定义来把内部的components一一画出来（内部的components同样拥有自己的Lifecycle，过程相同）。绘制完毕后，控件进入下一步：componentDidMount，即加载完后做的事情。这一步一般主要用来动态更新states以改变控件的显示。每当控件从界面中卸载(unmount)时都会触发ComponentWillUnmount事件，用来清理一些不再需要的东西，比如控制控件自动刷新的计时器等东西。值得注意的是，React与React Native都没有ComponentDidMount这一步。原因也很简单，当控件被卸载了，它也就不存在程序的执行内存块中了，自然也没有哪个指针能够指向那块没法执行的等待垃圾回收的代码块，所以这个步骤自然不存在了。</p>
+<p>React Native的界面显示（render函数）和states的值息息相关，每当一个state更新值之后，如果控件在render函数中展示这个值，那么整个component就会收到一个重新渲染的信号然后重新进行渲染。</p>
+<p>根据Component需要的值，程序的constructor长这样<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">constructor</span>(props) &#123;</div><div class="line">  <span class="keyword">super</span>(props);</div><div class="line">  <span class="keyword">this</span>.state = &#123;</div><div class="line">    <span class="attr">icon</span>: <span class="string">"\uf00d"</span>,</div><div class="line">    <span class="attr">temperature</span>: <span class="string">"0"</span>,</div><div class="line">    <span class="attr">location</span>: <span class="string">""</span>,</div><div class="line">    <span class="attr">description</span>: <span class="string">""</span></div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果在iOS模拟器上使用Command+R快捷键刷新应用，我们将看到这个天气应用都界面。</p>
+<h1 id="安装字体"><a href="#安装字体" class="headerlink" title="安装字体"></a>安装字体</h1><p>由于我们使用了自己做的字体来提供天气图例，我们需要让iOS程序资源集知道这个字体的存在。用Xcode打开ios/WeatherMobileApp.xcodeproj文件。把字体文件拖入左侧边栏中，点击最上面的项目，在Build Phases中把字体文件加入Build Resources内。<br><img src="http://i1.piimg.com/4851/eb9b5858349357ca.png" alt="Copy Build Resources"></p>
+<p>然后进入WeatherMobileApp/info.plist，告诉系统我们这个weather.ttf文件是个自制的字体文件。这里我们需要新加入Fonts provided by application条目。<br><img src="http://i1.piimg.com/4851/1b010667746a0f05.png" alt="info.plist"></p>
+<h1 id="城市搜索天气"><a href="#城市搜索天气" class="headerlink" title="城市搜索天气"></a>城市搜索天气</h1><p>根据之前的设计，程序的一部分用户流程(User journey)是能够使用搜索框输入城市，点击搜索后显示相应城市的天气状况。这个过程将对我们服务器的city入口发起一个请求。</p>
+<p>流程确定后就能开始实现代码了。首先更改Text组件的事件响应：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;TextInput style=&#123;styles.input&#125;</div><div class="line">           placeholder=<span class="string">"City"</span></div><div class="line">           onChangeText=&#123;evt =&gt; <span class="keyword">this</span>._onChangeText(evt)&#125;</div><div class="line">           onSubmitEditing=&#123;_ =&gt; <span class="keyword">this</span>.getWeatherViaCity()&#125;</div><div class="line">           clearButtonMode=&#123;<span class="string">"always"</span>&#125;</div><div class="line">           clearTextOnFocus=&#123;<span class="literal">true</span>&#125;</div><div class="line">           enablesReturnKeyAutomatically=&#123;<span class="literal">true</span>&#125;</div><div class="line">           returnKeyType=&#123;<span class="string">"search"</span>&#125;/&gt;</div></pre></td></tr></table></figure></p>
+<p>由于Text组件没法获得当前的输入内容（我也不知道为什么，感觉是个槽点），我们得曲线救国。首先使用一个function绑定Text组件的<code>onChangeText</code>事件。每次输入内容更改后都会把当前输入值写到state里。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">_onChangeText(e) &#123;</div><div class="line">  this.setState(&#123;</div><div class="line">    city: e</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后绑定<code>onSubmitEditing</code>事件，每次提交时使用在state中都city的值。在向服务器通信时，React Native提供了一个fetch的内置函数。由于React Native不支持callback，为了达到类似的效果，React Native选择了JavaScript Promise。简单介绍下Promise，JS Promise是一种基于JS Event的并比callback好太多的JS新技术（工程实现上）。由于JS基于事件的执行方式，很多function的返回值都有不确定性，JS callback一直是一种方便但容易滥用的东西，这也是回调地狱(callback hell)的来源。JS Promise很好得解决了这个问题，用then/catch来处理正常／异常，并保证每一步都能在上一步完全完成后才开始执行。</p>
+<p>fetch函数就是一个Promise的例子。程序首先和服务器通信，然后在获得的内容提取出JSON，最后把每个值赋给相应的state。如果过程发生错误，我们就弹出个警告窗口。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">getWeatherViaCity() &#123;</div><div class="line">  fetch(<span class="string">`http://localhost:5000/city/<span class="subst">$&#123;<span class="keyword">this</span>.state.city&#125;</span>`</span>)</div><div class="line">  .then(</div><div class="line">    <span class="function"><span class="params">res</span> =&gt;</span> res.json()</div><div class="line">  ).then(</div><div class="line">    <span class="function"><span class="params">res</span> =&gt;</span> <span class="keyword">this</span>.setState(&#123;</div><div class="line">      <span class="attr">icon</span>: res.icon,</div><div class="line">      <span class="attr">temperature</span>: res.temperature,</div><div class="line">      <span class="attr">location</span>: res.location,</div><div class="line">      <span class="attr">description</span>: res.description</div><div class="line">    &#125;)</div><div class="line">  ).then(</div><div class="line">    <span class="function"><span class="params">_</span> =&gt;</span> <span class="keyword">this</span>.appendLocationHistory()</div><div class="line">  ).catch(</div><div class="line">    <span class="function"><span class="params">error</span> =&gt;</span> Alert.alert(<span class="string">"Error"</span>, <span class="string">"Network fail"</span>)</div><div class="line">  )</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="地理位置取得天气"><a href="#地理位置取得天气" class="headerlink" title="地理位置取得天气"></a>地理位置取得天气</h1><p>另一个用户流程(User journey)是在用户打开应用后自动加载当前城市的天气。这就需要<code>componentWillMount</code>的参与了。同时，借助官方的API，我们可以调用GPS来获得当前经纬度的地理位置。取得天气的函数<code>getWeatherViaGeo</code>和上面的<code>getWeatherViaCity</code>并没有太大的区别，只是访问的服务器地址不太一样。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">componentWillMount() &#123;</div><div class="line">  <span class="keyword">this</span>.getGeo();</div><div class="line">&#125;</div><div class="line"></div><div class="line">getGeo() &#123;</div><div class="line">  navigator.geolocation.getCurrentPosition(</div><div class="line">    <span class="function"><span class="params">position</span> =&gt;</span> &#123;</div><div class="line">      <span class="keyword">this</span>.setState(&#123;</div><div class="line">          <span class="attr">geoPos</span>: &#123;</div><div class="line">            <span class="attr">lat</span>: position.coords.latitude,</div><div class="line">            <span class="attr">lon</span>: position.coords.longitude</div><div class="line">          &#125;</div><div class="line">      &#125;);</div><div class="line">      <span class="keyword">this</span>.getWeatherViaGeo();</div><div class="line">    &#125;,</div><div class="line">    (error) =&gt; Alert.alert(<span class="string">"Unable to get geolocation"</span>, error.message),</div><div class="line">    &#123;<span class="attr">enableHighAccuracy</span>: <span class="literal">true</span>, <span class="attr">timeout</span>: <span class="number">20000</span>, <span class="attr">maximumAge</span>: <span class="number">1000</span>&#125;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>由于<code>getWeatherViaGeo</code>与<code>getWeatherViaCity</code>大体很相似，所以我们可以在重构的时候把重复部分提取出来。</p>
+<h1 id="历史记录"><a href="#历史记录" class="headerlink" title="历史记录"></a>历史记录</h1><p>最后一部分是关于记录用户查询历史的。我们用ListView的控件来实现显示，并把所有的历史值都存入state里。值得一提的是，React Native的ListView在存放Array时需要把Array转化成DataSource。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> ds = <span class="keyword">new</span> ListView.DataSource(&#123;<span class="attr">rowHasChanged</span>: <span class="function">(<span class="params">r1, r2</span>) =&gt;</span> r1 !== r2&#125;);</div></pre></td></tr></table></figure></p>
+<p>具体的ListView控件如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ListView dataSource=&#123;ds.cloneWithRows(<span class="keyword">this</span>.state.historyLocations)&#125;</div><div class="line">          renderRow=&#123;</div><div class="line">            rowData =&gt; &lt;Text onPress=&#123;</div><div class="line">              _ =&gt; this._onPressHistory(rowData)&#125;&gt;</div><div class="line">                &#123;rowData&#125;</div><div class="line">            &lt;/Text&gt;</div><div class="line">          &#125;/&gt;</div></pre></td></tr></table></figure></p>
+<p>在用户点击对应的城市时，系统需要把界面更新成那个城市的实时天气。我们用Promise来做事件的响应。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">_onPressHistory(location) &#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(</div><div class="line">    <span class="function">(<span class="params">res, rej</span>) =&gt;</span> &#123;</div><div class="line">      res(<span class="keyword">this</span>.setState(&#123;</div><div class="line">        <span class="attr">city</span>: location</div><div class="line">      &#125;))</div><div class="line">    &#125;</div><div class="line">  ).then(</div><div class="line">    <span class="function"><span class="params">_</span> =&gt;</span> <span class="keyword">this</span>.getWeatherViaCity()</div><div class="line">  )</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="两个小bug"><a href="#两个小bug" class="headerlink" title="两个小bug"></a>两个小bug</h1><p>具体使用时，我们发现当用户点击输入框时，弹出的键盘会阻挡输入框。这个是由于View的位置是固定的，所以TextInput的母View控件并不会由于屏幕键盘的出现而改变位置。解决的方法也很简单，就是使用KeyboardAvoidingView控件。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;KeyboardAvoidingView style=&#123;styles.outerContainer&#125; behavior=<span class="string">"padding"</span>&gt;</div><div class="line">  ...</div><div class="line">&lt;<span class="regexp">/KeyboardAvoidingView&gt;</span></div></pre></td></tr></table></figure></p>
+<p>第二个bug是如果用户点击了输入框后并不打算搜索，反而想回到主界面，这时点击非键盘的空白处并没有什么用。这是由于View控件不是一个能够交互的控件，我们需要TouchableWithoutFeedback控件和dismissKeyboard这个系统级事件的帮忙。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">const dismissKeyboard = require(&apos;dismissKeyboard&apos;);</div><div class="line">&lt;TouchableWithoutFeedback onPress=&#123;_ =&gt; dismissKeyboard()&#125;&gt;</div><div class="line">  ...</div><div class="line">&lt;/TouchableWithoutFeedback&gt;</div></pre></td></tr></table></figure></p>
+<h1 id="成品展示"><a href="#成品展示" class="headerlink" title="成品展示"></a>成品展示</h1><p>程序写好了，最终成果如下所示，动手运行看看吧。<br><img src="http://p1.bqimg.com/4851/0857843c7adb4f07.png" alt="应用截图"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/11/how-to-write-a-mobile-app-2/" rel="next" title="如何实现一个有网络通信的手机应用 - Part 2，服务器篇">
+                <i class="fa fa-chevron-left"></i> 如何实现一个有网络通信的手机应用 - Part 2，服务器篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Jason Chen" />
+          <p class="site-author-name" itemprop="name">Jason Chen</p>
+          <p class="site-description motion-element" itemprop="description">Jason的技术博客，关注后端，Linux，算法，设计模式，Machine Learning等。</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#初始操作"><span class="nav-number">1.</span> <span class="nav-text">初始操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#外观结构"><span class="nav-number">2.</span> <span class="nav-text">外观结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初始值-Properties"><span class="nav-number">3.</span> <span class="nav-text">初始值(Properties)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装字体"><span class="nav-number">4.</span> <span class="nav-text">安装字体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#城市搜索天气"><span class="nav-number">5.</span> <span class="nav-text">城市搜索天气</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#地理位置取得天气"><span class="nav-number">6.</span> <span class="nav-text">地理位置取得天气</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#历史记录"><span class="nav-number">7.</span> <span class="nav-text">历史记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#两个小bug"><span class="nav-number">8.</span> <span class="nav-text">两个小bug</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#成品展示"><span class="nav-number">9.</span> <span class="nav-text">成品展示</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jason Chen</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'aixc';
+      var disqus_identifier = '2017/02/17/how-to-write-a-mobile-app-3/';
+
+      var disqus_title = "如何实现一个有网络通信的手机应用 - Part 3，客户端篇";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

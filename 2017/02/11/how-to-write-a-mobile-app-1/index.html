@@ -92,7 +92,7 @@ RESTful在具体实现一个网络应用之前我们先提一个网络通信的�
 <meta property="og:site_name" content="Jason's Blog">
 <meta property="og:description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器端，手机端。完整代码可以在这里找到。
 RESTful在具体实现一个网络应用之前我们先提一个网络通信的准则:RESTful。RESTful是一个革命性的变革，也很好的体现了计算机的很重要">
-<meta property="og:updated_time" content="2017-02-12T17:01:30.000Z">
+<meta property="og:updated_time" content="2017-02-17T20:10:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何实现一个有网络通信的手机应用 - Part 1，基础知识篇">
 <meta name="twitter:description" content="这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器端，手机端。完整代码可以在这里找到。
@@ -369,7 +369,7 @@ RESTful在具体实现一个网络应用之前我们先提一个网络通信的�
       
 
       
-        <p>这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：<a href="/2017/02/11/how-to-write-a-mobile-app-1">基础知识</a>，<a href="/2017/02/11/how-to-write-a-mobile-app-2">服务器端</a>，手机端。完整代码可以在<a href="https://github.com/tinyHui/weather-mobile-app-sample" target="_blank" rel="external">这里</a>找到。</p>
+        <p>这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：<a href="/2017/02/11/how-to-write-a-mobile-app-1">基础知识</a>，<a href="/2017/02/11/how-to-write-a-mobile-app-2">服务器端</a>，<a href="/2017/02/17/how-to-write-a-mobile-app-3">手机端</a>。完整代码可以在<a href="https://github.com/tinyHui/weather-mobile-app-sample" target="_blank" rel="external">这里</a>找到。</p>
 <h1 id="RESTful"><a href="#RESTful" class="headerlink" title="RESTful"></a>RESTful</h1><p>在具体实现一个网络应用之前我们先提一个网络通信的准则:RESTful。RESTful是一个革命性的变革，也很好的体现了计算机的很重要的一个设计原则：S.O.L.I.D中的D，倚赖倒转原则(Dependency Inversion Principle)。说远了，RESTful是一个底层的网络架构原则，或者我更喜欢说它是种服务器和客户端达成的协议。无论是网页，手机，甚至是电视OS，PSP游戏机，这个年代的无论什么平台的网络应用都脱离不开RESTful这个终极网络协议。</p>
 <p>小A是个服务器，小B是个客户端。由于小A和小B相互生存在不同的地方然而却时常互相通信交换资源，一开始两个人各说各的，每次收到对方的消息了就去查找自己的语法书来尝试理解对方发过来的消息的意思。然而，小B是出了名的兄弟多，每次多了个孪生兄弟后（网页变手机应用）就得把规则书新抄一份仔细的变形下以便也能和小A通信。还有一个更严重的问题是由于双方独立的发展，每次两人有一方一有变动增加了新的消息类型或者懂得了新的词语，对方就傻眼看不懂了，因为原来的语法书里没有这个规则。于是邮差大人得把新写的语法书挨家挨户得送一遍。</p>
 <p>这实在是方便。两人只好互相约定，以后我们就按一个固定的句子格式说话，把每次遣词造句变成给格式里面填完，句子填好后发过来，我就按照约定的格式去解读它，要是我理解不了或者你发的内容有问题我就告诉你发错了，但错误信息也按照我们约定的句子格式写。这下，双方的通信变得无比便利，无论小A有多少孪生兄弟，小A都不用管，只要知道多了这么个兄弟并把他当作可以信任的人就行了。并且由于规则确定下来了，双方就顺带改造了电话，让语法书内置电话中，这样每次通话时双方也就不用去翻语法书了因为电话会自动把对方的消息翻译成自己看的懂的，也能把自己说的话重新排列成约定的句式发给对方。</p>
@@ -510,7 +510,7 @@ RESTful在具体实现一个网络应用之前我们先提一个网络通信的�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
