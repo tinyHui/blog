@@ -86,17 +86,17 @@
 
 <meta name="description" content="本博客围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient Vanish)">
-<meta property="og:url" content="http://blog.aixc.space/2017/02/04/neural-network-2/index.html">
+<meta property="og:title" content="Artificial Neural Network - Part 3, 全连接神经网络(Fully Connected Neural Network)">
+<meta property="og:url" content="http://blog.aixc.space/2017/02/26/neural-network-3/index.html">
 <meta property="og:site_name" content="Jason's Blog">
 <meta property="og:description" content="本博客围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面">
-<meta property="og:image" content="http://p1.bpimg.com/4851/3d0103e36064862a.gif">
-<meta property="og:image" content="http://p1.bpimg.com/4851/10650fb04fec0e49.png">
-<meta property="og:updated_time" content="2017-02-26T11:27:42.000Z">
+<meta property="og:image" content="http://p1.bpimg.com/4851/4faf76c47fa4294c.jpg">
+<meta property="og:image" content="http://p1.bqimg.com/4851/eee87492e0bd6e6d.gif">
+<meta property="og:updated_time" content="2017-02-26T21:00:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient Vanish)">
+<meta name="twitter:title" content="Artificial Neural Network - Part 3, 全连接神经网络(Fully Connected Neural Network)">
 <meta name="twitter:description" content="本博客围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面">
-<meta name="twitter:image" content="http://p1.bpimg.com/4851/3d0103e36064862a.gif">
+<meta name="twitter:image" content="http://p1.bpimg.com/4851/4faf76c47fa4294c.jpg">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.aixc.space/2017/02/04/neural-network-2/"/>
+  <link rel="canonical" href="http://blog.aixc.space/2017/02/26/neural-network-3/"/>
 
 
 
 
 
-  <title> Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient Vanish) | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> Artificial Neural Network - Part 3, 全连接神经网络(Fully Connected Neural Network) | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -262,7 +262,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/02/04/neural-network-2/">
+  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/02/26/neural-network-3/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jason Chen">
@@ -286,7 +286,7 @@
             
             
               
-                Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient Vanish)
+                Artificial Neural Network - Part 3, 全连接神经网络(Fully Connected Neural Network)
               
             
           </h2>
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-04T13:52:49+00:00">
-                04/02/2017
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-26T10:58:24+00:00">
+                26/02/2017
               </time>
             
 
@@ -342,8 +342,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/04/neural-network-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/04/neural-network-2/" itemprop="commentCount"></span>
+                <a href="/2017/02/26/neural-network-3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/26/neural-network-3/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -370,46 +370,21 @@
 
       
         <p>本博客围绕神经网络展开一系列的解说，包括<a href="/2017/01/28/neural-network-1/">神经网络的历史与数学模型基础</a>，<a href="/2017/02/04/neural-network-2/">数学模型的debug</a>，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。</p>
-<h1 id="Sigmod的缺陷-Flaw-of-sigmod"><a href="#Sigmod的缺陷-Flaw-of-sigmod" class="headerlink" title="Sigmod的缺陷 (Flaw of sigmod)"></a>Sigmod的缺陷 (Flaw of sigmod)</h1><p>在<a href="/2017/01/28/neural-network-1/">上一章</a>中，我们说到了神经网络(NN)的基础单元：perception，与和神经网络的两个重要的数学步骤：Forwardpropagation与Backwardpropagation。我们提到，sigmod函数是一个伟大的发明但却有一个天生的缺陷。<br><img src="http://p1.bpimg.com/4851/3d0103e36064862a.gif" alt="Sigmod function"></p>
-<p>通过观察，我们发现从$x$的值接近<script type="math/tex">\pm 5</script>的位置开始，整个函数的扩展方向就无限接近于水平，换言之，函数的斜率开始无限接近于<script type="math/tex">0</script>。结合Backwardpropagation的公式，这个数学事实也就意味着在神经网络的训练后期，<script type="math/tex">w</script>与<script type="math/tex">b</script>的绝对值变大后，整个模型的收敛效果将会无限的降低。</p>
-<p>再进一步说，由于sigmod无法保证给所有的输入值提供稳定有效的函数收敛用值(gradient)，整个网络的学习能力就会收到很大限制。具体表现为，如果整个NN的层数太多或者某一层的Perception太多，网络都并不会提升它的表现。</p>
-<p>这个问题也就是折磨了很多人并让神经网络研究止步不前的梯度消失问题(gradient vanish problem)。</p>
-<h1 id="救星1：Regularisation"><a href="#救星1：Regularisation" class="headerlink" title="救星1：Regularisation"></a>救星1：Regularisation</h1><p><strong><em>In nutshell：</em></strong> Regularisation的修复想法就是从估错(Error estimate)上面入手的。具体形式就是它在原有的估错所得到的值上面加上1级或2级的惩罚值(prior term)。整个过程就是用来消减权重的值。</p>
-<h3 id="L1-Regularisation"><a href="#L1-Regularisation" class="headerlink" title="L1 Regularisation"></a>L1 Regularisation</h3><p>L1 regularisation是基于权重的绝对值的。通过L1 regularisation修正后的错误评估值用数学表达式来表现则是</p>
+<h1 id="一次完整迭代的过程"><a href="#一次完整迭代的过程" class="headerlink" title="一次完整迭代的过程"></a>一次完整迭代的过程</h1><p>全连接神经网络，Fully Connected Neural Network，是一种最为简单且直接的神经网络结构。除了CNN在结构上的创新，后面发展出的AutoEncoder, RNN(recurrent), B-NN(Bidirectional), S-NN(Semantic)等都是在这个基础结构上面进行了加工。一个完整的Fully Connected Neural Network（以下简称NN）的结构如下图所示。一般来说，输出层会包含&gt;1个node，每个node对应目标labels中的一个类比。后面详解。</p>
+<p><img src="http://p1.bpimg.com/4851/4faf76c47fa4294c.jpg" alt="Sample network"></p>
+<p>结合前面两篇的对于单个Perception所涉及的数学原理描述，我们来根据上图直观得描述下一次迭代中会发生什么。我们用$l_{0,2}$这种表达来表示第一层的上数下第三个node。</p>
+<p>首先数据在input layer被输入，通过weight的加成后到达layer1。由于是全连接网络，所以第一层的每个node会和第二层的每个node相连。接下来，在sum，add bias，active function的帮助下，三个不同的输入在第二层的node上融合并输出到下一层。同样的，下一层也有weight和bias，active function这些处理。如此循环，直到最后的输出层的前一层，即上层中的layer2。这里开始和前面有一点不同。首先通过weight和bias得到将被输出层处理的值，然后进行softmax的计算使得输出的值转化成一个百分比的值，这个处理的意义就是每次由输出层的每个node算出的结果就是神经网络对于输入值可能是每个目标类比的猜测概率。这个好处就是能把评估的分数转化成一个更容易普遍使用的衡量标准，因为事先并没有人知道输入数据的精确目标(label/category)得分，但是大家知道数据应该属于哪个类比(category)里面。进行softmax运算后，output layer的运算值累加起来就是1。之后就进入根据估错值的backwardpropagation阶段。</p>
+<p><img src="http://p1.bqimg.com/4851/eee87492e0bd6e6d.gif" alt="Demo"></p>
+<p>首先对输出层进行“偏差值计算”，即输出对值和目标值的差距。虽然表现形式上只是$\delta=y-t$，即输出值减去目标值，但对于目标值的数学表现形式需要一定的规划，因为这也决定了输出层的node的数目。以手写数字0-9识别的问题为例，输出的值就是一个10维的vector，每一位代表一个数字，用0和1来表示是不是这个数字。所以网络的目标就是尽可能使网络在输出的时候让9的图片在vector上的第9位即输出层的第九个node算出1，其他位算出0。</p>
+<script type="math/tex; mode=display">\text{softmax}(x_i) = \frac{\exp(x_i)}{\sum_j \exp(x_j)}</script><p>之后就是根据这个偏差值用偏方(partial derivative)的方式更新weight参数。另外就是用后一层的偏差值来获得前一层的偏差值。以输出层的偏差值获得hidden layer 2的偏差值的计算过程如下：</p>
 <script type="math/tex; mode=display">\begin{eqnarray}
-E &=& E_{train} + \beta E_{L1} \\
-&=& E_{train} + \beta | w_i |
-\end{eqnarray}</script><p>它的斜率(gradients)为</p>
-<script type="math/tex; mode=display">\begin{eqnarray}
-\frac{\partial E}{\partial w_i} &=& \frac{\partial E_{train}}{\partial w_i} + \frac{\partial E_{L1}}{\partial w_i} \\
-&=& \frac{\partial E_{train}}{\partial w_i} + sgn(w_i)\\
-\end{eqnarray}</script><p>其中<script type="math/tex">sgn(w_i)</script>是一个简单的信号值。</p>
-<script type="math/tex; mode=display">
-sgn(w_i) =
-\begin{cases}
-    1 & \text{if } x\gt 0 \\
-    -1 & \text{if } x \lt 0 \\
-    0 & \text{otherwise}
-\end{cases}</script><h3 id="L2-Regularisation"><a href="#L2-Regularisation" class="headerlink" title="L2 Regularisation"></a>L2 Regularisation</h3><p>L2 regularisation的原理是通过增加一个complexity term来得到更平滑的错误评估函数曲线(encourage smoother mappings)。</p>
-<script type="math/tex; mode=display">\begin{eqnarray}
-E &=& E_{train} + \beta E_{L2} \\
-&=& E_{train} + \beta \frac{1}{2} \sum_i {w_i}^2
-\end{eqnarray}</script><p>它的斜率(gradients)为</p>
-<script type="math/tex; mode=display">\begin{eqnarray}
-\frac{\partial E}{\partial w_i} &=& \frac{\partial E_{train}}{\partial w_i} + \frac{\partial E_{L2}}{\partial w_i} \\
-&=& \frac{\partial E_{train}}{\partial w_i} + w_i\\
-\end{eqnarray}</script><h1 id="救星2：Dropout"><a href="#救星2：Dropout" class="headerlink" title="救星2：Dropout"></a>救星2：Dropout</h1><p><strong><em>In nutshell：</em></strong> Dropout是另一种修复gradient vanish问题的思路，即通过改变整个NN迭代时每一层的行为的方法来每次只更新一小部分的权重。</p>
-<p>打个比方，一个NN有3层，每层都有10个Perception。如果是普通的训练过程，这30个Perception将在每一次迭代过程中都参与训练。在应用了dropout后，我们设其中将有30%的Perception不参与训练。那么，在每次训练的时候，每一层的每个迭代过程都会有30%的Perception（即3个）会放弃这次迭代机会，从整个NN中被暂时剔除，既不参与forward的过程，也不参与backward的过程。他们的weight将会被保留直到下次被启用的时候。</p>
-<p>抽象来说在NN中每个perception代表了一个训练最终模型的hidden feature。由于采用dropout后每次迭代中features的组合都会有变化，因此dropout的技术不仅能够消减gradient vanish的影响，也能更大程度得发挥hidden feature的作用。</p>
-<h1 id="救星3：ReLU函数"><a href="#救星3：ReLU函数" class="headerlink" title="救星3：ReLU函数"></a>救星3：ReLU函数</h1><p>ReLU函数其实是一个简单的条件判断，即</p>
-<script type="math/tex; mode=display">relu(x) = \max(0, x)</script><p><img src="http://p1.bpimg.com/4851/10650fb04fec0e49.png" alt="ReLU function"></p>
-<p>它的导数(derivative)是</p>
-<script type="math/tex; mode=display">\frac{d}{d x} relu(x) =
-\begin{cases}
-    0 & \text{if } x\leq 1\\
-    1 & \text{otherwise}
-\end{cases}</script><p>个人认为ReLU的想法非常创新，是一个一个彻底的用计算机思想颠覆数学思想的壮举。它在保留模拟原有的函数作用并阻止了gradient vanish的同时，又做到了极度简化计算。但是它同样有两个很致命的缺陷，比如在输入值变成0后，整个perception会“死去”，因为它所有的过程结果都会变成0。同时，由于第一个缺陷，ReLU对于大的learning rate变得非常敏感，每次迭代的“步子”不能迈得太大。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>上述的三个做法互相间都不冲突。前两个方法都对于大规模的神经网络运算作出了卓越得贡献。同时由于ReLU运算的简便，GPU做运算来加速训练过程的思想也被提出。在两者的作用下，神经网络的发展从此一日千里，成为了整个Machine Learning领域最被广泛利用的一个算法。</p>
+\delta^3 &= y-t \\
+g^3 &= \delta^3 W^{3\top} \\
+\delta^2 &= g^3 \cdot \frac{\partial h^2}{\partial a^2}
+\end{eqnarray}</script><p>这里的上标数字是层数的标记，$W^2$是第二到第三层连接的weight，$h^2$是第二层的输出，$a^2$是第二层的输入。具体的展开式请参看<a href="/2017/01/28/neural-network-1/">第一篇文章</a>。</p>
+<p>如此从最后一层循环至第一层并更新完$W^1$和$b^1$后就可以开始第二次迭代了。神经网络的结束方式有两种，一种是最后输出层的偏差小于某个特定的值(threshold)，另一种是规定迭代的次数。一般来说都是以第二种为主因为训练非常耗时而且模型需要不断改变参数来优化（tuning）。</p>
+<h1 id="基于TensorFlow搭建能识别手写数字的网络"><a href="#基于TensorFlow搭建能识别手写数字的网络" class="headerlink" title="基于TensorFlow搭建能识别手写数字的网络"></a>基于TensorFlow搭建能识别手写数字的网络</h1><p>小节名字这么长你怕不怕。</p>
+<p>例子在<a href="https://github.com/tinyHui/tensorflow-examples/blob/master/fully-connect-neural-network.ipynb" target="_blank" rel="external">这里</a>。用的是IPython notebook，所以本文就不展开解释代码了。值得一提的是TensorFlow的运算速度真的很快，何况还能一键切换至GPU和提供可视化过程的dashboard，比当初自己徒手用python写的框架快了近千倍也好用千倍。开源真好。</p>
 
       
     </div>
@@ -444,8 +419,8 @@ E &=& E_{train} + \beta E_{L2} \\
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/29/docker-introduction/" rel="next" title="Docker入门介绍">
-                <i class="fa fa-chevron-left"></i> Docker入门介绍
+              <a href="/2017/02/25/design-pattern-2-strategy/" rel="next" title="设计模式2 - 策略模式 (Strategy)">
+                <i class="fa fa-chevron-left"></i> 设计模式2 - 策略模式 (Strategy)
               </a>
             
           </div>
@@ -453,10 +428,6 @@ E &=& E_{train} + \beta E_{L2} \\
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/11/how-to-write-a-mobile-app-1/" rel="prev" title="如何实现一个有网络通信的手机应用 - Part 1，基础知识篇">
-                如何实现一个有网络通信的手机应用 - Part 1，基础知识篇 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -586,7 +557,7 @@ E &=& E_{train} + \beta E_{L2} \\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Sigmod的缺陷-Flaw-of-sigmod"><span class="nav-number">1.</span> <span class="nav-text">Sigmod的缺陷 (Flaw of sigmod)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#救星1：Regularisation"><span class="nav-number">2.</span> <span class="nav-text">救星1：Regularisation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#L1-Regularisation"><span class="nav-number">2.0.1.</span> <span class="nav-text">L1 Regularisation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L2-Regularisation"><span class="nav-number">2.0.2.</span> <span class="nav-text">L2 Regularisation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#救星2：Dropout"><span class="nav-number">3.</span> <span class="nav-text">救星2：Dropout</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#救星3：ReLU函数"><span class="nav-number">4.</span> <span class="nav-text">救星3：ReLU函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一次完整迭代的过程"><span class="nav-number">1.</span> <span class="nav-text">一次完整迭代的过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于TensorFlow搭建能识别手写数字的网络"><span class="nav-number">2.</span> <span class="nav-text">基于TensorFlow搭建能识别手写数字的网络</span></a></li></ol></div>
             
 
           </div>
@@ -718,9 +689,9 @@ E &=& E_{train} + \beta E_{L2} \\
 
     <script type="text/javascript">
       var disqus_shortname = 'aixc';
-      var disqus_identifier = '2017/02/04/neural-network-2/';
+      var disqus_identifier = '2017/02/26/neural-network-3/';
 
-      var disqus_title = "Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient Vanish)";
+      var disqus_title = "Artificial Neural Network - Part 3, 全连接神经网络(Fully Connected Neural Network)";
 
 
       function run_disqus_script(disqus_script) {
