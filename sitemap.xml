@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.aixc.space/2017/02/25/design-pattern-2-strategy/</loc>
+    
+    <lastmod>2017-02-26T21:03:26.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.aixc.space/2017/02/20/design-pattern-1-simple-factory/</loc>
+    
+    <lastmod>2017-02-26T21:03:21.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.aixc.space/2017/02/26/neural-network-3/</loc>
     
     <lastmod>2017-02-26T21:00:33.000Z</lastmod>
@@ -19,20 +33,6 @@
     <loc>http://blog.aixc.space/2017/02/04/neural-network-2/</loc>
     
     <lastmod>2017-02-26T11:27:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.aixc.space/2017/02/25/design-pattern-2-strategy/</loc>
-    
-    <lastmod>2017-02-25T15:59:35.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.aixc.space/2017/02/20/design-pattern-1-simple-factory/</loc>
-    
-    <lastmod>2017-02-25T15:55:36.000Z</lastmod>
     
   </url>
   
