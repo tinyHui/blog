@@ -86,13 +86,13 @@
 
 <meta name="description" content="这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式2 - 策略模式 (Strategy)">
-<meta property="og:url" content="http://blog.aixc.space/2017/02/25/design-pattern-2-strategy/index.html">
+<meta property="og:title" content="设计模式3 - 装饰模式 (Decoration)">
+<meta property="og:url" content="http://blog.aixc.space/2017/03/05/design-pattern-3-decoration/index.html">
 <meta property="og:site_name" content="Jason's Blog">
 <meta property="og:description" content="这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径">
-<meta property="og:updated_time" content="2017-02-26T21:03:26.000Z">
+<meta property="og:updated_time" content="2017-03-05T16:14:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式2 - 策略模式 (Strategy)">
+<meta name="twitter:title" content="设计模式3 - 装饰模式 (Decoration)">
 <meta name="twitter:description" content="这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径">
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.aixc.space/2017/02/25/design-pattern-2-strategy/"/>
+  <link rel="canonical" href="http://blog.aixc.space/2017/03/05/design-pattern-3-decoration/"/>
 
 
 
 
 
-  <title> 设计模式2 - 策略模式 (Strategy) | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 设计模式3 - 装饰模式 (Decoration) | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -259,7 +259,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/02/25/design-pattern-2-strategy/">
+  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/03/05/design-pattern-3-decoration/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jason Chen">
@@ -283,7 +283,7 @@
             
             
               
-                设计模式2 - 策略模式 (Strategy)
+                设计模式3 - 装饰模式 (Decoration)
               
             
           </h2>
@@ -298,8 +298,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-25T13:42:44+00:00">
-                25/02/2017
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-05T13:51:15Z">
+                05/03/2017
               </time>
             
 
@@ -339,8 +339,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/02/25/design-pattern-2-strategy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/25/design-pattern-2-strategy/" itemprop="commentCount"></span>
+                <a href="/2017/03/05/design-pattern-3-decoration/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/05/design-pattern-3-decoration/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -367,11 +367,13 @@
 
       
         <p>这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径。整个系列将使用一个架空的环境描述“一个村”在设计模式的帮助下的发展，用看得下去的人话来慢慢讲述那最最基础的28个模式，同时在故事后用Java实现故事里描述的事情。本系列的合集在<a href="/categories/Design-Pattern/">这里</a>。</p>
-<h1 id="策略超市"><a href="#策略超市" class="headerlink" title="策略超市"></a>策略超市</h1><p>“一个村”终于从物物交换的经济模式走入了货币时代。</p>
-<p>赵大娘在精明村长的指导下在村子里开起了间杂货铺名叫“策略杂货铺”。一开始，赵大娘在结账处培养了一个账房赵一，专门负责计算顾客所购买的商品价格并对顾客收费。可是生意不好啊，虽然杂货铺里应有尽有但是村民并没有从杂货铺买东西的习惯。赵大娘这个着急啊，只好去找精明村长让他提意见。村长深思熟虑了一番说：你看你杂货铺，优势是每次进货多成本便宜，何不卖得比外面单买得也便宜些，搞点打折促销啊。赵大娘一听心想对啊。把赵二找来培训他打折，返现，积分这些策略。可惜这些策略实在是繁杂又不好记，赵二试了几次都没法记全而且明显影响了他正常收费的速度（单个函数过长就是代码的坏味道）。不得已，赵大娘只好学习张大哥的“烧铺”的做法，请了赵三，赵四，赵五来分别做打折，返现，积分的事情，并自己来接待顾客，判断由谁来负责算价格（这也就是典型的简单工厂模式，有兴趣的朋友可以自己写写看）。</p>
-<p>这倒也相安无事了一段时间，直到村子要过节了。为了能把握住过节这个促销赚钱的绝佳时期，策略杂货铺忙坏了，张大妈不停的召集账房们开会，一会儿是食品类货品3折，一会儿又是满10送1。赵大娘和众账房都弄得很辛苦。咨询过精明村长后，赵大娘决定使用神器：规章。她不再让专人做专事，反而把自己的定价策略写到几本小册子中让账房们结账时挑选合适的策略册子，跟着册子的指导完成交易。</p>
-<h1 id="干货"><a href="#干货" class="headerlink" title="干货"></a>干货</h1><p>策略模式的重点就是分析一系列的操作，抽象提取出他们相似的地方。由于操作抽象相同但具体实现不同，所以可以通过把类型在一处实例化来集中调用具体行为。由于不同的操作有自己的类，所以又同时有简单工厂的优点：功能相互独立，易维护易测试。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> interface <span class="title">DealStrategy</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">calculateMoney</span><span class="params">(<span class="keyword">float</span> money)</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> class <span class="title">Discount</span><span class="params">()</span> extends DealStrategy </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">calculateMoney</span><span class="params">(<span class="keyword">float</span> money)</span> </span>&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> class <span class="title">CashReturn</span><span class="params">()</span> extends DealStrategy </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">calculateMoney</span><span class="params">(<span class="keyword">float</span> money)</span> </span>&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> class <span class="title">Credit</span><span class="params">()</span> extends DealStrategy </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">calculateMoney</span><span class="params">(<span class="keyword">float</span> money)</span> </span>&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在正常的软件架构中，由于前后端的分离，客户端是不应该知道具体的后台策略的。所以应该由后端代码来判断。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> Enumerate CheckoutType &#123;</div><div class="line">  DISCOUNT;</div><div class="line">  CASH_RETURN;</div><div class="line">  CREDIT;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> class <span class="title">DealContext</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> DealStrategy dealStrategy;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">DealContext</span><span class="params">(CheckoutType checkoutType)</span> </span>&#123;</div><div class="line">    <span class="keyword">switch</span> (checkoutType) &#123;</div><div class="line">      <span class="keyword">case</span> CheckoutType.DISCOUNT:</div><div class="line">        <span class="keyword">this</span>.dealStrategy = <span class="keyword">new</span> Discount();</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> CheckoutType.CASH_RETURN:</div><div class="line">        <span class="keyword">this</span>.dealStrategy = <span class="keyword">new</span> CashReturn();</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> CheckoutType.CREDIT:</div><div class="line">        <span class="keyword">this</span>.dealStrategy = <span class="keyword">new</span> Credit();</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">checkout</span><span class="params">(<span class="keyword">float</span> money)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.dealStrategy.calculateMoney();</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> class <span class="title">StrategyStore</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkout</span><span class="params">(CheckoutType checkoutType, <span class="keyword">float</span> money)</span> </span>&#123;</div><div class="line">    DealContext dealContext = <span class="keyword">new</span> DealContext(checkoutType);</div><div class="line">    dealContext.checkout(money);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="钱大娘的馄饨摊"><a href="#钱大娘的馄饨摊" class="headerlink" title="钱大娘的馄饨摊"></a>钱大娘的馄饨摊</h1><p>一个村里的钱大娘准备开个馄饨铺。</p>
+<p>想了几天后，钱大娘跑去和精明村长商量如何开馄饨铺最重要的部分：如何准备馄饨。钱大娘兴致勃勃得和村长说到，她准备叫上钱二娘，三娘，四娘等人，培训她们一起包馄饨。精明村长打断道：“不行，如果说你的饺子制作得工序稍微变动下，比如多放蒜蓉少放盐了，那你就得和每个人都重新培训一遍了。”（用简单工厂得方式，封装得太厉害，违反了开放封闭原则 open-close principle）</p>
+<p>钱大娘又说到：“那就每个人培训一部分，钱二娘负责做皮，钱二娘负责剁猪肉，三娘负责剁蒜蓉，四娘负责拌馅，然后我来包。”精明村长想了想，问到：“这个倒是不错，可是你打算怎么包呢？”。钱三娘回道：“这还不简单，反正我们都是围坐一张桌子的，我要皮了就让二娘递下，让四娘问老二老三给拌馅的原料，我拿四娘拌好的馅。村长说：“这么弄你不累死了嘛，每次要东西都得让别人拿过来，这样不就变成馄饨每部分都是自己一个个出现的嘛。而且就我所知你如果要方便得话，最好是先那皮再舀馅，可是你现在这种叫号的方法并没有限制材料出现的顺序啊，万一以后你找人带个班你都不能确定人家是不是严格按你的流程来的。（原料制作者在提供原料时应该严格安装流程提供，但流程能方便改动）</p>
+<p>钱大娘思考了会儿说：“要不这样吧，我还是让她们分别负责一个工作，但却让她们安装包馄饨的步骤顺时针坐，上一个作出的成品交给下一个进一步加工。这样次序也就固定下来了，而且就算我不在我也不需要担心她们的加工顺序出错，就算要改顺序也就是换下座位的事情。只要第一步开始执行了，我就能确保最好的馄饨是我想要的”。村长想想说：“好！”。</p>
+<h1 id="干货"><a href="#干货" class="headerlink" title="干货"></a>干货</h1><p>装饰模式非常适合于实现需要经常加功能，但对实现某个目标却有很严格的流程要求的系统。而且由于功能都只是偶尔会用到来满足某些需要，所以又不像系统的核心功能那样值得对客户端分离，可以让客户端有选择得去使用它们。</p>
+<p>钱大娘的第二个想法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Very bad</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Wonton</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> Skin skin;</div><div class="line">  <span class="keyword">private</span> Meat meat;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addIngredient</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> Wonton <span class="title">wrap</span><span class="params">()</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Meat</span> <span class="keyword">extends</span> <span class="title">Wonton</span> </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addIngredient</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.meat = ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Skin</span> <span class="keyword">extends</span> <span class="title">Wonton</span> </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addIngredient</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.skin = ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WontonMaker</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">make</span><span class="params">()</span> </span>&#123;</div><div class="line">    Meat meat = <span class="keyword">new</span> Meat();</div><div class="line">    meat.addIngredient();</div><div class="line"></div><div class="line">    Skin skin = <span class="keyword">new</span> Skin();</div><div class="line">    skin.addIngredient();</div><div class="line"></div><div class="line">    Wonton wonton = (Wonton) skin.wrap();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果钱大娘的第二个想法文字上来看还好得化，那从代码来看真的是太糟糕了。她的第三个想法的实现如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Good</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Wonton</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">make</span><span class="params">()</span> </span>&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">WontonPart</span> <span class="keyword">extends</span> <span class="title">Wonton</span> </span>&#123;</div><div class="line">  <span class="keyword">public</span> Wonton wonton;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">wrap</span><span class="params">(Wonton wonton)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.wonton = wonton;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">makePart</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">make</span><span class="params">()</span> </span>&#123;</div><div class="line">    makePart();</div><div class="line">    wonton.make();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// decoration part</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Skin</span> <span class="keyword">extends</span> <span class="title">WontonPart</span> </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">makePart</span><span class="params">()</span> </span>&#123;</div><div class="line">    knead();</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">knead</span><span class="params">()</span> </span>&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Meat</span> <span class="keyword">extends</span> <span class="title">WontonPart</span> </span>&#123;</div><div class="line">  @<span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">makePart</span><span class="params">()</span> </span>&#123;</div><div class="line">    cutMeat();</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">cutMeat</span><span class="params">()</span> </span>&#123;</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WontonMaker</span> </span>&#123;</div><div class="line">  Wonton wonton = <span class="keyword">new</span> Wonton();</div><div class="line">  Meat meat = <span class="keyword">new</span> Meat();</div><div class="line">  Skin skin = <span class="keyword">new</span> Skin();</div><div class="line"></div><div class="line">  meat.wrap(wonton);</div><div class="line">  skin.wrap(meat);</div><div class="line">  skin.make();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -410,8 +412,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/20/design-pattern-1-simple-factory/" rel="next" title="设计模式1 - 简单工厂 (Simple Factory)">
-                <i class="fa fa-chevron-left"></i> 设计模式1 - 简单工厂 (Simple Factory)
+              <a href="/2017/02/26/neural-network-3/" rel="next" title="Artificial Neural Network - Part 3, 全连接神经网络(Fully Connected Neural Network)">
+                <i class="fa fa-chevron-left"></i> Artificial Neural Network - Part 3, 全连接神经网络(Fully Connected Neural Network)
               </a>
             
           </div>
@@ -419,10 +421,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/26/neural-network-3/" rel="prev" title="Artificial Neural Network - Part 3, 全连接神经网络(Fully Connected Neural Network)">
-                Artificial Neural Network - Part 3, 全连接神经网络(Fully Connected Neural Network) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -552,7 +550,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#策略超市"><span class="nav-number">1.</span> <span class="nav-text">策略超市</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#干货"><span class="nav-number">2.</span> <span class="nav-text">干货</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#钱大娘的馄饨摊"><span class="nav-number">1.</span> <span class="nav-text">钱大娘的馄饨摊</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#干货"><span class="nav-number">2.</span> <span class="nav-text">干货</span></a></li></ol></div>
             
 
           </div>
@@ -684,9 +682,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'aixc';
-      var disqus_identifier = '2017/02/25/design-pattern-2-strategy/';
+      var disqus_identifier = '2017/03/05/design-pattern-3-decoration/';
 
-      var disqus_title = "设计模式2 - 策略模式 (Strategy)";
+      var disqus_title = "设计模式3 - 装饰模式 (Decoration)";
 
 
       function run_disqus_script(disqus_script) {

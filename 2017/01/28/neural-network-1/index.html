@@ -92,7 +92,7 @@
 <meta property="og:description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一">
 <meta property="og:image" content="http://p1.bqimg.com/4851/de149d22d97c033c.png">
 <meta property="og:image" content="http://p1.bqimg.com/4851/d4defa0972395073.png">
-<meta property="og:updated_time" content="2017-02-26T11:27:46.000Z">
+<meta property="og:updated_time" content="2017-03-05T11:35:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Artificial Neural Network - Part 1，神经网络的历史与数学模型基础">
 <meta name="twitter:description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一">
@@ -369,7 +369,7 @@
       
 
       
-        <p>从今天开始，本博客将会围绕神经网络展开一系列的解说，包括<a href="/2017/01/28/neural-network-1/">神经网络的历史与数学模型基础</a>，<a href="/2017/02/04/neural-network-2/">数学模型的debug</a>，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。</p>
+        <p>从今天开始，本博客将会围绕神经网络展开一系列的解说，包括<a href="/2017/01/28/neural-network-1/">神经网络的历史与数学模型基础</a>，<a href="/2017/02/04/neural-network-2/">数学模型的debug</a>，<a href="/2017/02/26/neural-network-3/">全连接神经网络(fully connected neural network)</a>，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。</p>
 <h1 id="早期的机器学习-Early-stage-of-Machine-learning"><a href="#早期的机器学习-Early-stage-of-Machine-learning" class="headerlink" title="早期的机器学习 (Early stage of Machine learning)"></a>早期的机器学习 (Early stage of Machine learning)</h1><p><img src="http://p1.bqimg.com/4851/de149d22d97c033c.png" alt="classification"><br>机器学习，是现行的靠谱的实现人工智能的算法的统称。顾名思义，就是让机器，也就是计算机，自动地去学习。由于电影中的夸张和对于这个行业的过度自信，加上媒体的渲染，一说自己是学人工智能的大家就会想到：好小子，准备毁灭全人类了啊。其实真冤枉了，人工智能，或者说机器学习，简单来说它学的东西就是如何画一条线，能把平面(feature space)内自由分散的不同类型的点恰好划分开。这个平面可以不止是2维的，也可以是三维的，4维的以及多维的。以此类推，线也不一定就是线，在二维下是线，三维下是平面，多维下就是不知道什么东西的东西。再用数学化点的语言来描述就是我们有一个函数f，输入是x，输出是y，这个函数能够把在空间内的任意x变成其对应的y。这个也就是线性回归，一切的机器学习算法的核心思想。别看这个东西描述效果起来异常简单，但具体的数学实现却前前后后花费了200多年几代人的心思。</p>
 <p>机器学习从输出数据的类型上大致分两种：classification和regression。前者是预测离散的类，比如说晴天啊雨天啊，后者则是预测连续的类，比如说年龄啊价格啊。从学习的方法来说可分为supervised learning, unsupervised learning, semi-supervised learning。第一个是在训练的时候告诉电脑一系列x-&gt;y的对应集，让机器去估计。这就引发了两种问题，一个是这个估计的f对于训练集实在是太匹配了，以至于对于外在数据反而没有那么的合适，这就是over fitting，还有一个就比较常见了，就是f连训练数据都没法很好得划分，也就是under fitting。</p>
 <p>在早期的时候，人工智能的研究专家们通常也都是很厉害的数学家，他们发明了很多耳熟能详的算法来解决线性回归的问题，比如决策树，朴素贝叶斯，SVM等等等等（以后我将会开展系列文章来详细解释下）。这些算法都后世的人工智能行业思想的发展产生了深远的影响并被广泛应用，在此对他们致敬。但是，在那个时期人工智能的突破真的很困难，一来是这些算法理解的门槛很高；二来它的过程实在是太抽象了，比如如上文二维三维的空间(feature space)还能理解，但4维，5维乃至100维，300维，1000维就不是常人能够理解的了；三来则是把这些算法组合并和现实的问题联系起来何谈容易，首先一个问题它如何用这些结构来表达现实问题的数据结构，其次这需要很多领域的专家和人工智能专家合作，但隔行如隔山，两个行业互相理解也是不容易。</p>
@@ -513,7 +513,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
