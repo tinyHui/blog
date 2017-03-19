@@ -86,13 +86,13 @@
 
 <meta name="description" content="这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式4 - 代理模式 (Proxy)">
-<meta property="og:url" content="http://blog.aixc.space/2017/03/05/design-pattern-4-proxy/index.html">
+<meta property="og:title" content="设计模式5 - 工厂方法 (Factory Method)">
+<meta property="og:url" content="http://blog.aixc.space/2017/03/18/design-pattern-5-factory-method/index.html">
 <meta property="og:site_name" content="Jason's Blog">
 <meta property="og:description" content="这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径">
-<meta property="og:updated_time" content="2017-03-13T19:42:01.000Z">
+<meta property="og:updated_time" content="2017-03-19T13:36:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式4 - 代理模式 (Proxy)">
+<meta name="twitter:title" content="设计模式5 - 工厂方法 (Factory Method)">
 <meta name="twitter:description" content="这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径">
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.aixc.space/2017/03/05/design-pattern-4-proxy/"/>
+  <link rel="canonical" href="http://blog.aixc.space/2017/03/18/design-pattern-5-factory-method/"/>
 
 
 
 
 
-  <title> 设计模式4 - 代理模式 (Proxy) | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 设计模式5 - 工厂方法 (Factory Method) | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -259,7 +259,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/03/05/design-pattern-4-proxy/">
+  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/03/18/design-pattern-5-factory-method/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jason Chen">
@@ -283,7 +283,7 @@
             
             
               
-                设计模式4 - 代理模式 (Proxy)
+                设计模式5 - 工厂方法 (Factory Method)
               
             
           </h2>
@@ -298,8 +298,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-05T13:51:15+00:00">
-                05/03/2017
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-18T13:19:44Z">
+                18/03/2017
               </time>
             
 
@@ -339,8 +339,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/05/design-pattern-4-proxy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/05/design-pattern-4-proxy/" itemprop="commentCount"></span>
+                <a href="/2017/03/18/design-pattern-5-factory-method/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/18/design-pattern-5-factory-method/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -367,14 +367,12 @@
 
       
         <p>这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径。整个系列将使用一个架空的环境描述“一个村”在设计模式的帮助下的发展，用看得下去的人话来慢慢讲述那最最基础的28个模式，同时在故事后用Java实现故事里描述的事情。本系列的合集在<a href="/categories/Design-Pattern/">这里</a>。</p>
-<h1 id="孙老板的餐厅"><a href="#孙老板的餐厅" class="headerlink" title="孙老板的餐厅"></a>孙老板的餐厅</h1><p>孙老板的餐厅在一个村开业了。餐厅很漂亮，厨房是半开放的，因为孙老板觉得这样顾客可以自己把要吃的东西交给厨房的大厨们做而且还能欣赏厨师们行云流水的动作。</p>
-<p>可是理想美好现实却不尽人意，开业那天生意很好，一群人围着厨房为了能把自己的订单顺利交给厨房。孙老板很苦恼，前来请教精明村长。村长想了想说：你应该找几个人专门负责服务你的顾客啊，厨师就应该专注做厨师该做的事情嘛。<strong>（真实实例专注该做的事情，代理处理其他）</strong></p>
-<p>孙老板想了想觉得对啊，回去就叫了几个兄弟，还给他们的岗位取了个名字叫服务员。<strong>（当两个资源不应或不能处于同一个空间时，包括内存空间、地理空间甚至时间空间，代理模式能让一个资源能够访问调用另一个资源）</strong></p>
-<p>而且孙老板发现，有了服务员，餐厅也不用让顾客自取时，饮料没了顾客就没法喝了，服务员可以去隔壁策略杂货铺买过来。<strong>（存放开销很大的实例对象，由于代理的存在，实例不需要一直存在，可以在需要的时候new一个，而客户端（调用者）并不需要了解实例的正式存在，只要向代理者发出命令就行）</strong></p>
-<p>并且，服务员来结账比靠顾客自觉自主结账也更加靠谱。<strong>（代理对象可以负责对象的权限控制）</strong></p>
-<h1 id="干货"><a href="#干货" class="headerlink" title="干货"></a>干货</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Before</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chief</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> Customer customer;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Chief</span><span class="params">(Customer customer)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.customer = customer;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serveMeat</span><span class="params">()</span> </span>&#123;</div><div class="line">    System.out.println(<span class="string">"serve meat for "</span> + customer.getName());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serveVeg</span><span class="params">()</span> </span>&#123;</div><div class="line">    System.out.println(<span class="string">"serve veg for "</span> + customer.getName());</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Customer</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> name;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">  Customer customer = <span class="keyword">new</span> Customer(<span class="string">"any name"</span>);</div><div class="line">  Chief chief = <span class="keyword">new</span> Chief(customer);</div><div class="line">  chief.serveMeat();</div><div class="line">  chief.serveVeg();</div><div class="line">&#125;</div><div class="line"><span class="comment">// it is chaos and we need to introduce many creep to make sure</span></div><div class="line"><span class="comment">// chief is only used by a single customer at one time, which I am not going to demo.</span></div></pre></td></tr></table></figure>
-<p>接下来我们使用代理模式。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Use proxy</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Restaurant</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serveMeat</span><span class="params">()</span></span>;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serveVeg</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chief</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> Customer customer;</div><div class="line">  <span class="keyword">private</span> Boolean free;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Chief</span><span class="params">(Customer customer)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.customer = customer;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serveMeat</span><span class="params">()</span> </span>&#123;</div><div class="line">    reverseFree();</div><div class="line">    System.out.println(<span class="string">"serve meat for "</span> + customer.getName());</div><div class="line">    reverseFree();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serveVeg</span><span class="params">()</span> </span>&#123;</div><div class="line">    reverseFree();</div><div class="line">    System.out.println(<span class="string">"serve veg for "</span> + customer.getName());</div><div class="line">    reverseFree();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCustomer</span><span class="params">(Customer customer)</span> </span>&#123;</div><div class="line">    customer = customer;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> Boolean <span class="title">isFree</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> free;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">reverseFree</span><span class="params">()</span> </span>&#123;</div><div class="line">      free = !free;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Waiter</span> <span class="keyword">implements</span> <span class="title">Restaurant</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> Chief chief;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Waiter</span><span class="params">(Customer customer)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (chief == <span class="keyword">null</span> ||</div><div class="line">        ! chief.isFree()) &#123;</div><div class="line">        <span class="keyword">this</span>.chief = <span class="keyword">new</span> Chief(customer);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">this</span>.chief.setCustomer(customer);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serveMeat</span><span class="params">()</span> </span>&#123;</div><div class="line">    chief.serveMeat();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serveVeg</span><span class="params">()</span> </span>&#123;</div><div class="line">    chief.serveVeg();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">  Customer customer = <span class="keyword">new</span> Customer(<span class="string">"any name"</span>);</div><div class="line">  Waiter waiter = <span class="keyword">new</span> Waiter(customer);</div><div class="line">  waiter.serveMeat();</div><div class="line">  waiter.serveVeg();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="烧铺的故事，续"><a href="#烧铺的故事，续" class="headerlink" title="烧铺的故事，续"></a>烧铺的故事，续</h1><p>烧铺在张大哥的经营下终于准备扩张了（关于烧铺的故事与简单工厂的解释请参看<a href="/2017/02/20/design-pattern-1-simple-factory/">这里</a>）。最开始，张大哥打算把每个分店都安装同样的制作陶器、玻璃、瓷器等等器皿与工艺品的设备。可是一算预算，张大哥发现这一扩展所需要的启动资金变得吓人。可是开分店也是个趋势啊，张大哥准备去前去咨询精明村长。</p>
+<p>听完张大哥的苦恼，精明村长想了想说：“你为什么不只开门店，把加工的事情留给工厂呢？”。他继续说道：“你如果把每个店都装上所有的设备，看起来是方便加工了但你不仅要维护前面的店铺经营还得管所有店后面的加工装置工作状况。如果要增加新的产品品种了你就得把所有分店加工区都重新装修一下。”。<strong>（由于核心代码区的不当封装违反了“开放封闭”原则 open-close principle，维护变得异常麻烦）</strong></p>
+<p>“如果门店和工厂分离，顾客只要在门店下单就好，顾客并不需要知道他的玻璃瓶是二哥还是三哥做的，他们只要在最后拿到的是玻璃瓶而不是别的东西就好。”<strong>(抽象出不同工厂共享的方法，客户端在更换同类的工厂实例时候就并不需要更改很多地方)</strong></p>
+<h1 id="干货"><a href="#干货" class="headerlink" title="干货"></a>干货</h1><p><a href="/2017/02/20/design-pattern-1-simple-factory/">上一篇</a>的实现一共有两个不好的地方，一是对烧铺类的扩展会违反open-close principle；二是每次用户想实例化的时候需要把参数传入，由于参数的不断重复使得代码有了坏味道。</p>
+<p>工厂方法(Factory Method)的想法是基于倚赖倒转原则(Dependency Inversion Principle)。由于所有工厂都基于同一个基类接口(base interface)，所以当客户端需要更改时，只要更换实例化的类就好。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">// factories</div><div class="line">public interface KilnFactory &#123;</div><div class="line">  public Kiln create();</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class PorcelainFactory : KilnFactory &#123;</div><div class="line">  @Override</div><div class="line">  public Kiln create() &#123;</div><div class="line">    return new ZhangErGe();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class EarthenwareFactory : KilnFactory &#123;</div><div class="line">  @Override</div><div class="line">  public Kiln create() &#123;</div><div class="line">    return new ZhangeSanGe();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class GlassFactory : KilnFactory &#123;</div><div class="line">  @Override</div><div class="line">  public Kiln create() &#123;</div><div class="line">    return new ZhangeSiGe();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// front-end usage</div><div class="line">// for example we want to build new a glass bottle</div><div class="line">KilnFactory factory = new GlassFactory();</div><div class="line">Kiln operator = factory.create();</div><div class="line"></div><div class="line">Bottle bottle = operator.make();</div></pre></td></tr></table></figure></p>
+<p>因此，这个设计模式的优点就是即能保留封装对象过程的优点，又能克服简单工厂违反open-close principle的缺点。<br>缺点也很明显：由于扩展时需要增加新类而不是更改条件分支，所有工作量变大。但是，增加的轻微工作量使得未来维护与扩展变得简单，很难说真的是缺点。</p>
 
       
     </div>
@@ -413,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/05/design-pattern-3-decoration/" rel="next" title="设计模式3 - 装饰模式 (Decoration)">
-                <i class="fa fa-chevron-left"></i> 设计模式3 - 装饰模式 (Decoration)
+              <a href="/2017/03/05/design-pattern-4-proxy/" rel="next" title="设计模式4 - 代理模式 (Proxy)">
+                <i class="fa fa-chevron-left"></i> 设计模式4 - 代理模式 (Proxy)
               </a>
             
           </div>
@@ -422,10 +420,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/18/design-pattern-5-factory-method/" rel="prev" title="设计模式5 - 工厂方法 (Factory Method)">
-                设计模式5 - 工厂方法 (Factory Method) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -555,7 +549,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#孙老板的餐厅"><span class="nav-number">1.</span> <span class="nav-text">孙老板的餐厅</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#干货"><span class="nav-number">2.</span> <span class="nav-text">干货</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#烧铺的故事，续"><span class="nav-number">1.</span> <span class="nav-text">烧铺的故事，续</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#干货"><span class="nav-number">2.</span> <span class="nav-text">干货</span></a></li></ol></div>
             
 
           </div>
@@ -687,9 +681,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'aixc';
-      var disqus_identifier = '2017/03/05/design-pattern-4-proxy/';
+      var disqus_identifier = '2017/03/18/design-pattern-5-factory-method/';
 
-      var disqus_title = "设计模式4 - 代理模式 (Proxy)";
+      var disqus_title = "设计模式5 - 工厂方法 (Factory Method)";
 
 
       function run_disqus_script(disqus_script) {
