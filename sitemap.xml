@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.aixc.space/2017/03/28/neural-network-4/</loc>
+    
+    <lastmod>2017-04-02T20:24:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.aixc.space/2017/01/28/neural-network-1/</loc>
+    
+    <lastmod>2017-03-28T20:01:35.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.aixc.space/2017/02/04/neural-network-2/</loc>
+    
+    <lastmod>2017-03-28T20:01:29.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.aixc.space/2017/02/26/neural-network-3/</loc>
+    
+    <lastmod>2017-03-28T20:01:25.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.aixc.space/2017/03/18/design-pattern-5-factory-method/</loc>
     
     <lastmod>2017-03-19T13:36:48.000Z</lastmod>
@@ -26,27 +54,6 @@
     <loc>http://blog.aixc.space/2017/03/05/design-pattern-3-decoration/</loc>
     
     <lastmod>2017-03-05T16:16:22.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.aixc.space/2017/02/26/neural-network-3/</loc>
-    
-    <lastmod>2017-03-05T11:35:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.aixc.space/2017/01/28/neural-network-1/</loc>
-    
-    <lastmod>2017-03-05T11:35:43.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.aixc.space/2017/02/04/neural-network-2/</loc>
-    
-    <lastmod>2017-03-05T11:35:42.000Z</lastmod>
     
   </url>
   
