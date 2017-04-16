@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://i2.muimg.com/567571/e7d7d7cd10fe0933.png">
 <meta property="og:image" content="http://i1.piimg.com/567571/0edb2cf594edfafe.png">
 <meta property="og:image" content="http://i2.muimg.com/567571/fa54a630d1c4da4e.png">
-<meta property="og:updated_time" content="2017-04-02T20:24:18.000Z">
+<meta property="og:updated_time" content="2017-04-16T09:54:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Artificial Neural Network - Part 4，自编码神经网络(AutoEncoder Neural Network)">
 <meta name="twitter:description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一">
@@ -370,7 +370,7 @@
       
 
       
-        <p>从今天开始，本博客将会围绕神经网络展开一系列的解说，包括<a href="/2017/01/28/neural-network-1/">神经网络的历史与数学模型基础</a>，<a href="/2017/02/04/neural-network-2/">数学模型的debug</a>，<a href="/2017/02/26/neural-network-3/">全连接神经网络(fully connected neural network)</a>，<a href="/2017/03/28/neural-network-4/">自编码(AutoEncoder neural network)</a>，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。</p>
+        <p>从今天开始，本博客将会围绕神经网络展开一系列的解说，包括<a href="/2017/01/28/neural-network-1/">神经网络的历史与数学模型基础</a>，<a href="/2017/02/04/neural-network-2/">数学模型的debug</a>，<a href="/2017/02/26/neural-network-3/">全连接神经网络(fully connected neural network)</a>，<a href="/2017/03/28/neural-network-4/">自编码(AutoEncoder neural network)</a>，<a href="/2017/04/16/neural-network-5/">卷积神经网络(convolution neural network)</a>，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。</p>
 <h1 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h1><p>神经网络最有意思的地方就是它万变不离其宗，不管是高级的结构如CNN或RNN还是基础的网络如上一节讲的FCNN，它们的基础模块都一样，也就是计算单元Perception。同时，神经网络多变的结构（如CNN，RNN把perception排列在一起的方法）还是它的组合形态（如最新的GAN对抗网络， Generative Adversarial Nets）赋予了它们及其强大的学习能力。自编码网络Auto Encoder就是一个例子。它的思想被广泛应用在不同的地方，一个是降维／降噪；另外是和“翻译”有关的产品中。从基础的“双语互翻”，到包含了奇思妙想的“图文互翻”，甚至用来“提取文档中心思想”等。自编码网络最擅长的就是把一个特征向量尽可能得变成另外一个向量。</p>
 <p>In netshell: 最基础的Auto Encoder的行为可以用下面这个公式来形容，其中$y$代表输出，$x$代表输入。</p>
 <script type="math/tex; mode=display">y \approx \text{decoder}(\text{encoder}(x))</script><p>AutoEncoder的结构很简单，如下图。<br><img src="http://i2.muimg.com/567571/e7d7d7cd10fe0933.png" alt="Auto Encoder"><br>虽然简单，但由于Neural Network的灵活性和可玩性，当我们调整参数时候就会有有意思的事情发生了。比如我们现在拿一张10x10的图片做输入与输出值。这里我们一共有100个像素，也就是100维的一个vector，$v$。由于AutoEncoder的设定，我们把$v$同时当作input和target。我们把Encoder的结果层设为50维，$s_1 \in R^{50}$。同时，Decoder的输入层也是$s_1$。但由于AutoEncoder的目标就是把输出尽可能接近输入，所以它就会想办法使得$s_1$的50维的vector尽可能能表示输入的图片，即100维的vector。这也就是为什么AUtoEncoder能做降维，即dimension reduce的原因。但得提一句，这个压缩后的东西由于太简单粗暴了所以对于人类不一定是有意义的，同时由于它的计算量很大(computation intensive)，所以它不能应用为压缩技术。</p>
@@ -422,6 +422,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/16/neural-network-5/" rel="prev" title="Artificial Neural Network - Part 5，卷积神经网络(Convolution Neural Network)">
+                Artificial Neural Network - Part 5，卷积神经网络(Convolution Neural Network) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -498,7 +502,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

@@ -260,6 +260,164 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/04/16/neural-network-5/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jason Chen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jason's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jason's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/16/neural-network-5/" itemprop="url">
+                  Artificial Neural Network - Part 5，卷积神经网络(Convolution Neural Network)
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-16T10:53:13+01:00">
+                16/04/2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index">
+                    <span itemprop="name">Artificial Intelligence</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/16/neural-network-5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/16/neural-network-5/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。
+一点点发展历史2012年，在ILSVRC (ImageNet Large-Scale Visual Recognition Challenge)的比赛上，AlexNet名噪一时。比赛的任务是识别图中主体物品／场景，在150,000张测试图片中随机选择1000张图片（每张图片几乎都是不同的category）放入各家的模型中进行识别。而AlexNet凭借CNN的模型和原创的ReLU active function以15.4%的错误率遥遥领先第二名（错误率26.2%）。自此，CNN进入人们的视线。说起来，CNN其实是上个世纪的研究产物，只是限制
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/16/neural-network-5/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/03/28/neural-network-4/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -577,165 +735,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/03/05/design-pattern-4-proxy/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jason Chen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/uploads/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Jason's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Jason's Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/05/design-pattern-4-proxy/" itemprop="url">
-                  设计模式4 - 代理模式 (Proxy)
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-05T13:51:15Z">
-                05/03/2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design-Pattern/" itemprop="url" rel="index">
-                    <span itemprop="name">Design Pattern</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/05/design-pattern-4-proxy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/05/design-pattern-4-proxy/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径。整个系列将使用一个架空的环境描述“一个村”在设计模式的帮助下的发展，用看得下去的人话来慢慢讲述那最最基础的28个模式，同时在故事后用Java实现故事里描述的事情。本系列的合集在这里。
-孙老板的餐厅孙老板的餐厅在一个村开业了。餐厅很漂亮，厨房是半开放的，因为孙老板觉得这样顾客可以自己把要吃的东西交给厨房的大厨们做而且还能欣赏厨师们行云流水的动作。
-可是理想美好现实却不尽人意，开业那天生意很好，一群人围着厨房为了能把自己的订单顺利交给厨房。孙老板很苦恼，前来请教精明村长。村长想了想说：你应该找几个人专门负责服务你的顾客啊，厨师就应该专注做厨师该做的事情嘛。（真实实例专注该做的事情，代理处理其他）
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/05/design-pattern-4-proxy/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/03/05/design-pattern-3-decoration/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -856,6 +855,165 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/03/05/design-pattern-3-decoration/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/03/05/design-pattern-4-proxy/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jason Chen">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jason's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jason's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/05/design-pattern-4-proxy/" itemprop="url">
+                  设计模式4 - 代理模式 (Proxy)
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-05T13:51:15Z">
+                05/03/2017
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design-Pattern/" itemprop="url" rel="index">
+                    <span itemprop="name">Design Pattern</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/05/design-pattern-4-proxy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/05/design-pattern-4-proxy/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径。整个系列将使用一个架空的环境描述“一个村”在设计模式的帮助下的发展，用看得下去的人话来慢慢讲述那最最基础的28个模式，同时在故事后用Java实现故事里描述的事情。本系列的合集在这里。
+孙老板的餐厅孙老板的餐厅在一个村开业了。餐厅很漂亮，厨房是半开放的，因为孙老板觉得这样顾客可以自己把要吃的东西交给厨房的大厨们做而且还能欣赏厨师们行云流水的动作。
+可是理想美好现实却不尽人意，开业那天生意很好，一群人围着厨房为了能把自己的订单顺利交给厨房。孙老板很苦恼，前来请教精明村长。村长想了想说：你应该找几个人专门负责服务你的顾客啊，厨师就应该专注做厨师该做的事情嘛。（真实实例专注该做的事情，代理处理其他）
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/05/design-pattern-4-proxy/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1683,165 +1841,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/02/11/how-to-write-a-mobile-app-1/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jason Chen">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/uploads/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Jason's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Jason's Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/11/how-to-write-a-mobile-app-1/" itemprop="url">
-                  如何实现一个有网络通信的手机应用 - Part 1，基础知识篇
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-11T08:39:13Z">
-                11/02/2017
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tutorial/" itemprop="url" rel="index">
-                    <span itemprop="name">Tutorial</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/11/how-to-write-a-mobile-app-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/11/how-to-write-a-mobile-app-1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          这个系列的博文来和大家聊下如何做一个简单的手机应用。我们以一个展示天气的网络应用来做例子。本例将使用Python的Flask网络框架作为后台框架；React Native做手机的前台。本系列分三部分：基础知识，服务器端，手机端。完整代码可以在这里找到。
-RESTful在具体实现一个网络应用之前我们先提一个网络通信的准则:RESTful。RESTful是一个革命性的变革，也很好的体现了计算机的很重要的一个设计原则：S.O.L.I.D中的D，倚赖倒转原则(Dependency Inversion Principle)。说远了，RESTful是一个底层的网络架构原则，或者我更喜欢说它是种服务器和客户端达成的协议。无论是网页，手机，甚至是电视OS，PSP游戏机，这个年代的无论什么平台的网络应用都脱离不开RESTful这个终极网络协议。
-小A是个服务器，小B是个客户端。由于小A和小B相互生存在不同的地方然而却时常互相通信交换资源，一开始两个人各说各的，每次收到对方的消息了就去查找自己的语法书来尝试理解对方发过来的消息的意思。然而，小B是出了名的兄弟多，每次多了个孪生兄弟后（网页变手机应用）就得把
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/11/how-to-write-a-mobile-app-1/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1889,7 +1888,7 @@ RESTful在具体实现一个网络应用之前我们先提一个网络通信的�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

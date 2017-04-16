@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java,coding,engineer,beauty-of-programming," />
+  <meta name="keywords" content="machine learning,neural network," />
 
 
 
@@ -84,16 +84,18 @@
 
 
 
-<meta name="description" content="这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径">
+<meta name="description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式5 - 工厂方法 (Factory Method)">
-<meta property="og:url" content="http://blog.aixc.space/2017/03/18/design-pattern-5-factory-method/index.html">
+<meta property="og:title" content="Artificial Neural Network - Part 5，卷积神经网络(Convolution Neural Network)">
+<meta property="og:url" content="http://blog.aixc.space/2017/04/16/neural-network-5/index.html">
 <meta property="og:site_name" content="Jason's Blog">
-<meta property="og:description" content="这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径">
-<meta property="og:updated_time" content="2017-03-19T13:36:48.000Z">
+<meta property="og:description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一">
+<meta property="og:image" content="http://i4.buimg.com/567571/0c1b58d9adad186c.png">
+<meta property="og:updated_time" content="2017-04-16T19:40:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式5 - 工厂方法 (Factory Method)">
-<meta name="twitter:description" content="这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径">
+<meta name="twitter:title" content="Artificial Neural Network - Part 5，卷积神经网络(Convolution Neural Network)">
+<meta name="twitter:description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一">
+<meta name="twitter:image" content="http://i4.buimg.com/567571/0c1b58d9adad186c.png">
 
 
 
@@ -121,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.aixc.space/2017/03/18/design-pattern-5-factory-method/"/>
+  <link rel="canonical" href="http://blog.aixc.space/2017/04/16/neural-network-5/"/>
 
 
 
 
 
-  <title> 设计模式5 - 工厂方法 (Factory Method) | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> Artificial Neural Network - Part 5，卷积神经网络(Convolution Neural Network) | Jason's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -259,7 +261,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/03/18/design-pattern-5-factory-method/">
+  <link itemprop="mainEntityOfPage" href="http://blog.aixc.space/2017/04/16/neural-network-5/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jason Chen">
@@ -283,7 +285,7 @@
             
             
               
-                设计模式5 - 工厂方法 (Factory Method)
+                Artificial Neural Network - Part 5，卷积神经网络(Convolution Neural Network)
               
             
           </h2>
@@ -298,8 +300,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-18T13:19:44+00:00">
-                18/03/2017
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-16T10:53:13+01:00">
+                16/04/2017
               </time>
             
 
@@ -321,8 +323,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design-Pattern/" itemprop="url" rel="index">
-                    <span itemprop="name">Design Pattern</span>
+                  <a href="/categories/AI/" itemprop="url" rel="index">
+                    <span itemprop="name">Artificial Intelligence</span>
                   </a>
                 </span>
 
@@ -339,8 +341,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/18/design-pattern-5-factory-method/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/18/design-pattern-5-factory-method/" itemprop="commentCount"></span>
+                <a href="/2017/04/16/neural-network-5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/16/neural-network-5/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -366,13 +368,24 @@
       
 
       
-        <p>这个系列将用大概30篇文章来讲解程序设计中很重要的但也会被初学者轻视的一部分——设计模式。少小毋识模式贵，老大加班不知归。写代码，尤其是商业化的大项目，很多时候并不是实现功能就好，更多的要考虑强壮性，维护性，灵活性，烧死产品经理等提需求的人员们所需的汽油费等等等等。设计模式，就是前辈们在一次次压抑了掀桌子砸电脑的洪荒之力后总结出来造福后人的构架软件的黄金规则，也是我们从能写代码进阶到写好代码的捷径。整个系列将使用一个架空的环境描述“一个村”在设计模式的帮助下的发展，用看得下去的人话来慢慢讲述那最最基础的28个模式，同时在故事后用Java实现故事里描述的事情。本系列的合集在<a href="/categories/Design-Pattern/">这里</a>。</p>
-<h1 id="烧铺的故事，续"><a href="#烧铺的故事，续" class="headerlink" title="烧铺的故事，续"></a>烧铺的故事，续</h1><p>烧铺在张大哥的经营下终于准备扩张了（关于烧铺的故事与简单工厂的解释请参看<a href="/2017/02/20/design-pattern-1-simple-factory/">这里</a>）。最开始，张大哥打算把每个分店都安装同样的制作陶器、玻璃、瓷器等等器皿与工艺品的设备。可是一算预算，张大哥发现这一扩展所需要的启动资金变得吓人。可是开分店也是个趋势啊，张大哥准备去前去咨询精明村长。</p>
-<p>听完张大哥的苦恼，精明村长想了想说：“你为什么不只开门店，把加工的事情留给工厂呢？”。他继续说道：“你如果把每个店都装上所有的设备，看起来是方便加工了但你不仅要维护前面的店铺经营还得管所有店后面的加工装置工作状况。如果要增加新的产品品种了你就得把所有分店加工区都重新装修一下。”。<strong>（由于核心代码区的不当封装违反了“开放封闭”原则 open-close principle，维护变得异常麻烦）</strong></p>
-<p>“如果门店和工厂分离，顾客只要在门店下单就好，顾客并不需要知道他的玻璃瓶是二哥还是三哥做的，他们只要在最后拿到的是玻璃瓶而不是别的东西就好。”<strong>(抽象出不同工厂共享的方法，客户端在更换同类的工厂实例时候就并不需要更改很多地方)</strong></p>
-<h1 id="干货"><a href="#干货" class="headerlink" title="干货"></a>干货</h1><p><a href="/2017/02/20/design-pattern-1-simple-factory/">上一篇</a>的实现一共有两个不好的地方，一是对烧铺类的扩展会违反open-close principle；二是每次用户想实例化的时候需要把参数传入，由于参数的不断重复使得代码有了坏味道。</p>
-<p>工厂方法(Factory Method)的想法是基于倚赖倒转原则(Dependency Inversion Principle)。由于所有工厂都基于同一个基类接口(base interface)，所以当客户端需要更改时，只要更换实例化的类就好。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">// factories</div><div class="line">public interface KilnFactory &#123;</div><div class="line">  public Kiln create();</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class PorcelainFactory : KilnFactory &#123;</div><div class="line">  @Override</div><div class="line">  public Kiln create() &#123;</div><div class="line">    return new ZhangErGe();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class EarthenwareFactory : KilnFactory &#123;</div><div class="line">  @Override</div><div class="line">  public Kiln create() &#123;</div><div class="line">    return new ZhangeSanGe();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class GlassFactory : KilnFactory &#123;</div><div class="line">  @Override</div><div class="line">  public Kiln create() &#123;</div><div class="line">    return new ZhangeSiGe();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// front-end usage</div><div class="line">// for example we want to build new a glass bottle</div><div class="line">KilnFactory factory = new GlassFactory();</div><div class="line">Kiln operator = factory.create();</div><div class="line"></div><div class="line">Bottle bottle = operator.make();</div></pre></td></tr></table></figure></p>
-<p>因此，这个设计模式的优点就是即能保留封装对象过程的优点，又能克服简单工厂违反open-close principle的缺点。<br>缺点也很明显：由于扩展时需要增加新类而不是更改条件分支，所有工作量变大。但是，增加的轻微工作量使得未来维护与扩展变得简单，很难说真的是缺点。</p>
+        <p>从今天开始，本博客将会围绕神经网络展开一系列的解说，包括<a href="/2017/01/28/neural-network-1/">神经网络的历史与数学模型基础</a>，<a href="/2017/02/04/neural-network-2/">数学模型的debug</a>，<a href="/2017/02/26/neural-network-3/">全连接神经网络(fully connected neural network)</a>，<a href="/2017/03/28/neural-network-4/">自编码(AutoEncoder neural network)</a>，<a href="/2017/04/16/neural-network-5/">卷积神经网络(convolution neural network)</a>，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。</p>
+<h1 id="一点点发展历史"><a href="#一点点发展历史" class="headerlink" title="一点点发展历史"></a>一点点发展历史</h1><p>2012年，在ILSVRC (ImageNet Large-Scale Visual Recognition Challenge)的比赛上，AlexNet名噪一时。比赛的任务是识别图中主体物品／场景，在150,000张测试图片中随机选择1000张图片（每张图片几乎都是不同的category）放入各家的模型中进行识别。而AlexNet凭借CNN的模型和原创的ReLU active function以15.4%的错误率遥遥领先第二名（错误率26.2%）。自此，CNN进入人们的视线。说起来，CNN其实是上个世纪的研究产物，只是限制于当时的机能和软件工程的开发理念，模型只存在于纸上。但由于Alex Krizhevsky团队在工程级别上的优化，创新的ReLU，和大胆使用GPU作为计算单元的举动，使得书本上的模型第一次（可能也不是第一次）真正在实践中被使用并取得及其优异的结果。</p>
+<p>由于AlexNet的成功，那些一心想要在人工智能方向有所突破的专家发现，原来neural network这样强大，而且还能用GPU加速，甚好甚好。自此，人工智能的发展开始一日千里，研究重心也从传统的统计学方法转为NN。</p>
+<h1 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h1><p>卷积神经网络(Convolution Neural Network)是对基础的FCNN的一个巨大的改良。它的特殊的结构就预示着自己就是为了图片处理而服务的。先来看看它的结构示意图。<br><img src="http://i4.buimg.com/567571/0c1b58d9adad186c.png" alt="Convolution Neural Network Structure"></p>
+<p>Convolution Neural Network主要由三种功能的Layer组成：</p>
+<ol>
+<li><p>Convolution Layer: 卷积层是CNN中获得图像特征的层，也是我之前说CNN天生就是为图片处理而存在的原因。用简单的语言来描述下这层的行为。Convolution Layer的本体是一个Feature Map，它在Input Data上从左到右从上到下的逐像素扫描，把每次被Feature Map罩住的那些像素值归纳成单一一个值。文字解释可能不太直观，我们上一个数学公式，其中$h$代表输出，$i,j$代表input data的横纵坐标，$f$是active function。例子的feature map是一个$m \times m$的二维matrix。</p>
+<script type="math/tex; mode=display">h_{i,j} = f(\sum_{k=0}^{m-1}\sum_{l=0}^{m-1}) w_{k,l} x_{i+k,j+l} + b</script><p>可以看出，CNN能够对于input data的结构有所保留，而不是像FCNN一样每一层的perceptions相互独立。同时，feature map和input layer不一定要1-1对应，也可以有多个feature map把同一个input layer映射到多个channel中。<br>Convolution Layer的Backpropagation过程比较复杂，直接用数学公式来表现过程。其中$s$是第$L-1$层某个input值的编号，$f’(a^{L-1})$是第$L-1$层激活函数的导数(derivative)。</p>
+<script type="math/tex; mode=display">\delta_s^{L-1}=\sum_{j \in \texttt{connected to s}} w_{js} \delta_j^{L} f'(a^{L-1})</script><p>由于每个weight计算gradient时需要考虑所有和其相连的input，所以这也是一个卷积的过程。最后值得注意的是，在计算g过程中，我们需要将weight matrix旋转180度。</p>
+</li>
+<li><p>Pooling Layer: 这个类型的层主要目的是降维提速。Neural Network对于数据的强悍抽象能力我们已经在AutoEncoder例子中看到了。由于图片的尺寸一般都会比较大（清晰图片500x500起步最起码，250000个像素点），所以如果需要多个Convolution层那么计算效率就会很低。Pooler和Feature Map的处理方法很像，给出一个固定尺寸的pooler然后在Input Data上从左到右从上到下的逐像素扫描，把框住的值取最大保留。<br>这个类型的Layer的Backpropagation不包含什么计算，仅仅就是简单得把下一层的regression值复制给上一层，由于是$n \times n$的值获得一个值，所以regression要复制给对应的$n \times n$。</p>
+</li>
+<li><p>Dense Layer （Fully Connected Layer): 在CNN最后面加入FCL使得计算出的feature重新投入神经网络的老本行，做classification。</p>
+</li>
+</ol>
+<p>还有要提到的是，在计算gradient时，由于feature map尺寸是固定的，但是由于整个forward的过程是减少尺寸的过程，所以backward会出现数据点不够的情况。解决的方法就是在L+1层数据四周pad值，常见的值策略有添0，添相同值等。</p>
+<h1 id="识别手写数字，进化"><a href="#识别手写数字，进化" class="headerlink" title="识别手写数字，进化"></a>识别手写数字，进化</h1><p>记得当时我们用两层FCNN对MNIST数据进行训练手写数字识别，模型最后的准确率只有90%左右。现在换CNN来试试看。</p>
+<p>例子在<a href="https://github.com/tinyHui/tensorflow-examples/blob/master/fully-connect-neural-network.ipynb" target="_blank" rel="external">这里</a>。最终结果有96.93%！</p>
 
       
     </div>
@@ -396,13 +409,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
           
-            <a href="/tags/coding/" rel="tag"># coding</a>
-          
-            <a href="/tags/engineer/" rel="tag"># engineer</a>
-          
-            <a href="/tags/beauty-of-programming/" rel="tag"># beauty-of-programming</a>
+            <a href="/tags/neural-network/" rel="tag"># neural network</a>
           
         </div>
       
@@ -411,8 +420,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/05/design-pattern-3-decoration/" rel="next" title="设计模式3 - 装饰模式 (Decoration)">
-                <i class="fa fa-chevron-left"></i> 设计模式3 - 装饰模式 (Decoration)
+              <a href="/2017/03/28/neural-network-4/" rel="next" title="Artificial Neural Network - Part 4，自编码神经网络(AutoEncoder Neural Network)">
+                <i class="fa fa-chevron-left"></i> Artificial Neural Network - Part 4，自编码神经网络(AutoEncoder Neural Network)
               </a>
             
           </div>
@@ -420,10 +429,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/28/neural-network-4/" rel="prev" title="Artificial Neural Network - Part 4，自编码神经网络(AutoEncoder Neural Network)">
-                Artificial Neural Network - Part 4，自编码神经网络(AutoEncoder Neural Network) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -553,7 +558,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#烧铺的故事，续"><span class="nav-number">1.</span> <span class="nav-text">烧铺的故事，续</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#干货"><span class="nav-number">2.</span> <span class="nav-text">干货</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一点点发展历史"><span class="nav-number">1.</span> <span class="nav-text">一点点发展历史</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结构"><span class="nav-number">2.</span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#识别手写数字，进化"><span class="nav-number">3.</span> <span class="nav-text">识别手写数字，进化</span></a></li></ol></div>
             
 
           </div>
@@ -685,9 +690,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'aixc';
-      var disqus_identifier = '2017/03/18/design-pattern-5-factory-method/';
+      var disqus_identifier = '2017/04/16/neural-network-5/';
 
-      var disqus_title = "设计模式5 - 工厂方法 (Factory Method)";
+      var disqus_title = "Artificial Neural Network - Part 5，卷积神经网络(Convolution Neural Network)";
 
 
       function run_disqus_script(disqus_script) {

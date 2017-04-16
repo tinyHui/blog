@@ -2,30 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.aixc.space/2017/04/16/neural-network-5/</loc>
+    
+    <lastmod>2017-04-16T19:40:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.aixc.space/2017/03/28/neural-network-4/</loc>
     
-    <lastmod>2017-04-02T20:24:18.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.aixc.space/2017/01/28/neural-network-1/</loc>
-    
-    <lastmod>2017-03-28T20:01:35.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.aixc.space/2017/02/04/neural-network-2/</loc>
-    
-    <lastmod>2017-03-28T20:01:29.000Z</lastmod>
+    <lastmod>2017-04-16T09:54:54.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.aixc.space/2017/02/26/neural-network-3/</loc>
     
-    <lastmod>2017-03-28T20:01:25.000Z</lastmod>
+    <lastmod>2017-04-16T09:54:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.aixc.space/2017/02/04/neural-network-2/</loc>
+    
+    <lastmod>2017-04-16T09:54:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.aixc.space/2017/01/28/neural-network-1/</loc>
+    
+    <lastmod>2017-04-16T09:54:48.000Z</lastmod>
     
   </url>
   

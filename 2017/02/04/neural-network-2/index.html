@@ -92,7 +92,7 @@
 <meta property="og:description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一">
 <meta property="og:image" content="http://p1.bpimg.com/4851/3d0103e36064862a.gif">
 <meta property="og:image" content="http://p1.bpimg.com/4851/10650fb04fec0e49.png">
-<meta property="og:updated_time" content="2017-03-28T20:01:29.000Z">
+<meta property="og:updated_time" content="2017-04-16T09:54:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Artificial Neural Network - Part 2，Sigmod的救星(Prevent Gradient Vanish)">
 <meta name="twitter:description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一">
@@ -369,7 +369,7 @@
       
 
       
-        <p>从今天开始，本博客将会围绕神经网络展开一系列的解说，包括<a href="/2017/01/28/neural-network-1/">神经网络的历史与数学模型基础</a>，<a href="/2017/02/04/neural-network-2/">数学模型的debug</a>，<a href="/2017/02/26/neural-network-3/">全连接神经网络(fully connected neural network)</a>，<a href="/2017/03/28/neural-network-4/">自编码(AutoEncoder neural network)</a>，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。</p>
+        <p>从今天开始，本博客将会围绕神经网络展开一系列的解说，包括<a href="/2017/01/28/neural-network-1/">神经网络的历史与数学模型基础</a>，<a href="/2017/02/04/neural-network-2/">数学模型的debug</a>，<a href="/2017/02/26/neural-network-3/">全连接神经网络(fully connected neural network)</a>，<a href="/2017/03/28/neural-network-4/">自编码(AutoEncoder neural network)</a>，<a href="/2017/04/16/neural-network-5/">卷积神经网络(convolution neural network)</a>，递归神经网络(recurrent neural network)等系列文章。一来是对自己这方面的总结，二来也是补充这方面的中文文章。</p>
 <h1 id="Sigmod的缺陷-Flaw-of-sigmod"><a href="#Sigmod的缺陷-Flaw-of-sigmod" class="headerlink" title="Sigmod的缺陷 (Flaw of sigmod)"></a>Sigmod的缺陷 (Flaw of sigmod)</h1><p>在<a href="/2017/01/28/neural-network-1/">上一章</a>中，我们说到了神经网络(NN)的基础单元：perception，与和神经网络的两个重要的数学步骤：Forwardpropagation与Backwardpropagation。我们提到，sigmod函数是一个伟大的发明但却有一个天生的缺陷。<br><img src="http://p1.bpimg.com/4851/3d0103e36064862a.gif" alt="Sigmod function"></p>
 <p>通过观察，我们发现从$x$的值接近<script type="math/tex">\pm 5</script>的位置开始，整个函数的扩展方向就无限接近于水平，换言之，函数的斜率开始无限接近于<script type="math/tex">0</script>。结合Backwardpropagation的公式，这个数学事实也就意味着在神经网络的训练后期，<script type="math/tex">w</script>与<script type="math/tex">b</script>的绝对值变大后，整个模型的收敛效果将会无限的降低。</p>
 <p>再进一步说，由于sigmod无法保证给所有的输入值提供稳定有效的函数收敛用值(gradient)，整个网络的学习能力就会收到很大限制。具体表现为，如果整个NN的层数太多或者某一层的Perception太多，网络都并不会提升它的表现。</p>
@@ -533,7 +533,7 @@ E &=& E_{train} + \beta E_{L2} \\
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
