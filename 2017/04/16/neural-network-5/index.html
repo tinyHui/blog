@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Jason's Blog">
 <meta property="og:description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一">
 <meta property="og:image" content="http://i4.buimg.com/567571/0c1b58d9adad186c.png">
-<meta property="og:updated_time" content="2017-04-16T19:40:54.000Z">
+<meta property="og:updated_time" content="2017-04-16T19:44:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Artificial Neural Network - Part 5，卷积神经网络(Convolution Neural Network)">
 <meta name="twitter:description" content="从今天开始，本博客将会围绕神经网络展开一系列的解说，包括神经网络的历史与数学模型基础，数学模型的debug，全连接神经网络(fully connected neural network)，自编码(AutoEncoder neural network)，卷积神经网络(convolution neural network)，递归神经网络(recurrent neural network)等系列文章。一">
@@ -385,7 +385,7 @@
 </ol>
 <p>还有要提到的是，在计算gradient时，由于feature map尺寸是固定的，但是由于整个forward的过程是减少尺寸的过程，所以backward会出现数据点不够的情况。解决的方法就是在L+1层数据四周pad值，常见的值策略有添0，添相同值等。</p>
 <h1 id="识别手写数字，进化"><a href="#识别手写数字，进化" class="headerlink" title="识别手写数字，进化"></a>识别手写数字，进化</h1><p>记得当时我们用两层FCNN对MNIST数据进行训练手写数字识别，模型最后的准确率只有90%左右。现在换CNN来试试看。</p>
-<p>例子在<a href="https://github.com/tinyHui/tensorflow-examples/blob/master/fully-connect-neural-network.ipynb" target="_blank" rel="external">这里</a>。最终结果有96.93%！</p>
+<p>例子在<a href="https://github.com/tinyHui/tensorflow-examples/blob/master/convolution-neural-network.ipynb" target="_blank" rel="external">这里</a>。最终结果有96.93%！</p>
 
       
     </div>
